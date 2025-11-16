@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  overflow-x: hidden;
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #000000;
+}
+
+/* Logo in top left */
+.logo1{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  z-index: 1001;
+  font-family: 'JetBrains Mono', monospace;
+}
+.logo2 {
+  position: fixed;
+  top: 40px+2rem;
+  left: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  z-index: 1001;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Clock in top right */
+.clock-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+.clock-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-text {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+/* Main content - centered name and subheading */
+.page-content {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding-top: 80px; /* Space for navbar */
+}
+
+.main-content {
+  text-align: center;
+  z-index: 10;
+}
+
+.main-name {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.subheading {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.9;
+}
+
+/* Rain effect - behind everything */
+.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Navbar styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.navbar-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.navbar-link:hover {
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+.navbar-link.active {
+  color: #ffffff;
+}
+
+.navbar-link.active::after {
+  width: 100%;
+}
+
+/* Page headings for other pages */
+.page-content h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-name {
+    font-size: 2.5rem;
+  }
+
+  .subheading {
+    font-size: 1.2rem;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    top: 15px;
+    left: 15px;
+  }
+
+  .clock-wrapper {
+    top: 15px;
+    right: 15px;
+  }
+
+  .clock-text {
+    font-size: 1rem;
+  }
+
+  .navbar-menu {
+    gap: 1.5rem;
+  }
+
+  .navbar-link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-name {
+    font-size: 2rem;
+  }
+
+  .subheading {
+    font-size: 1rem;
+  }
+
+  .navbar-menu {
+    gap: 1rem;
+  }
+
+  .navbar-link {
+    font-size: 0.85rem;
+  }
+}
