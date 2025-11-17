@@ -1,0 +1,67 @@
+.projects-page {
+  min-height: 100vh;
+  background-color: #000000;
+  padding: 150px 3rem 3rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.projects-container {
+  width: 100%;
+  max-width: 1400px;
+}
+
+.projects-title {
+  font-size: 3rem;
+  font-weight: 500;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0 0 3rem 0;
+  text-align: left;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Tablet: 2 cards per row */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .projects-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 768px) {
+  .projects-page {
+    padding: 150px 0.5rem 1.5rem 0.5rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .projects-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-title {
+    font-size: 1.5rem;
+  }
+}
+

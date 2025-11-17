@@ -59,7 +59,7 @@ body {
 .clock-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
@@ -69,16 +69,17 @@ body {
   font-size: 1.2rem;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 500;
+  text-align: center;
 }
 
 .clock-date {
-  margin: 0.5rem 0 0 0;
+  margin: 0.3rem 0 0 0;
   color: #ffffff;
   font-size: 0.9rem;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 400;
-  opacity: 0.8;
-  text-align: right;
+  opacity: 1;
+  text-align: center;
 }
 
 /* Main content - centered name and subheading */
@@ -221,10 +222,14 @@ body {
 
   .clock-text {
     font-size: 1rem;
+    text-align: center;
+    color: white;
   }
 
   .clock-date {
     font-size: 0.8rem;
+    text-align: center;
+    color: white;
   }
 
   .navbar-menu {
