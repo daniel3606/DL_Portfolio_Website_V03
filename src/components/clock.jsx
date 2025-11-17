@@ -21,9 +21,14 @@ class Clock extends Component {
   }
 
   render() {
+    const date = this.state.date;
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    const dateString = date.toLocaleDateString('en-US', options);
+    
     return (
       <div className="clock-container">
-        <h2 className="clock-text">{this.state.date.toLocaleTimeString()}</h2>
+        <h2 className="clock-text">{date.toLocaleTimeString()}</h2>
+        <p className="clock-date">{dateString}</p>
       </div>
     );
   }
