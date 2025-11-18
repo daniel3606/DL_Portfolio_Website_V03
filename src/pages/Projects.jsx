@@ -2,6 +2,8 @@ import React from 'react';
 import ProjectCard from '../components/ProjectCard.jsx';
 import './Projects.css';
 import ArtFitImage from '../assets/artfit_preview.png';
+import PortfolioImage from '../assets/portfolio_preview.png';
+import SideQuestImage from '../assets/sidequest_preview.png';
 
 const Projects = () => {
   // Sample projects data - you can update this with your actual projects
@@ -14,17 +16,17 @@ const Projects = () => {
       detailsLink: '/projects/project-1'
     },
     {
-      image: 'https://via.placeholder.com/400x200?text=Project+2',
-      name: 'Project Name 2',
-      description: 'A brief description of the second project and what it does.',
-      tags: ['JavaScript', 'CSS', 'HTML'],
+      image: PortfolioImage,
+      name: 'Portfolio Website',
+      description: 'Current website that showcases my projects and skills.',
+      tags: ['React','JavaScript', 'CSS', 'HTML'],
       detailsLink: '/projects/project-2'
     },
     {
-      image: 'https://via.placeholder.com/400x200?text=Project+3',
-      name: 'Project Name 3',
-      description: 'A brief description of the third project and its features.',
-      tags: ['Python', 'Django', 'PostgreSQL'],
+      image: SideQuestImage,
+      name: 'Side Quest',
+      description: 'Travel add-on that makes exploring new cities special and engaging.',
+      tags: ['Figma', 'UI/UX', 'HTML', 'CSS'],
       detailsLink: '/projects/project-3'
     },
     {
