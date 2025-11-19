@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
+import PortfolioImage1 from '../assets/portfolio_preview01.png';
+import PortfolioImage2 from '../assets/portfolio_preview02.png';
+import PortfolioImage3 from '../assets/portfolio_preview03.png';
+import PortfolioImage4 from '../assets/portfolio_preview04.png';
 
 const ProjectDetail2 = () => {
   return (
@@ -10,9 +14,9 @@ const ProjectDetail2 = () => {
           <Link to="/projects" className="back-button">
             ← Back to Projects
           </Link>
-          <h1 className="project-detail-title">Project Name 2</h1>
+          <h1 className="project-detail-title">Portfolio Website</h1>
           <p className="project-detail-subtitle">
-            A brief description of the second project and what it does. This project demonstrates various skills and technologies.
+            History of how my portfolio website changed and evolved over time.
           </p>
           <div className="project-detail-tags">
             <span className="project-detail-tag">JavaScript</span>
@@ -22,7 +26,9 @@ const ProjectDetail2 = () => {
         </div>
 
         <div className="project-detail-image-container">
-          <img src="https://via.placeholder.com/1200x600?text=Project+2" alt="Project 2" className="project-detail-image" />
+          <img src={PortfolioImage1} alt="Project 2" className="project-detail-image" />
+          <img src={PortfolioImage2} alt="Project 2" className="project-detail-image" />
+          <img src={PortfolioImage3} alt="Project 2" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">
@@ -30,8 +36,8 @@ const ProjectDetail2 = () => {
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Overview</h2>
               <p className="project-detail-section-content">
-                This project showcases modern web development practices using core web technologies. 
-                It demonstrates clean code structure, responsive design, and user-friendly interfaces.
+                This project showcases the evolution of my personal portfolio website.
+                It highlights the various design and development techniques I have employed over time to improve user experience and visual appeal.
               </p>
             </div>
 
@@ -75,13 +81,18 @@ const ProjectDetail2 = () => {
             <div className="project-detail-info-box">
               <h3 className="project-detail-info-title">Links</h3>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://portfolio-website-v02-git-main-daniel-lims-projects-eddeb3c7.vercel.app/" className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   Live Demo →
                 </a>
               </div>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
-                  GitHub Repository →
+                <a href="https://github.com/daniel3606/DL_Portfolio_Website_V03" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                  GitHub Repository 1 →
+                </a>
+              </div>
+              <div className="project-detail-info-item">
+                <a href="https://github.com/daniel3606/DL_Portfolio_Website_V02-1-JSX" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                  GitHub Repository 2 →
                 </a>
               </div>
             </div>
@@ -89,11 +100,14 @@ const ProjectDetail2 = () => {
         </div>
 
         <div className="project-detail-actions">
-          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
-            View Live Project
+          <a href="https://portfolio-website-v02-git-main-daniel-lims-projects-eddeb3c7.vercel.app/" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
+            View Live Project (Old Version)
           </a>
-          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
-            View Source Code
+          <a href="https://github.com/daniel3606/DL_Portfolio_Website_V03" className="project-detail-button" target="_blank" rel="noopener noreferrer">
+            View Source Code (New Version)
+          </a>
+          <a href="https://github.com/daniel3606/DL_Portfolio_Website_V02-1-JSX" className="project-detail-button" target="_blank" rel="noopener noreferrer">
+            View Source Code (Old Version)
           </a>
         </div>
       </div>

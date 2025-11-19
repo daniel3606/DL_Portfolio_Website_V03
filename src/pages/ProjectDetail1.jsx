@@ -79,12 +79,12 @@ const ProjectDetail1 = () => {
             <div className="project-detail-info-box">
               <h3 className="project-detail-info-title">Links</h3>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href='https://www.artfit.dev/' className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   Live Demo →
                 </a>
               </div>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/daniel3606/ArtFit" className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   GitHub Repository →
                 </a>
               </div>
@@ -93,10 +93,10 @@ const ProjectDetail1 = () => {
         </div>
 
         <div className="project-detail-actions">
-          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.artfit.dev/" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
             View Live Project
           </a>
-          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/daniel3606/ArtFit" className="project-detail-button" target="_blank" rel="noopener noreferrer">
             View Source Code
           </a>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import ProjectCard from '../components/ProjectCard.jsx';
 import './Projects.css';
 import ArtFitImage from '../assets/artfit_preview.png';
-import PortfolioImage from '../assets/portfolio_preview.png';
+import PortfolioImage from '../assets/portfolio_preview01.png';
 import SideQuestImage from '../assets/sidequest_preview.png';
 
 const Projects = () => {
