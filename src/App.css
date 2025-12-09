@@ -14,12 +14,38 @@ body {
   cursor: none;
 }
 
+/* Show default cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+}
+
 .app {
   position: relative;
   min-height: 100vh;
   width: 100%;
   background-color: #000000;
   cursor: none;
+}
+
+/* Show default cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .app {
+    cursor: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app {
+    cursor: auto;
+  }
 }
 
 /* Logo in top left */
@@ -199,8 +225,91 @@ body {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Responsive design */
+/* Tablet Responsive Design */
+@media (max-width: 1024px) {
+  .logo1,
+  .logo2 {
+    font-size: 1.1rem;
+    top: 15px;
+    left: 15px;
+    margin-left: 0.5rem;
+  }
+
+  .logo2 {
+    top: calc(15px + 1.8rem);
+  }
+
+  .clock-wrapper {
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+  }
+
+  .clock-text {
+    font-size: 1.1rem;
+  }
+
+  .clock-date {
+    font-size: 0.85rem;
+  }
+
+  .main-name {
+    font-size: 3rem;
+  }
+
+  .subheading {
+    font-size: 1.3rem;
+  }
+
+  .page-content {
+    padding-top: 100px;
+  }
+}
+
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
+  /* Logo centered on mobile */
+  .logo1 {
+    font-size: 1rem;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    z-index: 1001;
+  }
+
+  .logo2 {
+    font-size: 1rem;
+    top: calc(15px + 1.6rem);
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    z-index: 1001;
+  }
+
+  /* Clock moved to left on mobile */
+  .clock-wrapper {
+    top: 15px;
+    left: 10px;
+    right: auto;
+    z-index: 1001;
+  }
+
+  .clock-container {
+    align-items: flex-start;
+  }
+
+  .clock-text {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .clock-date {
+    font-size: 0.75rem;
+    margin: 0.2rem 0 0 0;
+    text-align: left;
+  }
+
   .main-name {
     font-size: 2.5rem;
   }
@@ -209,39 +318,60 @@ body {
     font-size: 1.2rem;
   }
 
-  .logo {
-    font-size: 1.2rem;
-    top: 15px;
-    left: 15px;
+  .page-content {
+    padding-top: 100px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .clock-wrapper {
-    top: 15px;
-    right: 15px;
-  }
-
-  .clock-text {
-    font-size: 1rem;
-    text-align: center;
-    color: white;
-  }
-
-  .clock-date {
-    font-size: 0.8rem;
-    text-align: center;
-    color: white;
-  }
-
-  .navbar-menu {
-    gap: 1.5rem;
-  }
-
-  .navbar-link {
-    font-size: 0.9rem;
+  .page-content h1 {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
+  /* Logo centered on small mobile */
+  .logo1 {
+    font-size: 0.9rem;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    z-index: 1001;
+  }
+
+  .logo2 {
+    font-size: 0.9rem;
+    top: calc(12px + 1.4rem);
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    z-index: 1001;
+  }
+
+  /* Clock on left for small mobile */
+  .clock-wrapper {
+    top: 12px;
+    left: 8px;
+    right: auto;
+    z-index: 1001;
+  }
+
+  .clock-container {
+    align-items: flex-start;
+  }
+
+  .clock-text {
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .clock-date {
+    font-size: 0.7rem;
+    margin: 0.15rem 0 0 0;
+    text-align: left;
+  }
+
   .main-name {
     font-size: 2rem;
   }
@@ -250,11 +380,13 @@ body {
     font-size: 1rem;
   }
 
-  .navbar-menu {
-    gap: 1rem;
+  .page-content {
+    padding-top: 90px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
-  .navbar-link {
-    font-size: 0.85rem;
+  .page-content h1 {
+    font-size: 1.5rem;
   }
 }

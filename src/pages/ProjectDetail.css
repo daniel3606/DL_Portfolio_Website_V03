@@ -220,17 +220,34 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Mobile Responsive */
-@media (max-width: 968px) {
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .project-detail-page {
+    padding: 120px 2rem 2rem 2rem;
+  }
+
+  .project-detail-title {
+    font-size: 2.5rem;
+  }
+
   .project-detail-content {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  .project-detail-sidebar {
+    order: -1;
+  }
 }
 
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .project-detail-page {
-    padding: 150px 1rem 2rem 1rem;
+    padding: 120px 1rem 2rem 1rem;
+  }
+
+  .project-detail-header {
+    margin-bottom: 2rem;
   }
 
   .project-detail-title {
@@ -241,12 +258,34 @@
     font-size: 1rem;
   }
 
+  .project-detail-tags {
+    margin-bottom: 2rem;
+  }
+
+  .project-detail-image-container {
+    margin-bottom: 2rem;
+  }
+
+  .project-detail-content {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
   .project-detail-section-title {
     font-size: 1.3rem;
   }
 
+  .project-detail-section-content {
+    font-size: 0.95rem;
+  }
+
+  .project-detail-info-box {
+    padding: 1.2rem;
+  }
+
   .project-detail-actions {
     flex-direction: column;
+    gap: 0.75rem;
   }
 
   .project-detail-button {
@@ -256,17 +295,54 @@
 }
 
 @media (max-width: 480px) {
+  .project-detail-page {
+    padding: 100px 0.75rem 1.5rem 0.75rem;
+  }
+
+  .back-button {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
   .project-detail-title {
     font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-detail-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
   }
 
   .project-detail-tags {
     gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .project-detail-tag {
     font-size: 0.75rem;
     padding: 0.3rem 0.8rem;
+  }
+
+  .project-detail-section-title {
+    font-size: 1.1rem;
+  }
+
+  .project-detail-section-content {
+    font-size: 0.9rem;
+  }
+
+  .project-detail-info-box {
+    padding: 1rem;
+  }
+
+  .project-detail-info-title {
+    font-size: 1rem;
+  }
+
+  .project-detail-button {
+    font-size: 0.85rem;
+    padding: 0.65rem 1.2rem;
   }
 }
 

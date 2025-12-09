@@ -30,6 +30,10 @@
 
 /* Tablet: 2 cards per row */
 @media (max-width: 1024px) {
+  .projects-page {
+    padding: 120px 2rem 2rem 2rem;
+  }
+
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -44,7 +48,7 @@
 /* Mobile: 1 card per row */
 @media (max-width: 768px) {
   .projects-page {
-    padding: 150px 0.5rem 1.5rem 0.5rem;
+    padding: 120px 1rem 1.5rem 1rem;
   }
   
   .projects-grid {
@@ -60,8 +64,17 @@
 }
 
 @media (max-width: 480px) {
+  .projects-page {
+    padding: 100px 0.75rem 1rem 0.75rem;
+  }
+
   .projects-title {
     font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .projects-grid {
+    gap: 1rem;
   }
 }
 

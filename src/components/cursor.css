@@ -18,3 +18,17 @@
   border-width: 2px;
 }
 
+/* Hide custom cursor on touch devices (mobile/tablet) */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
+/* Also hide on smaller screens that are likely touch devices */
+@media (max-width: 1024px) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
