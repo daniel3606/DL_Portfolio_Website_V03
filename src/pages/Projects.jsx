@@ -9,6 +9,20 @@ const Projects = () => {
   // Sample projects data - you can update this with your actual projects
   const projects = [
     {
+      image: 'https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2024/09/spectacles-24-2.jpg',
+      name: 'Face Recognition(Spectacles)',
+      description: 'Spectacle Pogram that Detect, Saves, and Recognizes faces from a user\'s view.',
+      tags: ['Lens Studio', 'Spectacles', 'TypeScript','XR', 'PostgreSQL'],
+      detailsLink: '/projects/project-4'
+    },
+    {
+      image: 'https://via.placeholder.com/400x200?=Project+5',
+      name: 'AR Hair Studio',
+      description: '3D AR Hairstyle Try-On App',
+      tags: ['Unity', 'Blender', 'C#', 'AR'],
+      detailsLink: '/projects/project-5'
+    },
+    {
       image: ArtFitImage,
       name: 'ArtFit',
       description: 'Social Media Platform that allows developers to interact with designers.',
@@ -28,20 +42,6 @@ const Projects = () => {
       description: 'Travel add-on that makes exploring new cities special and engaging.',
       tags: ['Figma', 'UI/UX', 'HTML', 'CSS'],
       detailsLink: '/projects/project-3'
-    },
-    {
-      image: 'https://via.placeholder.com/400x200?text=Project+4',
-      name: 'Project Name 4',
-      description: 'A brief description of the fourth project and its functionality.',
-      tags: ['Vue.js', 'Firebase', 'TypeScript'],
-      detailsLink: '/projects/project-4'
-    },
-    {
-      image: 'https://via.placeholder.com/400x200?text=Project+5',
-      name: 'Project Name 5',
-      description: 'A brief description of the fifth project and its purpose.',
-      tags: ['Next.js', 'Tailwind', 'Prisma'],
-      detailsLink: '/projects/project-5'
     },
     {
       image: 'https://via.placeholder.com/400x200?text=Project+6',
