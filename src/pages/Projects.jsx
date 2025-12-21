@@ -4,6 +4,7 @@ import './Projects.css';
 import ArtFitImage from '../assets/artfit_preview.png';
 import PortfolioImage from '../assets/portfolio_preview01.png';
 import SideQuestImage from '../assets/sidequest_preview.png';
+import ScribbleAIImage from '../assets/scribbleai_image.webp';
 
 const Projects = () => {
   // Sample projects data - you can update this with your actual projects
@@ -44,10 +45,10 @@ const Projects = () => {
       detailsLink: '/projects/project-3'
     },
     {
-      image: 'https://via.placeholder.com/400x200?text=Project+6',
-      name: 'Project Name 6',
-      description: 'A brief description of the sixth project and what makes it special.',
-      tags: ['React Native', 'GraphQL', 'AWS'],
+      image: ScribbleAIImage,
+      name: 'Scribble AI',
+      description: 'PyTorch based neural drawing recognition tool',
+      tags: ['Python', 'PyTorch', 'AI'],
       detailsLink: '/projects/project-6'
     }
   ];
