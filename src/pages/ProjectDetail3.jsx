@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
+import SideQuestImage from '../assets/sidequest_preview.png';
 
 const ProjectDetail3 = () => {
   return (
@@ -10,19 +11,20 @@ const ProjectDetail3 = () => {
           <Link to="/projects" className="back-button">
             ← Back to Projects
           </Link>
-          <h1 className="project-detail-title">Project Name 3</h1>
+          <h1 className="project-detail-title">Side Quest</h1>
           <p className="project-detail-subtitle">
-            A brief description of the third project and its features. This project demonstrates backend development and database management.
+            A travel add-on that makes exploring new cities special and engaging, transforming ordinary trips into memorable adventures.
           </p>
           <div className="project-detail-tags">
-            <span className="project-detail-tag">Python</span>
-            <span className="project-detail-tag">Django</span>
-            <span className="project-detail-tag">PostgreSQL</span>
+            <span className="project-detail-tag">Figma</span>
+            <span className="project-detail-tag">UI/UX</span>
+            <span className="project-detail-tag">HTML</span>
+            <span className="project-detail-tag">CSS</span>
           </div>
         </div>
 
         <div className="project-detail-image-container">
-          <img src="https://via.placeholder.com/1200x600?text=Project+3" alt="Project 3" className="project-detail-image" />
+          <img src={SideQuestImage} alt="Side Quest" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">
@@ -30,28 +32,29 @@ const ProjectDetail3 = () => {
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Overview</h2>
               <p className="project-detail-section-content">
-                This project is a full-stack web application built with Django, showcasing robust backend architecture 
-                and efficient database management. It demonstrates server-side development best practices.
+                SideQuest is a gamified travel planning app designed to make exploring new places feel more exciting and interactive. As the UI/UX Design Lead, I led a team of four designers to create an end to end mobile experience in Figma, producing over 100 high fidelity screens including onboarding, dynamic maps, and itinerary building. The app motivates users through personalized quests and rewards that turn trip planning into a fun challenge rather than a chore. SideQuest won 1st Place for Best UI/UX at the MSU Imagine Software Fall 2024 Showcase, recognizing the project’s strong visual design and engaging user experience.
               </p>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Features</h2>
               <ul className="project-detail-section-content">
-                <li>RESTful API endpoints</li>
-                <li>User authentication and authorization</li>
-                <li>Database models and migrations</li>
-                <li>Admin panel for content management</li>
-                <li>Data validation and error handling</li>
-                <li>Scalable architecture</li>
+                <li>Interactive city exploration interface</li>
+                <li>Curated local experiences and hidden gems</li>
+                <li>Gamified quest system for engaging travel</li>
+                <li>Personalized recommendations based on interests</li>
+                <li>Social sharing and community features</li>
+                <li>Offline map integration and navigation</li>
               </ul>
             </div>
 
             <div className="project-detail-section">
-              <h2 className="project-detail-section-title">Technical Details</h2>
+              <h2 className="project-detail-section-title">Design Process</h2>
               <p className="project-detail-section-content">
-                Built with Python and Django framework, this project uses PostgreSQL for reliable data storage. 
-                The application follows Django best practices including proper model design, view organization, and template structure.
+                The design process began with extensive user research and journey mapping to understand traveler pain points. 
+                Using Figma, I created wireframes, interactive prototypes, and high-fidelity designs that prioritize usability 
+                and visual appeal. The final implementation uses HTML and CSS to bring the design to life, ensuring a responsive 
+                and accessible user experience across devices.
               </p>
             </div>
           </div>
@@ -69,20 +72,15 @@ const ProjectDetail3 = () => {
               </div>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Category</span>
-                <span className="project-detail-info-value">Backend Development</span>
+                <span className="project-detail-info-value">UI/UX Design</span>
               </div>
             </div>
 
             <div className="project-detail-info-box">
               <h3 className="project-detail-info-title">Links</h3>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
-                  Live Demo →
-                </a>
-              </div>
-              <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
-                  GitHub Repository →
+                <a href="https://www.figma.com/design/FXXfsnlbR1YK03vDnxAZdQ/SideQuest-Updates?node-id=0-1&t=yKgNhbCSM5HeJ6wt-1" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                  Figma Design →
                 </a>
               </div>
             </div>
@@ -90,11 +88,8 @@ const ProjectDetail3 = () => {
         </div>
 
         <div className="project-detail-actions">
-          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
-            View Live Project
-          </a>
-          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
-            View Source Code
+          <a href="https://www.figma.com/design/FXXfsnlbR1YK03vDnxAZdQ/SideQuest-Updates?node-id=0-1&t=yKgNhbCSM5HeJ6wt-1" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
+            View Figma Design
           </a>
         </div>
       </div>

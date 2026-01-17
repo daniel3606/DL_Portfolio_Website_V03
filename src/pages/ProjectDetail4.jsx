@@ -10,21 +10,19 @@ const ProjectDetail4 = () => {
           <Link to="/projects" className="back-button">
             ← Back to Projects
           </Link>
-          <h1 className="project-detail-title">Face Recognition (Spectacles)</h1>
+          <h1 className="project-detail-title">Project Name 4</h1>
           <p className="project-detail-subtitle">
-            Spectacle Program that Detects, Saves, and Recognizes faces from a user's view.
+            A brief description of the fourth project and its functionality. This project showcases modern frontend frameworks and cloud services.
           </p>
           <div className="project-detail-tags">
-            <span className="project-detail-tag">Lens Studio</span>
-            <span className="project-detail-tag">Spectacles</span>
+            <span className="project-detail-tag">Vue.js</span>
+            <span className="project-detail-tag">Firebase</span>
             <span className="project-detail-tag">TypeScript</span>
-            <span className="project-detail-tag">XR</span>
-            <span className="project-detail-tag">PostgreSQL</span>
           </div>
         </div>
 
         <div className="project-detail-image-container">
-          <img src="https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2024/09/spectacles-24-2.jpg" alt="Face Recognition Spectacles" className="project-detail-image" />
+          <img src="https://via.placeholder.com/1200x600?text=Project+4" alt="Project 4" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">
@@ -32,34 +30,28 @@ const ProjectDetail4 = () => {
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Overview</h2>
               <p className="project-detail-section-content">
-                Face Recognition (Spectacles) is an innovative augmented reality application built for Snap's Spectacles smart glasses. 
-                The program leverages computer vision and machine learning to detect, capture, and recognize faces in real-time through 
-                the user's field of view. This XR application combines Lens Studio's AR capabilities with a robust backend system for 
-                storing and managing facial recognition data.
+                This project leverages Vue.js for reactive user interfaces, TypeScript for type safety, 
+                and Firebase for backend services. It demonstrates modern frontend development practices and cloud integration.
               </p>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Features</h2>
               <ul className="project-detail-section-content">
-                <li>Real-time face detection through Spectacles camera</li>
-                <li>Automatic face capture and storage functionality</li>
-                <li>Face recognition and matching against stored database</li>
-                <li>Integration with Lens Studio for AR overlays</li>
-                <li>PostgreSQL database for secure face data storage</li>
-                <li>TypeScript implementation for type safety and maintainability</li>
-                <li>Seamless user experience in XR environment</li>
+                <li>Reactive Vue.js components</li>
+                <li>TypeScript for type safety</li>
+                <li>Firebase authentication</li>
+                <li>Real-time database updates</li>
+                <li>Cloud storage integration</li>
+                <li>Progressive Web App capabilities</li>
               </ul>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Technical Details</h2>
               <p className="project-detail-section-content">
-                Built using Lens Studio for creating immersive AR experiences on Snap Spectacles, this project implements face detection 
-                and recognition algorithms optimized for real-time performance. The application uses TypeScript for robust type checking 
-                and better code maintainability. Face data and recognition information are securely stored and managed in a PostgreSQL 
-                database, enabling efficient querying and matching of recognized faces. The XR implementation takes full advantage of 
-                Spectacles' camera capabilities and display system to provide an intuitive augmented reality interface.
+                Built with Vue.js 3 and TypeScript, this project uses Firebase for authentication, database, and hosting. 
+                The application implements Vue Composition API, reactive state management, and modern build tools.
               </p>
             </div>
           </div>
@@ -77,14 +69,19 @@ const ProjectDetail4 = () => {
               </div>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Category</span>
-                <span className="project-detail-info-value">XR/AR Development</span>
+                <span className="project-detail-info-value">Frontend Development</span>
               </div>
             </div>
 
             <div className="project-detail-info-box">
               <h3 className="project-detail-info-title">Links</h3>
               <div className="project-detail-info-item">
-                <a href="https://github.com/daniel3606/Spectacles_Face_Recongizer" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                  Live Demo →
+                </a>
+              </div>
+              <div className="project-detail-info-item">
+                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   GitHub Repository →
                 </a>
               </div>
@@ -93,7 +90,10 @@ const ProjectDetail4 = () => {
         </div>
 
         <div className="project-detail-actions">
-          <a href="https://github.com/daniel3606/Spectacles_Face_Recongizer" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
+          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
+            View Live Project
+          </a>
+          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
             View Source Code
           </a>
         </div>

@@ -48,7 +48,7 @@ const Projects = () => {
       image: ScribbleAIImage,
       name: 'Scribble AI',
       description: 'PyTorch based neural drawing recognition tool',
-      tags: ['Python', 'PyTorch', 'AI'],
+      tags: ['Python', 'PyTorch', 'AI', 'Neural Networks'],
       detailsLink: '/projects/project-6'
     }
   ];

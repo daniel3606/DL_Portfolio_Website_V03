@@ -1,12 +1,12 @@
 import React from 'react';
 import './Resume.css';
-import resumePDF from '../assets/DanielLimResume_v9.2.pdf';
+import resumePDF from '../assets/DanielLimResume_10.8.pdf';
 
 function Resume() {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = resumePDF;
-    link.download = 'DanielLimResume_v9.2.pdf';
+    link.download = 'DanielLimResume_10.8.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
