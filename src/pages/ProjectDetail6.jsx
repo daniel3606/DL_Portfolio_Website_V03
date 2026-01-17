@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
+import ScribbleAIImage from '../assets/scribbleai_image.webp';
 
 const ProjectDetail6 = () => {
   return (
@@ -10,19 +11,21 @@ const ProjectDetail6 = () => {
           <Link to="/projects" className="back-button">
             ← Back to Projects
           </Link>
-          <h1 className="project-detail-title">Project Name 6</h1>
+          <h1 className="project-detail-title">Scribble AI</h1>
           <p className="project-detail-subtitle">
-            A brief description of the sixth project and what makes it special. This project showcases mobile development and cloud infrastructure.
+            A Streamlit-based drawing recognition application that uses a CNN model to classify hand-drawn sketches, recognizing various categories like airplanes, bananas, cats, dogs, cars, and trees.
           </p>
           <div className="project-detail-tags">
-            <span className="project-detail-tag">React Native</span>
-            <span className="project-detail-tag">GraphQL</span>
-            <span className="project-detail-tag">AWS</span>
+            <span className="project-detail-tag">Python</span>
+            <span className="project-detail-tag">PyTorch</span>
+            <span className="project-detail-tag">Streamlit</span>
+            <span className="project-detail-tag">AI</span>
+            <span className="project-detail-tag">Neural Networks</span>
           </div>
         </div>
 
         <div className="project-detail-image-container">
-          <img src="https://via.placeholder.com/1200x600?text=Project+6" alt="Project 6" className="project-detail-image" />
+          <img src={ScribbleAIImage} alt="Scribble AI" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">
@@ -30,29 +33,35 @@ const ProjectDetail6 = () => {
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Overview</h2>
               <p className="project-detail-section-content">
-                This project is a cross-platform mobile application built with React Native, featuring GraphQL APIs 
-                and AWS cloud infrastructure. It demonstrates modern mobile development and scalable backend architecture.
+                Scribble AI (also known as QuickDraw AI) is a drawing recognition application that leverages deep learning 
+                to classify hand-drawn sketches in real-time. Built with PyTorch and Streamlit, the application uses a 
+                Convolutional Neural Network (CNN) model to accurately identify drawings across multiple categories including 
+                airplanes, bananas, cats, dogs, cars, and trees. The interactive web interface allows users to draw directly 
+                on a canvas or upload images for classification, making it an engaging demonstration of neural network capabilities.
               </p>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Features</h2>
               <ul className="project-detail-section-content">
-                <li>Cross-platform mobile app (iOS & Android)</li>
-                <li>GraphQL API integration</li>
-                <li>AWS cloud services</li>
-                <li>Real-time data synchronization</li>
-                <li>Offline functionality</li>
-                <li>Push notifications</li>
+                <li>Interactive drawing canvas for creating sketches</li>
+                <li>Image upload support for existing drawings</li>
+                <li>CNN-based classification model with high accuracy</li>
+                <li>Real-time predictions with confidence scores</li>
+                <li>Training visualization and metrics</li>
+                <li>Support for multiple categories (airplane, banana, cat, dog, car, tree)</li>
+                <li>Customizable model training with 2-4 selected categories</li>
               </ul>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Technical Details</h2>
               <p className="project-detail-section-content">
-                Built with React Native, this project uses GraphQL for efficient data fetching and mutations. 
-                AWS services including Lambda, DynamoDB, and S3 provide scalable backend infrastructure. 
-                The app implements native features and optimizations for both platforms.
+                The application is built using Python with PyTorch for the deep learning model architecture. The frontend 
+                is powered by Streamlit, providing an intuitive web interface for drawing and classification. The CNN model 
+                processes hand-drawn sketches and outputs predictions with confidence scores. Additional libraries including 
+                NumPy, Pillow, and scikit-learn support image processing and model evaluation. The project demonstrates 
+                end-to-end machine learning workflow from data preprocessing to model training and real-time inference.
               </p>
             </div>
           </div>
@@ -62,7 +71,7 @@ const ProjectDetail6 = () => {
               <h3 className="project-detail-info-title">Project Info</h3>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Status</span>
-                <span className="project-detail-info-value">In Development</span>
+                <span className="project-detail-info-value">Completed</span>
               </div>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Year</span>
@@ -70,19 +79,14 @@ const ProjectDetail6 = () => {
               </div>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Category</span>
-                <span className="project-detail-info-value">Mobile Development</span>
+                <span className="project-detail-info-value">AI/ML</span>
               </div>
             </div>
 
             <div className="project-detail-info-box">
               <h3 className="project-detail-info-title">Links</h3>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
-                  Live Demo →
-                </a>
-              </div>
-              <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/daniel3606/ScribbleAI" className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   GitHub Repository →
                 </a>
               </div>
@@ -91,10 +95,7 @@ const ProjectDetail6 = () => {
         </div>
 
         <div className="project-detail-actions">
-          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
-            View Live Project
-          </a>
-          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/daniel3606/ScribbleAI" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
             View Source Code
           </a>
         </div>
