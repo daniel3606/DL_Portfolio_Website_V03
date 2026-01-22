@@ -17,7 +17,7 @@ const Projects = () => {
       detailsLink: '/projects/project-4'
     },
     {
-      image: 'https://via.placeholder.com/400x200?=Project+5',
+      image: 'https://media.cgtrader.com/variants/95rqr03rqjh6thjkz9veva6v4vek/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/3D%20anime%20male%20hairstyle%20pack.webp',
       name: 'AR Hair Studio',
       description: '3D AR Hairstyle Try-On App',
       tags: ['Unity', 'Blender', 'C#', 'AR'],

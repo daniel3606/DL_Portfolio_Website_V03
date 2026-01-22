@@ -7,7 +7,7 @@
   gap: 1.7rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid #808080;
-  min-height: 550px;
+  height: 600px;
   padding: 1rem 1.5rem 1.5rem 1.5rem;
 }
 
@@ -28,16 +28,20 @@
   line-height: 1.6;
   margin: 0;
   font-family: 'JetBrains Mono', monospace;
-  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 
 .project-image-container {
   width: 100%;
-  height: 50%;
+  height: 250px;
   overflow: hidden;
   background-color: #000;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .project-image {
@@ -119,8 +123,12 @@
 /* Tablet Responsive */
 @media (max-width: 1024px) {
   .project-card {
-    min-height: 500px;
+    height: 550px;
     padding: 1rem 1.2rem 1.2rem 1.2rem;
+  }
+
+  .project-image-container {
+    height: 220px;
   }
 
   .project-name {
@@ -135,7 +143,7 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .project-card {
-    min-height: auto;
+    height: 500px;
     padding: 1rem;
     gap: 1.2rem;
   }
@@ -165,6 +173,7 @@
 
 @media (max-width: 480px) {
   .project-card {
+    height: 450px;
     padding: 0.75rem;
     gap: 1rem;
   }

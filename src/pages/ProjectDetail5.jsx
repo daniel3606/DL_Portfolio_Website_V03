@@ -10,19 +10,20 @@ const ProjectDetail5 = () => {
           <Link to="/projects" className="back-button">
             ← Back to Projects
           </Link>
-          <h1 className="project-detail-title">Project Name 5</h1>
+          <h1 className="project-detail-title">AR Hair Studio</h1>
           <p className="project-detail-subtitle">
-            A brief description of the fifth project and its purpose. This project demonstrates full-stack development with modern frameworks.
+            A 3D AR hairstyle try-on application that allows users to visualize different hairstyles in real-time using augmented reality technology.
           </p>
           <div className="project-detail-tags">
-            <span className="project-detail-tag">Next.js</span>
-            <span className="project-detail-tag">Tailwind</span>
-            <span className="project-detail-tag">Prisma</span>
+            <span className="project-detail-tag">Unity</span>
+            <span className="project-detail-tag">Blender</span>
+            <span className="project-detail-tag">C#</span>
+            <span className="project-detail-tag">AR</span>
           </div>
         </div>
 
         <div className="project-detail-image-container">
-          <img src="https://via.placeholder.com/1200x600?text=Project+5" alt="Project 5" className="project-detail-image" />
+          <img src="https://media.cgtrader.com/variants/95rqr03rqjh6thjkz9veva6v4vek/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/3D%20anime%20male%20hairstyle%20pack.webp" alt="AR Hair Studio - 3D Hairstyle Models" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">
@@ -30,28 +31,34 @@ const ProjectDetail5 = () => {
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Overview</h2>
               <p className="project-detail-section-content">
-                This project is a full-stack application built with Next.js, featuring server-side rendering, 
-                API routes, and modern styling with Tailwind CSS. It demonstrates production-ready development practices.
+                AR Hair Studio is an innovative augmented reality application that enables users to try on various hairstyles 
+                in real-time using their device's camera. Built with Unity and leveraging AR Foundation, the app provides 
+                an immersive experience for visualizing different hair styles, colors, and cuts before making a decision. 
+                The application uses advanced face tracking and 3D rendering to create realistic hair overlays.
               </p>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Features</h2>
               <ul className="project-detail-section-content">
-                <li>Server-side rendering (SSR)</li>
-                <li>Static site generation (SSG)</li>
-                <li>API routes and serverless functions</li>
-                <li>Tailwind CSS for styling</li>
-                <li>Prisma ORM for database management</li>
-                <li>Optimized performance and SEO</li>
+                <li>Real-time AR face tracking and hair overlay</li>
+                <li>Multiple hairstyle options and variations</li>
+                <li>Hair color customization and adjustment</li>
+                <li>3D hair models created in Blender</li>
+                <li>Smooth AR tracking and rendering</li>
+                <li>User-friendly interface for easy navigation</li>
+                <li>Photo capture and sharing capabilities</li>
               </ul>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Technical Details</h2>
               <p className="project-detail-section-content">
-                Built with Next.js 14, this project leverages React Server Components, App Router, and modern React features. 
-                Prisma provides type-safe database access, while Tailwind CSS enables rapid UI development.
+                The application is built using Unity game engine with C# scripting, providing robust AR capabilities through 
+                AR Foundation framework. 3D hair models are created and optimized in Blender, then imported into Unity for 
+                real-time rendering. The app utilizes device camera and AR tracking to accurately map hairstyles onto the 
+                user's face, creating a seamless augmented reality experience. The project demonstrates expertise in 3D 
+                modeling, AR development, and mobile application design.
               </p>
             </div>
           </div>
@@ -69,7 +76,7 @@ const ProjectDetail5 = () => {
               </div>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Category</span>
-                <span className="project-detail-info-value">Full-Stack</span>
+                <span className="project-detail-info-value">AR/XR</span>
               </div>
             </div>
 

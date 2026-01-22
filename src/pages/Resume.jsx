@@ -1,12 +1,12 @@
 import React from 'react';
 import './Resume.css';
-import resumePDF from '../assets/DanielLimResume_10.8.pdf';
+import resumePDF from '../assets/DanielLimResume_11.7.pdf';
 
 function Resume() {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = resumePDF;
-    link.download = 'DanielLimResume_10.8.pdf';
+    link.download = 'DanielLimResume_11.7.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -24,7 +24,7 @@ function Resume() {
         
         <div className="pdf-viewer-container">
           <iframe
-            src={`${resumePDF}#toolbar=1&navpanes=1&scrollbar=1`}
+            src={`${resumePDF}#toolbar=0&navpanes=0&scrollbar=1`}
             className="pdf-viewer"
             title="Daniel Lim Resume"
           />
