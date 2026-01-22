@@ -94,29 +94,7 @@ const ProjectDetailKelseyMuseum = () => {
               </div>
             </div>
 
-            <div className="project-detail-info-box">
-              <h3 className="project-detail-info-title">Links</h3>
-              <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
-                  Live Demo →
-                </a>
-              </div>
-              <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
-                  GitHub Repository →
-                </a>
-              </div>
-            </div>
           </div>
-        </div>
-
-        <div className="project-detail-actions">
-          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
-            View Live Project
-          </a>
-          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
-            View Source Code
-          </a>
         </div>
       </div>
     </div>
