@@ -23,9 +23,7 @@
   .custom-cursor {
     display: none;
   }
-}
-
-/* Also hide on smaller screens that are likely touch devices */
+}/* Also hide on smaller screens that are likely touch devices */
 @media (max-width: 1024px) {
   .custom-cursor {
     display: none;
