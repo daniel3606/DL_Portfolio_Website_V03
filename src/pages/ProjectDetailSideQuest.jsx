@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
 import SideQuestImage from '../assets/sidequest_preview.png';
 
-const ProjectDetail3 = () => {
+const ProjectDetailSideQuest = () => {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
@@ -97,5 +97,5 @@ const ProjectDetail3 = () => {
   );
 };
 
-export default ProjectDetail3;
+export default ProjectDetailSideQuest;
 

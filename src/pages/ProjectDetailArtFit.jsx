@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
+import ArtFitImage from '../assets/artfit_preview.png';
 
-const ProjectDetail5 = () => {
+const ProjectDetailArtFit = () => {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
@@ -10,20 +11,20 @@ const ProjectDetail5 = () => {
           <Link to="/projects" className="back-button">
             ← Back to Projects
           </Link>
-          <h1 className="project-detail-title">AR Hair Studio</h1>
+          <h1 className="project-detail-title">ArtFit</h1>
           <p className="project-detail-subtitle">
-            A 3D AR hairstyle try-on application that allows users to visualize different hairstyles in real-time using augmented reality technology.
+            A social media platform that connects developers with designers, enabling collaboration and creative exchange in the tech community.
           </p>
           <div className="project-detail-tags">
-            <span className="project-detail-tag">Unity</span>
-            <span className="project-detail-tag">Blender</span>
-            <span className="project-detail-tag">C#</span>
-            <span className="project-detail-tag">AR</span>
+            <span className="project-detail-tag">React</span>
+            <span className="project-detail-tag">Node.js</span>
+            <span className="project-detail-tag">MongoDB</span>
+            <span className="project-detail-tag">Express</span>
           </div>
         </div>
 
         <div className="project-detail-image-container">
-          <img src="https://media.cgtrader.com/variants/95rqr03rqjh6thjkz9veva6v4vek/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/3D%20anime%20male%20hairstyle%20pack.webp" alt="AR Hair Studio - 3D Hairstyle Models" className="project-detail-image" />
+          <img src={ArtFitImage} alt="ArtFit" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">
@@ -31,34 +32,29 @@ const ProjectDetail5 = () => {
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Overview</h2>
               <p className="project-detail-section-content">
-                AR Hair Studio is an innovative augmented reality application that enables users to try on various hairstyles 
-                in real-time using their device's camera. Built with Unity and leveraging AR Foundation, the app provides 
-                an immersive experience for visualizing different hair styles, colors, and cuts before making a decision. 
-                The application uses advanced face tracking and 3D rendering to create realistic hair overlays.
+                ArtFit is a comprehensive social media platform designed to bridge the gap between developers and designers. 
+                The platform facilitates meaningful connections, project collaborations, and knowledge sharing within the creative tech community.
               </p>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Features</h2>
               <ul className="project-detail-section-content">
-                <li>Real-time AR face tracking and hair overlay</li>
-                <li>Multiple hairstyle options and variations</li>
-                <li>Hair color customization and adjustment</li>
-                <li>3D hair models created in Blender</li>
-                <li>Smooth AR tracking and rendering</li>
-                <li>User-friendly interface for easy navigation</li>
-                <li>Photo capture and sharing capabilities</li>
+                <li>User authentication and profile management</li>
+                <li>Real-time messaging and communication</li>
+                <li>Project portfolio showcase</li>
+                <li>Collaboration tools and project matching</li>
+                <li>Community feed with posts and updates</li>
+                <li>Search and discovery of professionals</li>
               </ul>
             </div>
 
             <div className="project-detail-section">
               <h2 className="project-detail-section-title">Technical Details</h2>
               <p className="project-detail-section-content">
-                The application is built using Unity game engine with C# scripting, providing robust AR capabilities through 
-                AR Foundation framework. 3D hair models are created and optimized in Blender, then imported into Unity for 
-                real-time rendering. The app utilizes device camera and AR tracking to accurately map hairstyles onto the 
-                user's face, creating a seamless augmented reality experience. The project demonstrates expertise in 3D 
-                modeling, AR development, and mobile application design.
+                Built with a modern MERN stack, ArtFit leverages React for a responsive frontend, Node.js and Express for 
+                robust backend services, and MongoDB for flexible data storage. The application implements RESTful APIs, 
+                real-time updates, and secure authentication mechanisms.
               </p>
             </div>
           </div>
@@ -76,19 +72,19 @@ const ProjectDetail5 = () => {
               </div>
               <div className="project-detail-info-item">
                 <span className="project-detail-info-label">Category</span>
-                <span className="project-detail-info-value">AR/XR</span>
+                <span className="project-detail-info-value">Social Media</span>
               </div>
             </div>
 
             <div className="project-detail-info-box">
               <h3 className="project-detail-info-title">Links</h3>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href='https://www.artfit.dev/' className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   Live Demo →
                 </a>
               </div>
               <div className="project-detail-info-item">
-                <a href="#" className="project-detail-link" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/daniel3606/ArtFit" className="project-detail-link" target="_blank" rel="noopener noreferrer">
                   GitHub Repository →
                 </a>
               </div>
@@ -97,10 +93,10 @@ const ProjectDetail5 = () => {
         </div>
 
         <div className="project-detail-actions">
-          <a href="#" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.artfit.dev/" className="project-detail-button primary" target="_blank" rel="noopener noreferrer">
             View Live Project
           </a>
-          <a href="#" className="project-detail-button" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/daniel3606/ArtFit" className="project-detail-button" target="_blank" rel="noopener noreferrer">
             View Source Code
           </a>
         </div>
@@ -109,5 +105,5 @@ const ProjectDetail5 = () => {
   );
 };
 
-export default ProjectDetail5;
+export default ProjectDetailArtFit;
 

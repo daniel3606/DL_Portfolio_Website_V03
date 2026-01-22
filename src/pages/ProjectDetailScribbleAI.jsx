@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
 import ScribbleAIImage from '../assets/scribbleai_image.webp';
 
-const ProjectDetail6 = () => {
+const ProjectDetailScribbleAI = () => {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
@@ -104,5 +104,5 @@ const ProjectDetail6 = () => {
   );
 };
 
-export default ProjectDetail6;
+export default ProjectDetailScribbleAI;
 

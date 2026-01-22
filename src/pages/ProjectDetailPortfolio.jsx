@@ -6,7 +6,7 @@ import PortfolioImage2 from '../assets/portfolio_preview02.png';
 import PortfolioImage3 from '../assets/portfolio_preview03.png';
 import PortfolioImage4 from '../assets/portfolio_preview04.png';
 
-const ProjectDetail2 = () => {
+const ProjectDetailPortfolio = () => {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
@@ -115,5 +115,5 @@ const ProjectDetail2 = () => {
   );
 };
 
-export default ProjectDetail2;
+export default ProjectDetailPortfolio;
 

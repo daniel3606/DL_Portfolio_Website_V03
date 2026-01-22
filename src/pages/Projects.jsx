@@ -14,42 +14,42 @@ const Projects = () => {
       name: 'Face Recognition(Spectacles)',
       description: 'Spectacle Pogram that Detect, Saves, and Recognizes faces from a user\'s view.',
       tags: ['Lens Studio', 'Spectacles', 'TypeScript','XR', 'PostgreSQL'],
-      detailsLink: '/projects/project-4'
+      detailsLink: '/projects/spectacles'
     },
     {
       image: 'https://media.cgtrader.com/variants/95rqr03rqjh6thjkz9veva6v4vek/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/3D%20anime%20male%20hairstyle%20pack.webp',
       name: 'AR Hair Studio',
       description: '3D AR Hairstyle Try-On App',
       tags: ['Unity', 'Blender', 'C#', 'AR'],
-      detailsLink: '/projects/project-5'
+      detailsLink: '/projects/ar-hair-studio'
     },
     {
       image: ArtFitImage,
       name: 'ArtFit',
       description: 'Social Media Platform that allows developers to interact with designers.',
       tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-      detailsLink: '/projects/project-1'
+      detailsLink: '/projects/artfit'
     },
     {
       image: PortfolioImage,
       name: 'Portfolio Website',
       description: 'Current website that showcases my projects and skills.',
       tags: ['React','JavaScript', 'CSS', 'HTML'],
-      detailsLink: '/projects/project-2'
+      detailsLink: '/projects/portfolio'
     },
     {
       image: SideQuestImage,
       name: 'Side Quest',
       description: 'Travel add-on that makes exploring new cities special and engaging.',
       tags: ['Figma', 'UI/UX', 'HTML', 'CSS'],
-      detailsLink: '/projects/project-3'
+      detailsLink: '/projects/sidequest'
     },
     {
       image: ScribbleAIImage,
       name: 'Scribble AI',
       description: 'PyTorch based neural drawing recognition tool',
       tags: ['Python', 'PyTorch', 'AI', 'Neural Networks'],
-      detailsLink: '/projects/project-6'
+      detailsLink: '/projects/scribble-ai'
     }
   ];
 
