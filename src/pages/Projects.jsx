@@ -5,6 +5,7 @@ import ArtFitImage from '../assets/artfit_preview.png';
 import PortfolioImage from '../assets/portfolio_preview01.png';
 import SideQuestImage from '../assets/sidequest_preview.png';
 import ScribbleAIImage from '../assets/scribbleai_image.webp';
+import KelseyMuseumImage from '../assets/Kelsey Museum Cohort Preview.png';
 
 const Projects = () => {
   // Sample projects data - you can update this with your actual projects
@@ -50,6 +51,13 @@ const Projects = () => {
       description: 'PyTorch based neural drawing recognition tool',
       tags: ['Python', 'PyTorch', 'AI', 'Neural Networks'],
       detailsLink: '/projects/scribble-ai'
+    },
+    {
+      image: KelseyMuseumImage,
+      name: 'Kelsey Museum Cohort',
+      description: 'AR experience for Kelsey Museum of Archaeology using 8th Wall and TypeScript',
+      tags: ['8th Wall', 'TypeScript', 'Blender', 'AR'],
+      detailsLink: '/projects/kelsey-museum'
     }
   ];
 

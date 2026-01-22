@@ -14,6 +14,7 @@ import ProjectDetailSideQuest from './pages/ProjectDetailSideQuest.jsx';
 import ProjectDetailSpectacles from './pages/ProjectDetailSpectacles.jsx';
 import ProjectDetailARHairStudio from './pages/ProjectDetailARHairStudio.jsx';
 import ProjectDetailScribbleAI from './pages/ProjectDetailScribbleAI.jsx';
+import ProjectDetailKelseyMuseum from './pages/ProjectDetailKelseyMuseum.jsx';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/projects/spectacles" element={<ProjectDetailSpectacles />} />
         <Route path="/projects/ar-hair-studio" element={<ProjectDetailARHairStudio />} />
         <Route path="/projects/scribble-ai" element={<ProjectDetailScribbleAI />} />
+        <Route path="/projects/kelsey-museum" element={<ProjectDetailKelseyMuseum />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
