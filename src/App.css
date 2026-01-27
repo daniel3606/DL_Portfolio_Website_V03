@@ -116,7 +116,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  padding-top: 80px; /* Space for navbar */
+  padding-left: 200px; /* Space for left navbar */
 }
 
 .main-content {
@@ -151,71 +151,6 @@ body {
   pointer-events: none;
 }
 
-/* Navbar styling */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  padding: 0;
-  margin: 0;
-}
-
-.navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 3rem;
-}
-
-.navbar-menu {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-}
-
-.navbar-link {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.navbar-link:hover {
-  color: #ffffff;
-  opacity: 0.8;
-}
-
-.navbar-link::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #ffffff;
-  transition: width 0.3s ease;
-}
-
-.navbar-link:hover::after {
-  width: 100%;
-}
-
-.navbar-link.active {
-  color: #ffffff;
-}
-
-.navbar-link.active::after {
-  width: 100%;
-}
 
 /* Page headings for other pages */
 .page-content h1 {
@@ -262,7 +197,7 @@ body {
   }
 
   .page-content {
-    padding-top: 100px;
+    padding-left: 180px;
   }
 }
 
@@ -319,8 +254,7 @@ body {
   }
 
   .page-content {
-    padding-top: 100px;
-    padding-left: 1rem;
+    padding-left: 150px;
     padding-right: 1rem;
   }
 
@@ -381,8 +315,7 @@ body {
   }
 
   .page-content {
-    padding-top: 90px;
-    padding-left: 0.75rem;
+    padding-left: 120px;
     padding-right: 0.75rem;
   }
 

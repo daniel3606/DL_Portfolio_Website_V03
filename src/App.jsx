@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Clock from './components/clock.jsx';
 import Navbar from './components/navbar.jsx';
 import Cursor from './components/cursor.jsx';
 import Home from './pages/Home.jsx';
@@ -21,11 +20,6 @@ function App() {
     <div className="app">
       <Cursor />
       {/* <Rain /> */}
-      <div className="logo1">Daniel</div>
-      <div className="logo2">Lim</div>
-      <div className="clock-wrapper">
-        <Clock />
-      </div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
