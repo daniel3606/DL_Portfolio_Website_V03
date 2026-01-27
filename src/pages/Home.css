@@ -1,158 +1,174 @@
+/* Home.css (modified) */
+
 @font-face {
-    font-family: 'SixCaps';
-    src: url('../assets/six-caps/SixCaps.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'SixCaps';
+  src: url('../assets/six-caps/SixCaps.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Wire One';
-    src: url('../assets/wire-one/WireOne.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Wire One';
+  src: url('../assets/wire-one/WireOne.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* Scroll snap container */
 .home-page {
-    min-height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0;
-    margin: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  overscroll-behavior-y: contain;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  /* Smooth scrolling enhancements */
+  scroll-padding-top: 0;
 }
 
+/* Every full-page section snaps */
+.snap-section {
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  scroll-margin-top: 0;
+}
+
+/* Keep your existing styles, minus scroll-snap rules duplicated on each section */
+
 .main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 0.3rem;
-    min-height: 100vh;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.3rem;
+  width: 100%;
 }
 
 .name-first {
-    font-family: 'SixCaps', sans-serif;
-    font-size: 20rem;
-    font-weight: normal;
-    color: #ffffff;
-    margin: 0;
-    line-height: 0.9;
-    text-transform: uppercase;
-    animation: fadeInUp 1s ease-out 0.2s both;
+  font-family: 'SixCaps', sans-serif;
+  font-size: 20rem;
+  font-weight: normal;
+  color: #ffffff;
+  margin: 0;
+  line-height: 0.9;
+  text-transform: uppercase;
+  animation: fadeInUp 1s ease-out 0.2s both;
 }
 
 .name-last {
-    font-family: 'SixCaps', sans-serif;
-    font-size: 20rem;
-    font-weight: normal;
-    color: #ffffff;
-    margin: 0;
-    line-height: 0.9;
-    text-transform: uppercase;
-    animation: fadeInUp 1s ease-out 0.6s both;
+  font-family: 'SixCaps', sans-serif;
+  font-size: 20rem;
+  font-weight: normal;
+  color: #ffffff;
+  margin: 0;
+  line-height: 0.9;
+  text-transform: uppercase;
+  animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .subheading {
-    font-family: 'Wire One', sans-serif;
-    font-size: 2rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 1.5rem 0;
-    line-height: 0.9;
-    animation: fadeInUp 1s ease-out 0.4s both;
+  font-family: 'Wire One', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 1.5rem 0;
+  line-height: 0.9;
+  animation: fadeInUp 1s ease-out 0.4s both;
 }
 
 .cards-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    width: 100%;
-    padding: 4rem 2rem;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 2rem;
 }
 
 .cards-section .skill-card {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .cards-section.cards-visible .skill-card {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cards-section.cards-visible .skill-card:nth-child(1) {
-    transition-delay: 0.1s;
+  transition-delay: 0.1s;
 }
 
 .cards-section.cards-visible .skill-card:nth-child(2) {
-    transition-delay: 0.3s;
+  transition-delay: 0.3s;
 }
 
 .cards-section.cards-visible .skill-card:nth-child(3) {
-    transition-delay: 0.5s;
+  transition-delay: 0.5s;
 }
 
 .skill-card {
-    background-color: #000000;
-    border: 1px solid #ffffff;
-    border-radius: 7px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 3rem 2rem;
-    height: 400px;
-    width: 300px;
-    box-sizing: border-box;
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+  height: 400px;
+  width: 300px;
+  box-sizing: border-box;
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .skill-card-text {
-    font-family: 'SixCaps', sans-serif;
-    font-size: 5.5rem;
-    font-weight: normal;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-align: center;
-    margin-top: 2rem;
+  font-family: 'SixCaps', sans-serif;
+  font-size: 5.5rem;
+  font-weight: normal;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .skill-card-logo {
-    width: 80px;
-    height: auto;
-    object-fit: contain;
-    margin-bottom: 2rem;
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 2rem;
 }
 
 /* Tablet Responsive */
 @media (max-width: 1024px) {
-  .home-page {
-    min-height: 100vh;
-    overflow-y: auto;
-  }
-
   .name-first,
   .name-last {
     font-size: 9rem;
@@ -187,8 +203,6 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .home-page {
-    min-height: 100vh;
-    overflow-y: auto;
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -207,7 +221,7 @@
     flex-direction: column;
     gap: 2rem;
     padding: 3rem 1rem;
-    min-height: auto;
+    min-height: 100vh;
   }
 
   .skill-card {
@@ -229,8 +243,6 @@
 
 @media (max-width: 480px) {
   .home-page {
-    min-height: 100vh;
-    overflow-y: auto;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
   }
@@ -249,6 +261,7 @@
     flex-direction: column;
     gap: 1.5rem;
     padding: 2rem 0.75rem;
+    min-height: 100vh;
   }
 
   .skill-card {
@@ -274,9 +287,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
   padding: 4rem 2rem;
-  min-height: 100vh;
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;

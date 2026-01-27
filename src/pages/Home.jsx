@@ -1,3 +1,4 @@
+// Home.jsx (modified)
 import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
 import UIUXLogo from '../assets/UIUXLogo.png';
@@ -18,9 +19,7 @@ const Home = () => {
     const cardsObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setCardsVisible(true);
-          }
+          if (entry.isIntersecting) setCardsVisible(true);
         });
       },
       {
@@ -32,9 +31,7 @@ const Home = () => {
     const contactObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setContactVisible(true);
-          }
+          if (entry.isIntersecting) setContactVisible(true);
         });
       },
       {
@@ -43,21 +40,12 @@ const Home = () => {
       }
     );
 
-    if (cardsRef.current) {
-      cardsObserver.observe(cardsRef.current);
-    }
-
-    if (contactRef.current) {
-      contactObserver.observe(contactRef.current);
-    }
+    if (cardsRef.current) cardsObserver.observe(cardsRef.current);
+    if (contactRef.current) contactObserver.observe(contactRef.current);
 
     return () => {
-      if (cardsRef.current) {
-        cardsObserver.unobserve(cardsRef.current);
-      }
-      if (contactRef.current) {
-        contactObserver.unobserve(contactRef.current);
-      }
+      if (cardsRef.current) cardsObserver.unobserve(cardsRef.current);
+      if (contactRef.current) contactObserver.unobserve(contactRef.current);
     };
   }, []);
 
@@ -87,15 +75,15 @@ const Home = () => {
 
   return (
     <div className="page-content home-page">
-      <div className="main-content">
+      <section className="snap-section main-content">
         <div className="name-first">DANIEL</div>
         <div className="subheading">Software Developer · UX Designer</div>
         <div className="name-last">LIM</div>
-      </div>
-      
-      <div 
+      </section>
+
+      <section
         ref={cardsRef}
-        className={`cards-section ${cardsVisible ? 'cards-visible' : ''}`}
+        className={`snap-section cards-section ${cardsVisible ? 'cards-visible' : ''}`}
       >
         <div className="skill-card">
           <div className="skill-card-text">UI/UX</div>
@@ -109,11 +97,11 @@ const Home = () => {
           <div className="skill-card-text">XR/3D</div>
           <img src={Logo3D} alt="XR/3D Logo" className="skill-card-logo" />
         </div>
-      </div>
+      </section>
 
-      <div 
+      <section
         ref={contactRef}
-        className={`contact-section ${contactVisible ? 'contact-visible' : ''}`}
+        className={`snap-section contact-section ${contactVisible ? 'contact-visible' : ''}`}
       >
         <h2 className="contact-section-title">CONTACT ME</h2>
         <form ref={formRef} onSubmit={handleSubmit} className="contact-form-home">
@@ -157,24 +145,15 @@ const Home = () => {
             />
           </div>
 
-          {status.message && (
-            <div className={`form-status-home ${status.type}`}>
-              {status.message}
-            </div>
-          )}
+          {status.message && <div className={`form-status-home ${status.type}`}>{status.message}</div>}
 
-          <button
-            type="submit"
-            className="submit-button-home"
-            disabled={isSubmitting}
-          >
+          <button type="submit" className="submit-button-home" disabled={isSubmitting}>
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
         </form>
-      </div>
+      </section>
     </div>
   );
 };
 
 export default Home;
-
