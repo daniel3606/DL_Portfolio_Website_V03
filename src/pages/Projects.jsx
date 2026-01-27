@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard.jsx';
 import './Projects.css';
 import ArtFitImage from '../assets/artfit_preview.png';
@@ -11,11 +12,24 @@ import SoftwareLogo from '../assets/SoftwareLogo.png';
 import Logo3D from '../assets/3DLogo.png';
 
 const Projects = () => {
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  
   const [activeCategories, setActiveCategories] = useState({
-    software: true,
-    uiux: true,
-    '3dxr': true
+    software: categoryParam === 'software' ? true : categoryParam ? false : true,
+    uiux: categoryParam === 'uiux' ? true : categoryParam ? false : true,
+    '3dxr': categoryParam === '3dxr' ? true : categoryParam ? false : true
   });
+
+  useEffect(() => {
+    if (categoryParam) {
+      setActiveCategories({
+        software: categoryParam === 'software',
+        uiux: categoryParam === 'uiux',
+        '3dxr': categoryParam === '3dxr'
+      });
+    }
+  }, [categoryParam]);
 
   // Sample projects data with categories
   const projects = [

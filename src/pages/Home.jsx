@@ -1,5 +1,6 @@
 // Home.jsx (modified)
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import UIUXLogo from '../assets/UIUXLogo.png';
 import SoftwareLogo from '../assets/SoftwareLogo.png';
@@ -7,6 +8,7 @@ import Logo3D from '../assets/3DLogo.png';
 import { sendEmail } from '../utils/Email.js';
 
 const Home = () => {
+  const navigate = useNavigate();
   const cardsRef = useRef(null);
   const contactRef = useRef(null);
   const [cardsVisible, setCardsVisible] = useState(false);
@@ -14,6 +16,10 @@ const Home = () => {
   const formRef = useRef(null);
   const [status, setStatus] = useState({ type: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleCardClick = (category) => {
+    navigate(`/projects?category=${category}`);
+  };
 
   useEffect(() => {
     const cardsObserver = new IntersectionObserver(
@@ -87,17 +93,20 @@ const Home = () => {
       >
         <h2 className="projects-section-title">Projects</h2>
         <div className="cards-row">
-          <div className="skill-card">
+          <div className="skill-card" onClick={() => handleCardClick('uiux')}>
             <div className="skill-card-text">UI/UX</div>
             <img src={UIUXLogo} alt="UI/UX Logo" className="skill-card-logo" />
+            <div className="skill-card-hint">Click for details</div>
           </div>
-          <div className="skill-card">
+          <div className="skill-card" onClick={() => handleCardClick('software')}>
             <div className="skill-card-text">SOFTWARE</div>
             <img src={SoftwareLogo} alt="Software Logo" className="skill-card-logo" />
+            <div className="skill-card-hint">Click for details</div>
           </div>
-          <div className="skill-card">
+          <div className="skill-card" onClick={() => handleCardClick('3dxr')}>
             <div className="skill-card-text">XR/3D</div>
             <img src={Logo3D} alt="XR/3D Logo" className="skill-card-logo" />
+            <div className="skill-card-hint">Click for details</div>
           </div>
         </div>
       </section>

@@ -311,6 +311,26 @@
   letter-spacing: 0.05em;
 }
 
+.skill-card-hint {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.skill-card:hover .skill-card-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Tablet Responsive */
 @media (max-width: 1024px) {
   .name-first,
@@ -348,6 +368,10 @@
   .skill-card-logo {
     width: 75px;
     margin-bottom: 1.125rem;
+  }
+
+  .skill-card-hint {
+    font-size: 0.7rem;
   }
 }
 
@@ -397,6 +421,10 @@
     width: 67px;
     margin-bottom: 1.125rem;
   }
+
+  .skill-card-hint {
+    font-size: 0.65rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -443,6 +471,10 @@
   .skill-card-logo {
     width: 60px;
     margin-bottom: 0.75rem;
+  }
+
+  .skill-card-hint {
+    font-size: 0.6rem;
   }
 }
 
