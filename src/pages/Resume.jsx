@@ -17,17 +17,20 @@ function Resume() {
       <div className="resume-content">
         <div className="resume-header">
           <h1>Resume</h1>
-          <button className="download-button" onClick={handleDownload}>
-            Download PDF
-          </button>
         </div>
         
         <div className="pdf-viewer-container">
           <iframe
-            src={`${resumePDF}#toolbar=0&navpanes=0&scrollbar=1`}
+            src={`${resumePDF}#toolbar=0&navpanes=0&scrollbar=1&zoom=75`}
             className="pdf-viewer"
             title="Daniel Lim Resume"
           />
+        </div>
+        
+        <div className="download-button-container">
+          <button className="download-button" onClick={handleDownload}>
+            Download PDF
+          </button>
         </div>
       </div>
     </div>
