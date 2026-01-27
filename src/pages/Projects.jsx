@@ -22,7 +22,7 @@ const Projects = () => {
       name: 'AR Hair Studio',
       description: '3D AR Hairstyle Try-On App',
       tags: ['Unity', 'Blender', 'C#', 'AR'],
-      detailsLink: '/projects/ar-hair-studio'
+      detailsLink: '/projects/project-5'
     },
     {
       image: ArtFitImage,

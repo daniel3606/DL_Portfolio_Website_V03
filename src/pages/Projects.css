@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'SixCaps';
+  src: url('../assets/six-caps/SixCaps.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .projects-page {
   min-height: 100vh;
   background-color: #000000;
@@ -13,12 +31,16 @@
 }
 
 .projects-title {
-  font-size: 3rem;
-  font-weight: 500;
-  color: white;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'SixCaps', sans-serif;
+  font-size: 8rem;
+  font-weight: normal;
+  color: #ffffff;
   margin: 0 0 3rem 0;
   text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: fadeInUp 1s ease-out 0.2s both;
+  position: relative;
 }
 
 .projects-grid {
@@ -40,7 +62,7 @@
   }
   
   .projects-title {
-    font-size: 2.5rem;
+    font-size: 5rem;
     margin-bottom: 2rem;
   }
 }
@@ -57,7 +79,7 @@
   }
   
   .projects-title {
-    font-size: 2rem;
+    font-size: 4rem;
     margin-bottom: 1.5rem;
     text-align: center;
   }
@@ -69,7 +91,7 @@
   }
 
   .projects-title {
-    font-size: 1.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
   }
 

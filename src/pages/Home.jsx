@@ -85,17 +85,20 @@ const Home = () => {
         ref={cardsRef}
         className={`snap-section cards-section ${cardsVisible ? 'cards-visible' : ''}`}
       >
-        <div className="skill-card">
-          <div className="skill-card-text">UI/UX</div>
-          <img src={UIUXLogo} alt="UI/UX Logo" className="skill-card-logo" />
-        </div>
-        <div className="skill-card">
-          <div className="skill-card-text">SOFTWARE</div>
-          <img src={SoftwareLogo} alt="Software Logo" className="skill-card-logo" />
-        </div>
-        <div className="skill-card">
-          <div className="skill-card-text">XR/3D</div>
-          <img src={Logo3D} alt="XR/3D Logo" className="skill-card-logo" />
+        <h2 className="projects-section-title">Projects</h2>
+        <div className="cards-row">
+          <div className="skill-card">
+            <div className="skill-card-text">UI/UX</div>
+            <img src={UIUXLogo} alt="UI/UX Logo" className="skill-card-logo" />
+          </div>
+          <div className="skill-card">
+            <div className="skill-card-text">SOFTWARE</div>
+            <img src={SoftwareLogo} alt="Software Logo" className="skill-card-logo" />
+          </div>
+          <div className="skill-card">
+            <div className="skill-card-text">XR/3D</div>
+            <img src={Logo3D} alt="XR/3D Logo" className="skill-card-logo" />
+          </div>
         </div>
       </section>
 
