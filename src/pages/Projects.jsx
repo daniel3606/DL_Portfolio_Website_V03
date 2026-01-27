@@ -15,10 +15,20 @@ const Projects = () => {
   const [searchParams] = useSearchParams();
   const categoryParam = searchParams.get('category');
   
-  const [activeCategories, setActiveCategories] = useState({
-    software: categoryParam === 'software' ? true : categoryParam ? false : true,
-    uiux: categoryParam === 'uiux' ? true : categoryParam ? false : true,
-    '3dxr': categoryParam === '3dxr' ? true : categoryParam ? false : true
+  const [activeCategories, setActiveCategories] = useState(() => {
+    if (categoryParam) {
+      return {
+        software: categoryParam === 'software',
+        uiux: categoryParam === 'uiux',
+        '3dxr': categoryParam === '3dxr'
+      };
+    }
+    // Default to software being active if no category param
+    return {
+      software: true,
+      uiux: false,
+      '3dxr': false
+    };
   });
 
   useEffect(() => {
@@ -46,7 +56,7 @@ const Projects = () => {
       name: 'AR Hair Studio',
       description: '3D AR Hairstyle Try-On App',
       tags: ['Unity', 'Blender', 'C#', 'AR'],
-      detailsLink: '/projects/project-5',
+      detailsLink: '/projects/ar-hair-studio',
       category: '3dxr'
     },
     {
@@ -92,10 +102,11 @@ const Projects = () => {
   ];
 
   const toggleCategory = (category) => {
-    setActiveCategories(prev => ({
-      ...prev,
-      [category]: !prev[category]
-    }));
+    setActiveCategories({
+      software: category === 'software',
+      uiux: category === 'uiux',
+      '3dxr': category === '3dxr'
+    });
   };
 
   const filteredProjects = projects.filter(project => 
@@ -138,7 +149,7 @@ const Projects = () => {
             ))
           ) : (
             <div className="no-projects-message">
-              <p>No projects selected. Please select at least one category.</p>
+              <p>No projects in this category.</p>
             </div>
           )}
         </div>

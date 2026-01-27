@@ -63,12 +63,12 @@
   border: 1px solid #ffffff;
   border-radius: 7px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 0.75rem 0.875rem;
-  height: 100px;
-  width: 120px;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  height: 60px;
+  width: 180px;
   box-sizing: border-box;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -119,12 +119,14 @@
 }
 
 .category-toggle-logo {
-  width: 30px;
+  width: 28px;
   height: auto;
   object-fit: contain;
-  margin-bottom: 0.35rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  order: 1;
 }
 
 .category-toggle:hover .category-toggle-logo {
@@ -134,13 +136,15 @@
 
 .category-toggle-text {
   font-family: 'SixCaps', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: normal;
   color: #ffffff;
   text-transform: uppercase;
-  text-align: center;
-  margin-top: 0;
+  text-align: right;
+  margin: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  order: 2;
+  flex: 1;
 }
 
 .category-toggle:hover .category-toggle-text {
@@ -192,14 +196,15 @@
   }
 
   .category-toggle {
-    height: 90px;
-    width: 100px;
-    padding: 0.625rem 0.75rem;
+    height: 55px;
+    width: 160px;
+    padding: 0.45rem 0.875rem;
   }
 
   .category-toggle-logo {
-    width: 28px;
-    margin-bottom: 0.3rem;
+    width: 24px;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
   }
 
   .category-toggle-text {
@@ -231,14 +236,15 @@
   }
 
   .category-toggle {
-    height: 85px;
-    width: 90px;
-    padding: 0.6rem 0.625rem;
+    height: 50px;
+    width: 150px;
+    padding: 0.4rem 0.75rem;
   }
 
   .category-toggle-logo {
-    width: 26px;
-    margin-bottom: 0.25rem;
+    width: 22px;
+    margin-right: 0.4rem;
+    margin-bottom: 0;
   }
 
   .category-toggle-text {
@@ -267,14 +273,15 @@
   }
 
   .category-toggle {
-    height: 80px;
-    width: 90px;
-    padding: 0.55rem 0.625rem;
+    height: 48px;
+    width: 140px;
+    padding: 0.4rem 0.625rem;
   }
 
   .category-toggle-logo {
-    width: 24px;
-    margin-bottom: 0.2rem;
+    width: 20px;
+    margin-right: 0.4rem;
+    margin-bottom: 0;
   }
 
   .category-toggle-text {
