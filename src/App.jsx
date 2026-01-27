@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/navbar.jsx';
 import Cursor from './components/cursor.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import Home from './pages/Home.jsx';
 import Projects from './pages/Projects.jsx';
 import Resume from './pages/Resume.jsx';
@@ -18,6 +19,7 @@ import ProjectDetailKelseyMuseum from './pages/ProjectDetailKelseyMuseum.jsx';
 function App() {
   return (
     <div className="app">
+      <ScrollToTop />
       <Cursor />
       {/* <Rain /> */}
       <Navbar />
