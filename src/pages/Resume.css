@@ -65,12 +65,63 @@
 
 .pdf-viewer-container {
   width: 100%;
-  height: 95vh;
+  height: calc(100vh - 300px);
+  max-height: calc(100vh - 200px);
+  min-height: 500px;
   border-radius: 7px;
   overflow: hidden;
   border: 1px solid #ffffff;
   background: white;
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 12px;
+  border-radius: 7px;
+  border: 1px solid #ffffff;
+}
+
+.zoom-button {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.zoom-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.zoom-button:active {
+  transform: scale(0.95);
+}
+
+.zoom-level {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 45px;
+  text-align: center;
 }
 
 .pdf-viewer {
@@ -102,7 +153,27 @@
   }
 
   .pdf-viewer-container {
-    height: 75vh;
+    height: calc(100vh - 250px);
+    max-height: calc(100vh - 180px);
+    min-height: 400px;
+  }
+
+  .zoom-controls {
+    top: 8px;
+    right: 8px;
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .zoom-button {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+  }
+
+  .zoom-level {
+    font-size: 0.85rem;
+    min-width: 40px;
   }
 }
 
@@ -130,7 +201,27 @@
   }
   
   .pdf-viewer-container {
-    height: 70vh;
+    height: calc(100vh - 220px);
+    max-height: calc(100vh - 150px);
+    min-height: 350px;
+  }
+
+  .zoom-controls {
+    top: 6px;
+    right: 6px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  .zoom-button {
+    width: 26px;
+    height: 26px;
+    font-size: 1.2rem;
+  }
+
+  .zoom-level {
+    font-size: 0.8rem;
+    min-width: 35px;
   }
 }
 
@@ -150,7 +241,27 @@
   }
   
   .pdf-viewer-container {
-    height: 60vh;
+    height: calc(100vh - 200px);
+    max-height: calc(100vh - 120px);
+    min-height: 300px;
     border-radius: 7px;
+  }
+
+  .zoom-controls {
+    top: 5px;
+    right: 5px;
+    padding: 4px 6px;
+    gap: 5px;
+  }
+
+  .zoom-button {
+    width: 24px;
+    height: 24px;
+    font-size: 1.1rem;
+  }
+
+  .zoom-level {
+    font-size: 0.75rem;
+    min-width: 30px;
   }
 }
