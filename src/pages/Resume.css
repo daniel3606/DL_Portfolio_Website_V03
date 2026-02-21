@@ -1,127 +1,102 @@
-@font-face {
-    font-family: 'SixCaps';
-    src: url('../assets/six-caps/SixCaps.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+.resume-page {
+  min-height: 100vh;
+  padding: calc(var(--nav-height) + 2rem) 2rem 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .resume-container {
-  min-height: 100vh;
-  background-color: #000000;
-  padding: 150px 1rem 3rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.resume-content {
+  max-width: 800px;
   width: 100%;
-  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--nav-height) - 4rem);
 }
 
 .resume-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+  gap: 1.5rem;
+  animation: fadeUp 0.6s ease-out 0.1s both;
 }
 
-.resume-header h1 {
-  font-size: 8rem;
-  font-weight: normal;
-  color: #ffffff;
-  font-family: 'SixCaps', sans-serif;
-  margin: 0;
-  text-transform: uppercase;
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-}
-
-.download-button {
-  background-color: #000000;
-  color: #ffffff;
-  padding: 0.75rem 2rem;
-  border: 1px solid #ffffff;
-  border-radius: 7px;
-  font-size: 1rem;
+.resume-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 400;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'JetBrains Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
 }
 
-.download-button:hover {
-  background-color: #ffffff;
-  color: #000000;
-  transform: translateY(-2px);
+.resume-subtitle {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--text-secondary);
 }
 
-.download-button:active {
-  transform: translateY(0);
-}
-
-.pdf-viewer-container {
-  width: 100%;
-  height: calc(100vh - 300px);
-  max-height: calc(100vh - 200px);
-  min-height: 500px;
-  border-radius: 7px;
-  overflow: hidden;
-  border: 1px solid #ffffff;
-  background: white;
-  margin-bottom: 2rem;
-  position: relative;
+.resume-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
 .zoom-controls {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 8px 12px;
-  border-radius: 7px;
-  border: 1px solid #ffffff;
+  gap: 0.5rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.5rem;
 }
 
-.zoom-button {
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  width: 32px;
-  height: 32px;
-  font-size: 1.5rem;
-  font-weight: 300;
-  cursor: pointer;
+.zoom-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  font-family: 'JetBrains Mono', monospace;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.zoom-button:hover {
-  background-color: #ffffff;
-  color: #000000;
+.zoom-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-.zoom-button:active {
-  transform: scale(0.95);
-}
-
-.zoom-level {
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-family: 'JetBrains Mono', monospace;
-  min-width: 45px;
+.zoom-value {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  min-width: 36px;
   text-align: center;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  padding: 0.6rem 1.25rem;
+}
+
+.pdf-viewer-wrapper {
+  flex: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: white;
+  animation: fadeUp 0.6s ease-out 0.25s both;
 }
 
 .pdf-viewer {
@@ -131,137 +106,59 @@
   background: white;
 }
 
-.download-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Tablet Responsive */
-@media (max-width: 1024px) {
-  .resume-container {
-    padding: 120px 2rem 2rem 2rem;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  .resume-header h1 {
-    font-size: 5rem;
-  }
-
-  .download-button {
-    padding: 0.65rem 1.75rem;
-    font-size: 0.95rem;
-  }
-
-  .pdf-viewer-container {
-    height: calc(100vh - 250px);
-    max-height: calc(100vh - 180px);
-    min-height: 400px;
-  }
-
-  .zoom-controls {
-    top: 8px;
-    right: 8px;
-    padding: 6px 10px;
-    gap: 8px;
-  }
-
-  .zoom-button {
-    width: 28px;
-    height: 28px;
-    font-size: 1.3rem;
-  }
-
-  .zoom-level {
-    font-size: 0.85rem;
-    min-width: 40px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
-  .resume-container {
-    padding: 120px 1rem 1.5rem 1rem;
+  .resume-page {
+    padding: calc(var(--nav-height) + 1.5rem) 1.5rem 1.5rem;
   }
-  
+
+  .resume-container {
+    height: calc(100vh - var(--nav-height) - 3rem);
+  }
+
   .resume-header {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .resume-header h1 {
-    font-size: 4rem;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
-  .download-button {
+  .resume-actions {
     width: 100%;
-    max-width: 250px;
-    padding: 0.7rem 1.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .pdf-viewer-container {
-    height: calc(100vh - 220px);
-    max-height: calc(100vh - 150px);
-    min-height: 350px;
+    justify-content: space-between;
   }
 
-  .zoom-controls {
-    top: 6px;
-    right: 6px;
-    padding: 5px 8px;
-    gap: 6px;
-  }
-
-  .zoom-button {
-    width: 26px;
-    height: 26px;
-    font-size: 1.2rem;
-  }
-
-  .zoom-level {
-    font-size: 0.8rem;
-    min-width: 35px;
+  .download-btn {
+    flex: 1;
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  .resume-container {
-    padding: 100px 0.75rem 1rem 0.75rem;
+  .resume-page {
+    padding: calc(var(--nav-height) + 1rem) 1.25rem 1rem;
   }
 
-  .resume-header h1 {
-    font-size: 3rem;
+  .resume-actions {
+    flex-direction: column;
+    gap: 0.75rem;
   }
-  
-  .download-button {
-    padding: 0.65rem 1.2rem;
-    font-size: 0.85rem;
-    max-width: 100%;
-  }
-  
-  .pdf-viewer-container {
-    height: calc(100vh - 200px);
-    max-height: calc(100vh - 120px);
-    min-height: 300px;
-    border-radius: 7px;
+
+  .download-btn {
+    width: 100%;
   }
 
   .zoom-controls {
-    top: 5px;
-    right: 5px;
-    padding: 4px 6px;
-    gap: 5px;
-  }
-
-  .zoom-button {
-    width: 24px;
-    height: 24px;
-    font-size: 1.1rem;
-  }
-
-  .zoom-level {
-    font-size: 0.75rem;
-    min-width: 30px;
+    width: 100%;
+    justify-content: center;
   }
 }

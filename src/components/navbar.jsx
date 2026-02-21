@@ -4,40 +4,59 @@ import './navbar.css';
 
 const Navbar = () => {
   const location = useLocation();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Trigger animation on mount
-    setIsLoaded(true);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
+
+  const isActive = (path) => {
+    if (path === '/projects') {
+      return location.pathname.startsWith('/projects');
+    }
+    return location.pathname === path;
+  };
+
   return (
-    <nav className="navbar">
-      <div className={`navbar-menu ${isLoaded ? 'loaded' : ''}`}>
-        <Link 
-          to="/" 
-          className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}
-        >
-          Home
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-inner">
+        <Link to="/" className="navbar-logo">
+          Daniel Lim
         </Link>
-        <Link 
-          to="/projects" 
-          className={`navbar-link ${location.pathname === '/projects' ? 'active' : ''}`}
+
+        <button
+          className={`navbar-hamburger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
         >
-          Projects
-        </Link>
-        <Link 
-          to="/resume" 
-          className={`navbar-link ${location.pathname === '/resume' ? 'active' : ''}`}
-        >
-          Resume
-        </Link>
-        <Link 
-          to="/contact" 
-          className={`navbar-link ${location.pathname === '/contact' ? 'active' : ''}`}
-        >
-          Contact Me
-        </Link>
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
+          <Link to="/" className={`navbar-link ${isActive('/') && !isActive('/projects') ? 'active' : ''}`}>
+            Home
+          </Link>
+          <Link to="/projects" className={`navbar-link ${isActive('/projects') ? 'active' : ''}`}>
+            Projects
+          </Link>
+          <Link to="/resume" className={`navbar-link ${isActive('/resume') ? 'active' : ''}`}>
+            Resume
+          </Link>
+          <Link to="/contact" className={`navbar-link ${isActive('/contact') ? 'active' : ''}`}>
+            Contact
+          </Link>
+        </div>
       </div>
     </nav>
   );

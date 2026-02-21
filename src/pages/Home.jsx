@@ -1,168 +1,164 @@
-// Home.jsx (modified)
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Home.css';
-import UIUXLogo from '../assets/UIUXLogo.png';
-import SoftwareLogo from '../assets/SoftwareLogo.png';
-import Logo3D from '../assets/3DLogo.png';
-import { sendEmail } from '../utils/Email.js';
+import ArtFitImage from '../assets/artfit_preview.png';
+import ScribbleAIImage from '../assets/scribbleai_image.webp';
+import SideQuestImage from '../assets/sidequest_preview.png';
 
 const Home = () => {
   const navigate = useNavigate();
-  const cardsRef = useRef(null);
-  const contactRef = useRef(null);
-  const [cardsVisible, setCardsVisible] = useState(false);
-  const [contactVisible, setContactVisible] = useState(false);
-  const formRef = useRef(null);
-  const [status, setStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleCardClick = (category) => {
-    navigate(`/projects?category=${category}`);
-  };
+  const [visibleSections, setVisibleSections] = useState(new Set());
+  const sectionRefs = useRef([]);
 
   useEffect(() => {
-    const cardsObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setCardsVisible(true);
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => new Set([...prev, entry.target.dataset.section]));
+          }
         });
       },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px',
-      }
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
     );
 
-    const contactObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setContactVisible(true);
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px',
-      }
-    );
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
 
-    if (cardsRef.current) cardsObserver.observe(cardsRef.current);
-    if (contactRef.current) contactObserver.observe(contactRef.current);
-
-    return () => {
-      if (cardsRef.current) cardsObserver.unobserve(cardsRef.current);
-      if (contactRef.current) contactObserver.unobserve(contactRef.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setStatus({ type: '', message: '' });
-
-    const formData = {
-      from_name: formRef.current.from_name.value,
-      from_email: formRef.current.from_email.value,
-      subject: formRef.current.subject.value,
-      message: formRef.current.message.value,
-    };
-
-    const result = await sendEmail(formData);
-
-    if (result.success) {
-      setStatus({ type: 'success', message: 'Message sent successfully!' });
-      formRef.current.reset();
-    } else {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+  const addRef = (el, section) => {
+    if (el) {
+      el.dataset.section = section;
+      sectionRefs.current.push(el);
     }
-
-    setIsSubmitting(false);
   };
 
-  return (
-    <div className="page-content home-page">
-      <section className="snap-section main-content">
-        <div className="name-first">DANIEL</div>
-        <div className="subheading">Software Developer · UX Designer</div>
-        <div className="name-last">LIM</div>
-      </section>
+  const featuredProjects = [
+    {
+      name: 'ArtFit',
+      description: 'Social platform connecting developers and designers to collaborate and share creative work.',
+      tags: ['React', 'Node.js', 'MongoDB'],
+      image: ArtFitImage,
+      link: '/projects/artfit',
+    },
+    {
+      name: 'Scribble AI',
+      description: 'Neural drawing recognition tool built with PyTorch for real-time sketch classification.',
+      tags: ['Python', 'PyTorch', 'AI'],
+      image: ScribbleAIImage,
+      link: '/projects/scribble-ai',
+    },
+    {
+      name: 'Side Quest',
+      description: 'Award-winning travel companion app that makes exploring new cities engaging and personal.',
+      tags: ['Figma', 'UI/UX', 'Research'],
+      image: SideQuestImage,
+      link: '/projects/sidequest',
+    },
+  ];
 
-      <section
-        ref={cardsRef}
-        className={`snap-section cards-section ${cardsVisible ? 'cards-visible' : ''}`}
-      >
-        <h2 className="projects-section-title">Projects</h2>
-        <div className="cards-row">
-          <div className="skill-card" onClick={() => handleCardClick('uiux')}>
-            <div className="skill-card-text">UI/UX</div>
-            <img src={UIUXLogo} alt="UI/UX Logo" className="skill-card-logo" />
-            <div className="skill-card-hint">Click for details</div>
-          </div>
-          <div className="skill-card" onClick={() => handleCardClick('software')}>
-            <div className="skill-card-text">SOFTWARE</div>
-            <img src={SoftwareLogo} alt="Software Logo" className="skill-card-logo" />
-            <div className="skill-card-hint">Click for details</div>
-          </div>
-          <div className="skill-card" onClick={() => handleCardClick('3dxr')}>
-            <div className="skill-card-text">XR/3D</div>
-            <img src={Logo3D} alt="XR/3D Logo" className="skill-card-logo" />
-            <div className="skill-card-hint">Click for details</div>
+  return (
+    <div className="home-page">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-content">
+          <p className="hero-greeting">Hi, I'm</p>
+          <h1 className="hero-name">Daniel Lim</h1>
+          <h2 className="hero-title">Software Developer & UX Designer</h2>
+          <p className="hero-description">
+            I build thoughtful digital experiences at the intersection of engineering and design.
+            Currently studying at the University of Michigan.
+          </p>
+          <div className="hero-cta">
+            <Link to="/projects" className="btn-primary">View My Work</Link>
+            <Link to="/contact" className="btn-secondary">Get in Touch</Link>
           </div>
         </div>
       </section>
 
+      {/* About Section */}
       <section
-        ref={contactRef}
-        className={`snap-section contact-section ${contactVisible ? 'contact-visible' : ''}`}
+        className={`about-section ${visibleSections.has('about') ? 'visible' : ''}`}
+        ref={(el) => addRef(el, 'about')}
       >
-        <h2 className="contact-section-title">CONTACT ME</h2>
-        <form ref={formRef} onSubmit={handleSubmit} className="contact-form-home">
-          <div className="form-group-home">
-            <input
-              type="text"
-              name="from_name"
-              required
-              className="form-input-home"
-              placeholder="Your name"
-            />
+        <div className="section-container">
+          <span className="section-label">About</span>
+          <div className="about-content">
+            <h3 className="about-heading">
+              I'm a developer who cares deeply about <em>craft</em> and <em>user experience</em>.
+            </h3>
+            <div className="about-text">
+              <p>
+                With experience spanning full-stack development, UI/UX design, and XR/3D technologies,
+                I bring a multidisciplinary approach to every project. I believe the best digital products
+                come from understanding both the technical possibilities and the human needs they serve.
+              </p>
+              <p>
+                When I'm not coding, you'll find me exploring new design trends, experimenting with
+                emerging technologies, or working on creative side projects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section
+        className={`featured-section ${visibleSections.has('featured') ? 'visible' : ''}`}
+        ref={(el) => addRef(el, 'featured')}
+      >
+        <div className="section-container">
+          <div className="section-header">
+            <span className="section-label">Featured Work</span>
+            <Link to="/projects" className="section-link">
+              View all projects
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
           </div>
 
-          <div className="form-group-home">
-            <input
-              type="email"
-              name="from_email"
-              required
-              className="form-input-home"
-              placeholder="your.email@example.com"
-            />
+          <div className="featured-grid">
+            {featuredProjects.map((project, index) => (
+              <Link
+                to={project.link}
+                key={project.name}
+                className="featured-card"
+                style={{ transitionDelay: `${index * 0.1}s` }}
+              >
+                <div className="featured-card-image">
+                  <img src={project.image} alt={project.name} />
+                </div>
+                <div className="featured-card-content">
+                  <h4 className="featured-card-name">{project.name}</h4>
+                  <p className="featured-card-desc">{project.description}</p>
+                  <div className="featured-card-tags">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="form-group-home">
-            <input
-              type="text"
-              name="subject"
-              required
-              className="form-input-home"
-              placeholder="Subject"
-            />
-          </div>
-
-          <div className="form-group-home">
-            <textarea
-              name="message"
-              required
-              className="form-textarea-home"
-              rows="6"
-              placeholder="Your message here..."
-            />
-          </div>
-
-          {status.message && <div className={`form-status-home ${status.type}`}>{status.message}</div>}
-
-          <button type="submit" className="submit-button-home" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
+      {/* CTA Section */}
+      <section
+        className={`cta-section ${visibleSections.has('cta') ? 'visible' : ''}`}
+        ref={(el) => addRef(el, 'cta')}
+      >
+        <div className="section-container cta-container">
+          <h3 className="cta-heading">Interested in working together?</h3>
+          <p className="cta-text">
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+          </p>
+          <Link to="/contact" className="btn-primary">Let's Talk</Link>
+        </div>
       </section>
     </div>
   );

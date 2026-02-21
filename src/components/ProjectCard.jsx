@@ -6,25 +6,29 @@ const ProjectCard = ({ project }) => {
   const { image, name, description, tags, detailsLink } = project;
 
   return (
-    <div className='project-card'>
-      <h3 className="project-name">{name}</h3>
-      <p className="project-description">{description}</p>
-      <div className='project-image-container'>
-        <img src={image} alt={name} className='project-image'/>
+    <Link to={detailsLink} className="project-card">
+      <div className="project-card-image">
+        <img src={image} alt={name} loading="lazy" />
       </div>
-      <div className="project-content">
-        <div className="project-tags">
-          {tags.map((tag, index) => (
-            <span key={index} className="project-tag">{tag}</span>
-          ))}
+      <div className="project-card-body">
+        <div className="project-card-top">
+          <h3 className="project-card-name">{name}</h3>
+          <p className="project-card-description">{description}</p>
         </div>
-        <div className="project-button-container">
-          <Link to={detailsLink} className="project-button">
-            See More Details
-          </Link>
+        <div className="project-card-bottom">
+          <div className="project-card-tags">
+            {tags.map((tag, index) => (
+              <span key={index} className="tag">{tag}</span>
+            ))}
+          </div>
+          <span className="project-card-arrow">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
