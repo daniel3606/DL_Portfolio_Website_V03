@@ -7,6 +7,7 @@ import PortfolioImage from '../assets/portfolio_preview01.png';
 import SideQuestImage from '../assets/sidequest_preview.png';
 import ScribbleAIImage from '../assets/scribbleai_image.webp';
 import KelseyMuseumImage from '../assets/Kelsey Museum Cohort Preview.png';
+import QuadlyImage from '../assets/Quadly_img01.png';
 
 const Projects = () => {
   const [searchParams] = useSearchParams();
@@ -45,6 +46,14 @@ const Projects = () => {
       description: 'Social media platform that connects developers with designers for creative collaboration.',
       tags: ['React', 'Node.js', 'MongoDB', 'Express'],
       detailsLink: '/projects/artfit',
+      category: 'software'
+    },
+    {
+      image: QuadlyImage,
+      name: 'Quadly',
+      description: 'Verified campus community platform for UMich students with boards, schedules, and course reviews.',
+      tags: ['Next.js', 'NestJS', 'Prisma', 'PostgreSQL'],
+      detailsLink: '/projects/quadly',
       category: 'software'
     },
     {

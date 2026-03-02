@@ -14,6 +14,7 @@ import ProjectDetailSpectacles from './pages/ProjectDetailSpectacles.jsx';
 import ProjectDetailARHairStudio from './pages/ProjectDetailARHairStudio.jsx';
 import ProjectDetailScribbleAI from './pages/ProjectDetailScribbleAI.jsx';
 import ProjectDetailKelseyMuseum from './pages/ProjectDetailKelseyMuseum.jsx';
+import ProjectDetailQuadly from './pages/ProjectDetailQuadly.jsx';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/artfit" element={<ProjectDetailArtFit />} />
+        <Route path="/projects/quadly" element={<ProjectDetailQuadly />} />
         <Route path="/projects/portfolio" element={<ProjectDetailPortfolio />} />
         <Route path="/projects/sidequest" element={<ProjectDetailSideQuest />} />
         <Route path="/projects/spectacles" element={<ProjectDetailSpectacles />} />

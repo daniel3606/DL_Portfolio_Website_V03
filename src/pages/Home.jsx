@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import ArtFitImage from '../assets/artfit_preview.png';
 import ScribbleAIImage from '../assets/scribbleai_image.webp';
 import SideQuestImage from '../assets/sidequest_preview.png';
+import HeadshotImage from '../assets/05_Daniel_Lim_Headshot.png';
 
 const Home = () => {
-  const navigate = useNavigate();
   const [visibleSections, setVisibleSections] = useState(new Set());
   const sectionRefs = useRef([]);
 
@@ -65,16 +65,30 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <p className="hero-greeting">Hi, I'm</p>
-          <h1 className="hero-name">Daniel Lim</h1>
-          <h2 className="hero-title">Software Developer & UX Designer</h2>
-          <p className="hero-description">
-            I build thoughtful digital experiences at the intersection of engineering and design.
-            Currently studying at the University of Michigan.
-          </p>
-          <div className="hero-cta">
-            <Link to="/projects" className="btn-primary">View My Work</Link>
-            <Link to="/contact" className="btn-secondary">Get in Touch</Link>
+          <div className="hero-grid">
+            <div className="hero-text">
+              <p className="hero-greeting">Hi, I'm</p>
+              <h1 className="hero-name">Daniel Lim</h1>
+              <h2 className="hero-title">Software Developer & UX Designer</h2>
+              <p className="hero-description">
+                I build thoughtful digital experiences at the intersection of engineering and design.
+                Currently studying at the University of Michigan.
+              </p>
+              <div className="hero-cta">
+                <Link to="/projects" className="btn-primary">View My Work</Link>
+                <Link to="/contact" className="btn-secondary">Get in Touch</Link>
+              </div>
+            </div>
+
+            <div className="hero-image" aria-hidden="false">
+              <img
+                className="hero-headshot"
+                src={HeadshotImage}
+                alt="Daniel Lim headshot"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -88,7 +102,7 @@ const Home = () => {
           <span className="section-label">About</span>
           <div className="about-content">
             <h3 className="about-heading">
-              I'm a developer who cares deeply about <em>craft</em> and <em>user experience</em>.
+              I'm a developer who loves to build <em>user centered</em> products.
             </h3>
             <div className="about-text">
               <p>
