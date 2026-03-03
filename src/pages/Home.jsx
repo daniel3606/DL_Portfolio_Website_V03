@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import ArtFitImage from '../assets/artfit_preview.png';
+import QuadlyImage from '../assets/QuadlyFeaturedImage.png';
 import ScribbleAIImage from '../assets/scribbleai_image.webp';
 import SideQuestImage from '../assets/sidequest_preview.png';
 import HeadshotImage from '../assets/05_Daniel_Lim_Headshot.png';
@@ -38,11 +38,11 @@ const Home = () => {
 
   const featuredProjects = [
     {
-      name: 'ArtFit',
-      description: 'Social platform connecting developers and designers to collaborate and share creative work.',
-      tags: ['React', 'Node.js', 'MongoDB'],
-      image: ArtFitImage,
-      link: '/projects/artfit',
+      name: 'Quadly',
+      description: 'Verified campus community platform for UMich students with boards, schedules, and course reviews.',
+      tags: ['Next.js', 'NestJS', 'Prisma', 'PostgreSQL'],
+      image: QuadlyImage,
+      link: '/projects/quadly',
     },
     {
       name: 'Scribble AI',

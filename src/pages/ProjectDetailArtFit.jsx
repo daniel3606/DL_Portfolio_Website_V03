@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProjectDetail.css';
-import ArtFitImage from '../assets/artfit_preview.png';
+import ArtFitPrimaryImage from '../assets/artfit_preview01.png';
+import ArtFitSecondaryImage from '../assets/artfit_preview02.png';
 
 const ProjectDetailArtFit = () => {
   return (
@@ -23,8 +24,9 @@ const ProjectDetailArtFit = () => {
           </div>
         </div>
 
-        <div className="project-detail-image-container">
-          <img src={ArtFitImage} alt="ArtFit" className="project-detail-image" />
+        <div className="project-detail-image-grid">
+          <img src={ArtFitPrimaryImage} alt="ArtFit home screen" className="project-detail-image" />
+          <img src={ArtFitSecondaryImage} alt="ArtFit create project screen" className="project-detail-image" />
         </div>
 
         <div className="project-detail-content">

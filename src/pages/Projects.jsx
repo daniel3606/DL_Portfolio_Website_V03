@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard.jsx';
 import './Projects.css';
-import ArtFitImage from '../assets/artfit_preview.png';
+import ArtFitImage from '../assets/artfit_preview01.png';
 import PortfolioImage from '../assets/portfolio_preview01.png';
 import SideQuestImage from '../assets/sidequest_preview.png';
 import ScribbleAIImage from '../assets/scribbleai_image.webp';
 import KelseyMuseumImage from '../assets/Kelsey Museum Cohort Preview.png';
-import QuadlyImage from '../assets/Quadly_img01.png';
+import QuadlyImage from '../assets/QuadlyFeaturedImage.png';
 
 const Projects = () => {
   const [searchParams] = useSearchParams();
@@ -25,30 +25,6 @@ const Projects = () => {
 
   const projects = [
     {
-      image: 'https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2024/09/spectacles-24-2.jpg',
-      name: 'Face Recognition (Spectacles)',
-      description: 'Spectacle program that detects, saves, and recognizes faces from a user\'s view in real-time.',
-      tags: ['Lens Studio', 'Spectacles', 'TypeScript', 'XR'],
-      detailsLink: '/projects/spectacles',
-      category: '3dxr'
-    },
-    {
-      image: 'https://media.cgtrader.com/variants/95rqr03rqjh6thjkz9veva6v4vek/78add9c2f02fbd73a43ffb3970be38683c5f15eff6ca849dc78c644f4ff9ce1b/3D%20anime%20male%20hairstyle%20pack.webp',
-      name: 'AR Hair Studio',
-      description: '3D augmented reality hairstyle try-on application built with Unity and Blender.',
-      tags: ['Unity', 'Blender', 'C#', 'AR'],
-      detailsLink: '/projects/ar-hair-studio',
-      category: '3dxr'
-    },
-    {
-      image: ArtFitImage,
-      name: 'ArtFit',
-      description: 'Social media platform that connects developers with designers for creative collaboration.',
-      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-      detailsLink: '/projects/artfit',
-      category: 'software'
-    },
-    {
       image: QuadlyImage,
       name: 'Quadly',
       description: 'Verified campus community platform for UMich students with boards, schedules, and course reviews.',
@@ -57,12 +33,12 @@ const Projects = () => {
       category: 'software'
     },
     {
-      image: PortfolioImage,
-      name: 'Portfolio Website',
-      description: 'Personal portfolio website showcasing projects and skills with a modern design.',
-      tags: ['React', 'JavaScript', 'CSS'],
-      detailsLink: '/projects/portfolio',
-      category: 'software'
+      image: 'https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2024/09/spectacles-24-2.jpg',
+      name: 'Face Recognition (Spectacles)',
+      description: 'Spectacle program that detects, saves, and recognizes faces from a user\'s view in real-time.',
+      tags: ['Lens Studio', 'Spectacles', 'TypeScript', 'XR'],
+      detailsLink: '/projects/spectacles',
+      category: '3dxr'
     },
     {
       image: SideQuestImage,
@@ -87,6 +63,22 @@ const Projects = () => {
       tags: ['8th Wall', 'TypeScript', 'Blender', 'AR'],
       detailsLink: '/projects/kelsey-museum',
       category: '3dxr'
+    },
+    {
+      image: ArtFitImage,
+      name: 'ArtFit',
+      description: 'Social media platform that connects developers with designers for creative collaboration.',
+      tags: ['React', 'Node.js', 'MongoDB', 'Express'],
+      detailsLink: '/projects/artfit',
+      category: 'software'
+    },
+    {
+      image: PortfolioImage,
+      name: 'Portfolio Website',
+      description: 'Personal portfolio website showcasing projects and skills with a modern design.',
+      tags: ['React', 'JavaScript', 'CSS'],
+      detailsLink: '/projects/portfolio',
+      category: 'software'
     }
   ];
 
