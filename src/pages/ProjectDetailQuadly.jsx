@@ -6,6 +6,7 @@ import QuadlyImg01 from '../assets/Quadly_img01.png';
 import QuadlyImg02 from '../assets/Quadly_img02.png';
 import QuadlyImg03 from '../assets/Quadly_img03.png';
 import QuadlyImg04 from '../assets/Quadly_img04.png';
+import QuadlyImg05 from '../assets/Quadly_img05.png';
 import QuadlyQrIos from '../assets/quadly_qr_ios.png';
 
 const ProjectDetailQuadly = () => {
@@ -30,11 +31,40 @@ const ProjectDetailQuadly = () => {
           </div>
         </div>
 
-        <div className="project-detail-image-grid" aria-label="Quadly screenshots">
-          <img src={QuadlyImg01} alt="Quadly home and schedule screens" className="project-detail-image" loading="lazy" />
-          <img src={QuadlyImg02} alt="Quadly community screen" className="project-detail-image" loading="lazy" />
-          <img src={QuadlyImg03} alt="Quadly post detail screen" className="project-detail-image" loading="lazy" />
-          <img src={QuadlyImg04} alt="Quadly additional screen" className="project-detail-image" loading="lazy" />
+        <div className="project-detail-image-container" aria-label="Quadly web preview">
+          <img
+            src={QuadlyImg05}
+            alt="Quadly landing page preview"
+            className="project-detail-image"
+            loading="lazy"
+          />
+        </div>
+
+        <div className="project-detail-mobile-scroll" aria-label="Quadly mobile app screens">
+          <img
+            src={QuadlyImg01}
+            alt="Quadly home and schedule screens"
+            className="project-detail-mobile-image"
+            loading="lazy"
+          />
+          <img
+            src={QuadlyImg02}
+            alt="Quadly community screen"
+            className="project-detail-mobile-image"
+            loading="lazy"
+          />
+          <img
+            src={QuadlyImg03}
+            alt="Quadly post detail screen"
+            className="project-detail-mobile-image"
+            loading="lazy"
+          />
+          <img
+            src={QuadlyImg04}
+            alt="Additional Quadly mobile screen"
+            className="project-detail-mobile-image"
+            loading="lazy"
+          />
         </div>
 
         <div className="project-detail-content">
