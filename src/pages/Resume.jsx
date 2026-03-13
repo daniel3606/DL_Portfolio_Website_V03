@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Resume.css';
-import resumePDF from '../assets/DanielLimResumeSWE13.7.pdf';
+import resumePDF from '../assets/DanielLimResumeSWE_18.7.pdf';
 
 function Resume() {
   const [zoomLevel, setZoomLevel] = useState(75);
