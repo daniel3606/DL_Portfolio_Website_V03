@@ -1,0 +1,250 @@
+.windex {
+  position: relative;
+}
+
+/* Floating cover ---------------------------------------------------------- */
+
+.windex-float {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 340px;
+  height: 250px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+
+.windex-float.is-on {
+  opacity: 1;
+}
+
+.windex-float-item {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.92) rotate(-2deg);
+  transition: opacity 0.4s var(--ease), transform 0.6s var(--ease-out);
+}
+
+.windex-float-item.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.windex-float-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.windex-float-word {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111112;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* Rows -------------------------------------------------------------------- */
+
+.windex-list {
+  border-top: 1px solid var(--line);
+}
+
+.windex-list > li {
+  border-bottom: 1px solid var(--line);
+}
+
+.windex-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto 52px;
+  align-items: center;
+  gap: 24px;
+  min-height: 44px;
+  padding: 30px 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+/* Everything but the hovered row recedes. */
+.windex-row.is-dimmed {
+  opacity: 0.32;
+}
+
+.windex-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  transition: color 0.4s var(--ease);
+  align-self: start;
+  padding-top: 0.7em;
+}
+
+.windex-row:hover .windex-num {
+  color: var(--ink);
+}
+
+.windex-main {
+  display: block;
+  min-width: 0;
+}
+
+.windex-name {
+  display: block;
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.036em;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.windex-row:hover .windex-name {
+  transform: translateX(18px);
+}
+
+.windex-tagline {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 46ch;
+  transition: transform 0.6s var(--ease-out) 0.03s;
+}
+
+.windex-row:hover .windex-tagline {
+  transform: translateX(20px);
+}
+
+.windex-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.windex-disciplines {
+  display: flex;
+  align-items: center;
+}
+
+.windex-year {
+  color: var(--ink-2);
+}
+
+.windex-arrow {
+  justify-self: end;
+  color: var(--ink-3);
+  opacity: 0;
+  transform: translate(-8px, 8px);
+  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease-out), color 0.4s var(--ease);
+}
+
+.windex-row:hover .windex-arrow {
+  opacity: 1;
+  transform: none;
+  color: var(--ink);
+}
+
+/* Inline thumbnail (touch / narrow) ---------------------------------------- */
+
+.windex-thumb {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 78px;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+}
+
+.windex-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.windex-thumb-word {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #111112;
+  text-align: center;
+  padding: 0 6px;
+  line-height: 1.1;
+}
+
+/* Responsive --------------------------------------------------------------- */
+
+@media (max-width: 1040px) {
+  .windex-row {
+    grid-template-columns: 56px minmax(0, 1fr) auto 40px;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 860px) {
+  .windex-row {
+    grid-template-columns: 40px minmax(0, 1fr) 108px;
+    align-items: start;
+    gap: 16px;
+    padding: 24px 0;
+  }
+  .windex-row:hover .windex-name,
+  .windex-row:hover .windex-tagline {
+    transform: none;
+  }
+  .windex-meta {
+    grid-column: 2 / -1;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+    text-align: left;
+  }
+  .windex-arrow {
+    display: none;
+  }
+  .windex-thumb {
+    grid-row: 1 / 2;
+    width: 108px;
+    height: 78px;
+  }
+}
+
+@media (max-width: 560px) {
+  .windex-row {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+  .windex-thumb {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    width: 100%;
+    height: 190px;
+    margin-top: 16px;
+  }
+  .windex-tagline {
+    font-size: 0.875rem;
+  }
+  .windex-meta {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+  }
+}

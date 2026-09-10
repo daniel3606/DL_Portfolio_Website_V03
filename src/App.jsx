@@ -1,42 +1,30 @@
-import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/navbar.jsx';
+import Nav from './components/Nav.jsx';
+import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Home from './pages/Home.jsx';
-import Projects from './pages/Projects.jsx';
+import Work from './pages/Work.jsx';
+import ProjectDetail from './pages/ProjectDetail.jsx';
+import About from './pages/About.jsx';
 import Resume from './pages/Resume.jsx';
 import Contact from './pages/Contact.jsx';
-import ProjectDetailArtFit from './pages/ProjectDetailArtFit.jsx';
-import ProjectDetailPortfolio from './pages/ProjectDetailPortfolio.jsx';
-import ProjectDetailSideQuest from './pages/ProjectDetailSideQuest.jsx';
-import ProjectDetailSpectacles from './pages/ProjectDetailSpectacles.jsx';
-import ProjectDetailARHairStudio from './pages/ProjectDetailARHairStudio.jsx';
-import ProjectDetailScribbleAI from './pages/ProjectDetailScribbleAI.jsx';
-import ProjectDetailKelseyMuseum from './pages/ProjectDetailKelseyMuseum.jsx';
-import ProjectDetailQuadly from './pages/ProjectDetailQuadly.jsx';
+import NotFound from './pages/NotFound.jsx';
 
-function App() {
+export default function App() {
   return (
     <div className="app">
       <ScrollToTop />
-      <Navbar />
+      <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/artfit" element={<ProjectDetailArtFit />} />
-        <Route path="/projects/quadly" element={<ProjectDetailQuadly />} />
-        <Route path="/projects/portfolio" element={<ProjectDetailPortfolio />} />
-        <Route path="/projects/sidequest" element={<ProjectDetailSideQuest />} />
-        <Route path="/projects/spectacles" element={<ProjectDetailSpectacles />} />
-        <Route path="/projects/ar-hair-studio" element={<ProjectDetailARHairStudio />} />
-        <Route path="/projects/scribble-ai" element={<ProjectDetailScribbleAI />} />
-        <Route path="/projects/kelsey-museum" element={<ProjectDetailKelseyMuseum />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/work/:slug" element={<ProjectDetail />} />
+        <Route path="/about" element={<About />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
-
-export default App;
