@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 import { profile, disciplines, education, skills } from '../data/profile';
-import headshot from '../assets/brand/headshot.jpg';
+import headshot from '../assets/brand/headshot.jpeg';
 import './About.css';
 
 /* A real sequence, so it earns its numbering. */

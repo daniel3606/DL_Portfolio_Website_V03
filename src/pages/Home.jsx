@@ -4,7 +4,7 @@ import WorkIndex from '../components/WorkIndex';
 import Marquee from '../components/Marquee';
 import { profile, disciplines, experience } from '../data/profile';
 import { projects } from '../data/projects';
-import headshot from '../assets/brand/headshot.jpg';
+import headshot from '../assets/brand/headshot.jpeg';
 import './Home.css';
 
 const Arrow = () => (

@@ -119,10 +119,14 @@
   color: var(--ink-2);
 }
 
-.entry-when,
-.entry-where {
+.entry-when {
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.entry-where {
+  text-align: right;
+  min-width: 0;
 }
 
 .entry-points {
@@ -187,6 +191,9 @@
   .entry-when,
   .entry-where {
     white-space: normal;
+  }
+  .entry-where {
+    text-align: left;
   }
   .resume-actions {
     width: 100%;
