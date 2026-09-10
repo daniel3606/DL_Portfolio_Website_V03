@@ -1,5 +1,6 @@
 import Reveal from '../components/Reveal';
-import { profile, experience, education, skills, resumeProjects } from '../data/profile';
+import { profile, education } from '../data/profile';
+import { resumeExperience, resumeSkills, resumeProjects, resumeLeadership } from '../data/resume';
 import './Resume.css';
 
 export default function Resume() {
@@ -15,8 +16,7 @@ export default function Resume() {
             <span className="eyebrow">Resume</span>
             <h1 className="h1 resume-title">The short version.</h1>
             <p className="lede resume-lede">
-              Current as of {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}. Read it
-              here, print it, or download the PDF.
+              Read it here, print it, or download the PDF.
             </p>
           </div>
 
@@ -36,9 +36,12 @@ export default function Resume() {
           {/* Identity ------------------------------------------------ */}
           <div className="sheet-id">
             <h2 className="sheet-name">{profile.name}</h2>
-            <p className="sheet-role">{profile.role}</p>
             <div className="sheet-contact">
               <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              <i className="sep" aria-hidden="true" />
+              <a href="https://daniellimportfolio.com" target="_blank" rel="noreferrer">
+                daniellimportfolio.com
+              </a>
               <i className="sep" aria-hidden="true" />
               <a href={profile.socials.linkedin} target="_blank" rel="noreferrer">
                 linkedin.com/in/daniel-lim0306
@@ -67,11 +70,24 @@ export default function Resume() {
             </div>
           </section>
 
+          {/* Skills -------------------------------------------------- */}
+          <section className="sheet-section">
+            <h3 className="label sheet-heading">Technical Skills</h3>
+            <div className="sheet-body sheet-skills">
+              {resumeSkills.map((group) => (
+                <div className="skill-line" key={group.group}>
+                  <p className="label skill-label">{group.group}</p>
+                  <p className="skill-items">{group.items.join(', ')}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Experience ---------------------------------------------- */}
           <section className="sheet-section">
-            <h3 className="label sheet-heading">Experience &amp; Leadership</h3>
+            <h3 className="label sheet-heading">Experience</h3>
             <div className="sheet-body">
-              {experience.map((role) => (
+              {resumeExperience.map((role) => (
                 <div className="entry" key={role.org}>
                   <div className="entry-head">
                     <p className="entry-org">{role.org}</p>
@@ -115,18 +131,30 @@ export default function Resume() {
             </div>
           </section>
 
-          {/* Skills -------------------------------------------------- */}
+          {/* Leadership ---------------------------------------------- */}
           <section className="sheet-section sheet-section-last">
-            <h3 className="label sheet-heading">Technical Skills</h3>
-            <div className="sheet-body sheet-skills">
-              {skills.map((group) => (
-                <div className="skill-line" key={group.group}>
-                  <p className="label skill-label">{group.group}</p>
-                  <p className="skill-items">{group.items.join(', ')}</p>
+            <h3 className="label sheet-heading">Leadership</h3>
+            <div className="sheet-body">
+              {resumeLeadership.map((role) => (
+                <div className="entry" key={role.org}>
+                  <div className="entry-head">
+                    <p className="entry-org">{role.org}</p>
+                    <p className="label entry-when">{role.period}</p>
+                  </div>
+                  <div className="entry-head">
+                    <p className="entry-role">{role.role}</p>
+                    <p className="label entry-where">{role.place}</p>
+                  </div>
+                  <ul className="entry-points">
+                    {role.points.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
           </section>
+
         </Reveal>
       </div>
     </main>
