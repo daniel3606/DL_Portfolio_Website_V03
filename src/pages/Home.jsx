@@ -1,181 +1,194 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Reveal from '../components/Reveal';
+import WorkIndex from '../components/WorkIndex';
+import Marquee from '../components/Marquee';
+import { profile, disciplines, experience } from '../data/profile';
+import { projects } from '../data/projects';
+import headshot from '../assets/brand/headshot.jpg';
 import './Home.css';
-import QuadlyImage from '../assets/QuadlyFeaturedImage.png';
-import ScribbleAIImage from '../assets/scribbleai_image.webp';
-import SideQuestImage from '../assets/sidequest_preview.png';
-import HeadshotImage from '../assets/05_Daniel_Lim_Headshot.png';
 
-const Home = () => {
-  const [visibleSections, setVisibleSections] = useState(new Set());
-  const sectionRefs = useRef([]);
+const Arrow = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M4 12 12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
+  </svg>
+);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => new Set([...prev, entry.target.dataset.section]));
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-    );
+const TICKER = [
+  'React Native',
+  'TypeScript',
+  'Product spec',
+  'Firebase',
+  'PostgreSQL',
+  'Swift',
+  'Next.js',
+  'Figma',
+];
 
-    sectionRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const addRef = (el, section) => {
-    if (el) {
-      el.dataset.section = section;
-      sectionRefs.current.push(el);
-    }
-  };
-
-  const featuredProjects = [
-    {
-      name: 'Quadly',
-      description: 'Verified campus community platform for UMich students with boards, schedules, and course reviews.',
-      tags: ['Next.js', 'NestJS', 'Prisma', 'PostgreSQL'],
-      image: QuadlyImage,
-      link: '/projects/quadly',
-    },
-    {
-      name: 'Scribble AI',
-      description: 'Neural drawing recognition tool built with PyTorch for real-time sketch classification.',
-      tags: ['Python', 'PyTorch', 'AI'],
-      image: ScribbleAIImage,
-      link: '/projects/scribble-ai',
-    },
-    {
-      name: 'Side Quest',
-      description: 'Award-winning travel companion app that makes exploring new cities engaging and personal.',
-      tags: ['Figma', 'UI/UX', 'Research'],
-      image: SideQuestImage,
-      link: '/projects/sidequest',
-    },
-  ];
+export default function Home() {
+  const featured = projects.filter((p) => p.featured);
 
   return (
-    <div className="home-page">
-      {/* Hero Section */}
+    <main className="home">
+      {/* Hero ------------------------------------------------------------ */}
       <section className="hero">
-        <div className="hero-content">
-          <div className="hero-grid">
-            <div className="hero-text">
-              <p className="hero-greeting">Hi, I'm</p>
-              <h1 className="hero-name">Daniel Lim</h1>
-              <h2 className="hero-title">Software Developer & UX Designer</h2>
-              <p className="hero-description">
-                I build thoughtful digital experiences at the intersection of engineering and design.
-                Currently studying at the University of Michigan.
-              </p>
-              <div className="hero-cta">
-                <Link to="/projects" className="btn-primary">View My Work</Link>
-                <Link to="/contact" className="btn-secondary">Get in Touch</Link>
-              </div>
-            </div>
-
-            <div className="hero-image" aria-hidden="false">
-              <img
-                className="hero-headshot"
-                src={HeadshotImage}
-                alt="Daniel Lim headshot"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section
-        className={`about-section ${visibleSections.has('about') ? 'visible' : ''}`}
-        ref={(el) => addRef(el, 'about')}
-      >
-        <div className="section-container">
-          <span className="section-label">About</span>
-          <div className="about-content">
-            <h3 className="about-heading">
-              I'm a developer who loves to build <em>user centered</em> products.
-            </h3>
-            <div className="about-text">
-              <p>
-                With experience spanning full-stack development, UI/UX design, and XR/3D technologies,
-                I bring a multidisciplinary approach to every project. I believe the best digital products
-                come from understanding both the technical possibilities and the human needs they serve.
-              </p>
-              <p>
-                When I'm not coding, you'll find me exploring new design trends, experimenting with
-                emerging technologies, or working on creative side projects.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section
-        className={`featured-section ${visibleSections.has('featured') ? 'visible' : ''}`}
-        ref={(el) => addRef(el, 'featured')}
-      >
-        <div className="section-container">
-          <div className="section-header">
-            <span className="section-label">Featured Work</span>
-            <Link to="/projects" className="section-link">
-              View all projects
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
+        <div className="shell">
+          <div className="hero-rail">
+            <span className="label">{profile.location}</span>
+            <span className="label">CS at Michigan, UX minor</span>
+            <span className="label label-ink hero-avail">{profile.availability}</span>
           </div>
 
-          <div className="featured-grid">
-            {featuredProjects.map((project, index) => (
-              <Link
-                to={project.link}
-                key={project.name}
-                className="featured-card"
-                style={{ transitionDelay: `${index * 0.1}s` }}
-              >
-                <div className="featured-card-image">
-                  <img src={project.image} alt={project.name} />
-                </div>
-                <div className="featured-card-content">
-                  <h4 className="featured-card-name">{project.name}</h4>
-                  <p className="featured-card-desc">{project.description}</p>
-                  <div className="featured-card-tags">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="tag">{tag}</span>
-                    ))}
-                  </div>
-                </div>
+          <h1 className="display hero-title">
+            <span className="hero-line">I build mobile</span>
+            <span className="hero-line">and web products,</span>
+            <span className="hero-line">end to end.</span>
+          </h1>
+
+          <div className="hero-foot">
+            <p className="hero-note">
+              Software engineer and product-minded builder. Most recently a mobile engineering intern at SPAN,
+              shipping React Native to production. Currently building Marshmallow.
+            </p>
+            <div className="hero-cta">
+              <Link to="/work" className="btn btn-primary">
+                Selected work
+                <Arrow />
               </Link>
+              <Link to="/contact" className="btn btn-secondary">
+                Get in touch
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Marquee items={TICKER} />
+
+      {/* Statement ------------------------------------------------------- */}
+      <section className="section-tight statement">
+        <div className="shell statement-grid">
+          <Reveal className="statement-figure">
+            <div className="portrait">
+              <img src={headshot} alt={`${profile.name} portrait`} loading="lazy" />
+            </div>
+          </Reveal>
+
+          <Reveal className="statement-copy" delay={0.1}>
+            <span className="eyebrow">Introduction</span>
+            <h2 className="h2 statement-title">
+              I write the spec, then I ship the thing.
+            </h2>
+            <p className="statement-body">{profile.intro}</p>
+            <Link to="/about" className="link statement-link">
+              More about how I work
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Practice -------------------------------------------------------- */}
+      <section className="section-tight practice">
+        <div className="shell">
+          <Reveal className="head">
+            <span className="eyebrow">Practice</span>
+            <h2 className="h2 head-title">What I&rsquo;m good at.</h2>
+          </Reveal>
+
+          <div className="practice-grid">
+            {disciplines.map((d, i) => (
+              <Reveal className="practice-col" key={d.key} delay={i * 0.09}>
+                <h3 className="h3 practice-title">{d.title}</h3>
+                <p className="practice-line">{d.line}</p>
+                <p className="practice-body">{d.body}</p>
+                <div className="tag-row practice-tags">
+                  {d.tags.map((t) => (
+                    <span className="tag" key={t}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        className={`cta-section ${visibleSections.has('cta') ? 'visible' : ''}`}
-        ref={(el) => addRef(el, 'cta')}
-      >
-        <div className="section-container cta-container">
-          <h3 className="cta-heading">Interested in working together?</h3>
-          <p className="cta-text">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-          </p>
-          <Link to="/contact" className="btn-primary">Let's Talk</Link>
+      {/* Work ------------------------------------------------------------ */}
+      <section className="section work">
+        <div className="shell">
+          <Reveal className="head">
+            <span className="eyebrow">Selected work</span>
+            <div className="head-row">
+              <h2 className="h2 head-title">Things I&rsquo;ve shipped.</h2>
+              <Link to="/work" className="link">
+                All {projects.length} projects
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <WorkIndex projects={featured} />
+          </Reveal>
         </div>
       </section>
-    </div>
-  );
-};
 
-export default Home;
+      {/* Experience ------------------------------------------------------ */}
+      <section className="section-tight experience">
+        <div className="shell">
+          <Reveal className="head">
+            <span className="eyebrow">Experience</span>
+            <h2 className="h2 head-title">Where I&rsquo;ve been building.</h2>
+          </Reveal>
+
+          <div className="exp-list">
+            {experience.map((role, i) => (
+              <Reveal className="exp-row" key={role.org} delay={i * 0.07}>
+                <div className="exp-when">
+                  <span className="label label-ink">{role.period}</span>
+                  <span className="label">{role.place}</span>
+                </div>
+                <div className="exp-what">
+                  <h3 className="h3 exp-role">{role.role}</h3>
+                  <p className="exp-org">{role.org}</p>
+                  <ul className="list-dash exp-points">
+                    {role.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Closing --------------------------------------------------------- */}
+      <section className="closing">
+        <div className="shell closing-inner">
+          <Reveal>
+            <h2 className="display closing-title">
+              Always up for
+              <br />
+              a coffee chat.
+            </h2>
+            <div className="closing-foot">
+              <p className="closing-note">
+                Engineering and product roles, or anything that needs someone who can hold both halves. If you just
+                want to compare notes on shipping mobile, that works too.
+              </p>
+              <div className="closing-cta">
+                <Link to="/contact" className="btn btn-primary">
+                  Start a conversation
+                  <Arrow />
+                </Link>
+                <a className="btn btn-secondary" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+                  Resume
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </main>
+  );
+}

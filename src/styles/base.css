@@ -1,0 +1,535 @@
+/* ==========================================================================
+   Daniel Lim — Portfolio v04
+
+   Thesis: the shell is achromatic so the work supplies the colour. Every
+   project carries its own tint, and that tint — not a house accent — is the
+   only hue on the page. Per `branding.md › Best practices`: "Ensure branding
+   always defers to content."
+
+   Every foreground/background pair below is verified at 4.5:1 or better in
+   both appearances (`accessibility.md › Vision`).
+   ========================================================================== */
+
+:root {
+  /* Surfaces — true neutrals, no house hue. */
+  --paper: #fcfcfc;
+  --paper-raised: #ffffff;
+  --paper-sunken: #f1f1f2;
+  --paper-inverse: #111112;
+
+  /* Ink — every level clears 4.5:1 on paper and on sunken. */
+  --ink: #111112; /* 18.39:1 */
+  --ink-2: #46464a; /*  9.16:1 */
+  --ink-3: #62626a; /*  5.89:1 on paper, 5.35:1 on sunken */
+  --ink-inverse: #f5f5f6;
+
+  --line: rgba(17, 17, 18, 0.18);
+  --line-soft: rgba(17, 17, 18, 0.09);
+
+  /* Interaction reads through weight, rule and ground — never hue alone
+     (`accessibility.md › Vision`: "Convey information with more than color"). */
+  --focus: #111112;
+
+  /* Set per project; the only colour the shell ever shows. */
+  --wash: transparent;
+
+  --chrome: rgba(252, 252, 252, 0.86);
+
+  /* Type — one grotesque, one mono. */
+  --font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
+
+  /* Radius — a consistent, quiet curve. Not pill, not square. */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+
+  /* Rhythm */
+  --page: 1280px;
+  --page-text: 1060px;
+  --gutter: 28px;
+  --section-y: 132px;
+  --nav-h: 72px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --paper: #0c0c0d;
+  --paper-raised: #161617;
+  --paper-sunken: #161617;
+  --paper-inverse: #f5f5f6;
+
+  --ink: #f5f5f6; /* 17.95:1 */
+  --ink-2: #a9a9b0; /*  8.37:1 */
+  --ink-3: #8e8e96; /*  6.01:1 on paper, 5.56:1 on raised */
+  --ink-inverse: #111112;
+
+  --line: rgba(245, 245, 246, 0.2);
+  --line-soft: rgba(245, 245, 246, 0.1);
+
+  --focus: #f5f5f6;
+  --chrome: rgba(12, 12, 13, 0.86);
+
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   Reset
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
+  overflow-x: hidden;
+}
+
+/* The project wash: the hovered or current project's colour, bled behind the
+   whole page at low opacity. The one place colour enters the shell. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--wash);
+  opacity: 0.5;
+  transition: background-color 0.7s var(--ease);
+  pointer-events: none;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Type scale — scale contrast is the voice: very large sans against very
+   small mono. Body sizes stay at or above platform defaults
+   (`accessibility.md › Vision`: 17 pt mobile, 13 pt desktop).
+   -------------------------------------------------------------------------- */
+
+.display {
+  font-size: clamp(2.9rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.038em;
+}
+
+.h1 {
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.034em;
+}
+
+.h2 {
+  font-size: clamp(1.9rem, 3.8vw, 3rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.h3 {
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.022em;
+}
+
+.lede {
+  font-size: clamp(1.0625rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+  letter-spacing: -0.012em;
+}
+
+.body {
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: var(--ink-2);
+}
+
+/* The record layer: dates, categories, counts. 12px floor, never below —
+   11px sat under the platform minimum in the previous revision. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.label-ink {
+  color: var(--ink-2);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* A hairline separator — this system has no dots. */
+.sep {
+  display: inline-block;
+  width: 1px;
+  height: 0.8em;
+  background: var(--line);
+  vertical-align: -0.05em;
+  margin: 0 0.75em;
+}
+
+/* --------------------------------------------------------------------------
+   Layout primitives
+   -------------------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.shell-text {
+  width: 100%;
+  max-width: var(--page-text);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  padding: var(--section-y) 0;
+}
+
+.section-tight {
+  padding: calc(var(--section-y) * 0.62) 0;
+}
+
+.page-top {
+  padding-top: calc(var(--nav-h) + 68px);
+}
+
+/* A section header: label, then title. No ordinal — these are sections, not
+   a sequence, and numbering them would claim an order that isn't there. */
+.head {
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+  margin-bottom: 56px;
+}
+
+.head .eyebrow {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.head-title {
+  max-width: 20ch;
+}
+
+@media (max-width: 760px) {
+  .head {
+    margin-bottom: 38px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Links & buttons — all controls clear 44px of touch target
+   (`accessibility.md › Mobility`).
+   -------------------------------------------------------------------------- */
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.link:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  border: 1px solid var(--ink);
+  transition: background-color 0.32s var(--ease), color 0.32s var(--ease),
+    border-color 0.32s var(--ease), transform 0.32s var(--ease);
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-primary:hover {
+  background: var(--ink-2);
+  border-color: var(--ink-2);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.btn-secondary:hover {
+  border-color: var(--ink);
+  background: var(--paper-sunken);
+}
+
+.btn svg {
+  transition: transform 0.35s var(--ease-out);
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* --------------------------------------------------------------------------
+   Tags
+   -------------------------------------------------------------------------- */
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-soft);
+  background: var(--paper-sunken);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Lists — rules and ordinals, never dots
+   -------------------------------------------------------------------------- */
+
+.list-dash {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-dash li {
+  position: relative;
+  padding: 13px 0 13px 40px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--ink-2);
+}
+
+.list-dash li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.55em;
+  width: 22px;
+  height: 1px;
+  background: var(--ink-3);
+}
+
+/* Ordinals only where the content really is a sequence. */
+.list-num {
+  display: flex;
+  flex-direction: column;
+  counter-reset: item;
+}
+
+.list-num li {
+  counter-increment: item;
+  position: relative;
+  padding: 14px 0 14px 46px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  color: var(--ink-2);
+}
+
+.list-num li::before {
+  content: counter(item, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.3em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* `motion.md › Best practices`: "Make motion optional." */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  body::before {
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   App shell
+   -------------------------------------------------------------------------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app > main {
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive rhythm
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  :root {
+    --section-y: 92px;
+    --gutter: 22px;
+    --nav-h: 64px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 17px;
+  }
+  :root {
+    --section-y: 74px;
+  }
+  .page-top {
+    padding-top: calc(var(--nav-h) + 40px);
+  }
+}

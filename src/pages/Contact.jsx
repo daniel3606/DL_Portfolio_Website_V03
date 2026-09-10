@@ -1,169 +1,153 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import Reveal from '../components/Reveal';
+import { profile } from '../data/profile';
+import { sendEmail } from '../utils/email';
 import './Contact.css';
-import { sendEmail } from '../utils/Email.js';
 
-const Contact = () => {
+const REASONS = ['A role', 'A coffee chat', 'A project', 'Something else'];
+
+export default function Contact() {
   const formRef = useRef(null);
-  const [status, setStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [reason, setReason] = useState(REASONS[0]);
+  const [state, setState] = useState({ status: 'idle', message: '' });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setStatus({ type: '', message: '' });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setState({ status: 'sending', message: '' });
 
-    const formData = {
-      from_name: formRef.current.from_name.value,
-      from_email: formRef.current.from_email.value,
-      subject: formRef.current.subject.value,
-      message: formRef.current.message.value,
-    };
+    const form = formRef.current;
 
-    const result = await sendEmail(formData);
+    // Exactly the four variables the EmailJS template declares; the reason
+    // rides inside the message so the template mapping stays untouched.
+    const result = await sendEmail({
+      from_name: form.from_name.value,
+      from_email: form.from_email.value,
+      subject: form.subject.value || reason,
+      message: `[${reason}]\n\n${form.message.value}`,
+    });
 
     if (result.success) {
-      setStatus({ type: 'success', message: 'Message sent successfully!' });
-      formRef.current.reset();
+      form.reset();
+      setReason(REASONS[0]);
+      setState({ status: 'sent', message: 'Sent. I usually reply within a day or two.' });
     } else {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      setState({
+        status: 'error',
+        message: `That didn’t send. Email me directly at ${profile.email}.`,
+      });
     }
-
-    setIsSubmitting(false);
   };
 
   return (
-    <div className="contact-page">
-      <div className="contact-container">
-        <div className="contact-header">
-          <h1 className="contact-title">Get in Touch</h1>
-          <p className="contact-subtitle">
-            Have a project in mind or just want to chat? I'd love to hear from you.
-          </p>
-        </div>
+    <main className="contact page-top">
+      <div className="shell">
+        <header className="contact-head">
+          <Reveal>
+            <span className="eyebrow">Contact</span>
+            <h1 className="display contact-title">Let&rsquo;s talk.</h1>
+            <p className="lede contact-lede">
+              Engineering and product roles, a project, or just a coffee chat about shipping mobile — all worth a
+              message.
+            </p>
+          </Reveal>
+        </header>
 
         <div className="contact-grid">
-          <div className="contact-info">
-            <div className="contact-info-group">
-              <h3 className="contact-info-label">Email</h3>
-              <a href="mailto:daniel2060306@gmail.com" className="contact-info-value">
-                daniel2060306@gmail.com
+          {/* Form ------------------------------------------------------ */}
+          <Reveal className="contact-form-wrap">
+            <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
+              <fieldset className="field-reasons">
+                <legend className="eyebrow">What is this about</legend>
+                <div className="reason-row">
+                  {REASONS.map((r) => (
+                    <button
+                      type="button"
+                      key={r}
+                      className={`reason ${reason === r ? 'is-active' : ''}`}
+                      onClick={() => setReason(r)}
+                      aria-pressed={reason === r}
+                    >
+                      {r}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+
+              <div className="field-row">
+                <div className="field">
+                  <label className="eyebrow" htmlFor="from_name">
+                    Name
+                  </label>
+                  <input id="from_name" name="from_name" type="text" required placeholder="Your name" />
+                </div>
+                <div className="field">
+                  <label className="eyebrow" htmlFor="from_email">
+                    Email
+                  </label>
+                  <input id="from_email" name="from_email" type="email" required placeholder="you@company.com" />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="eyebrow" htmlFor="subject">
+                  Subject
+                </label>
+                <input id="subject" name="subject" type="text" placeholder="A short headline" />
+              </div>
+
+              <div className="field">
+                <label className="eyebrow" htmlFor="message">
+                  Message
+                </label>
+                <textarea id="message" name="message" rows="5" required placeholder="What are you working on?" />
+              </div>
+
+              <div className="contact-submit">
+                <button type="submit" className="btn btn-primary" disabled={state.status === 'sending'}>
+                  {state.status === 'sending' ? 'Sending' : 'Send message'}
+                </button>
+                {state.message ? (
+                  <p className={`contact-status is-${state.status}`} role="status">
+                    {state.message}
+                  </p>
+                ) : null}
+              </div>
+            </form>
+          </Reveal>
+
+          {/* Direct ---------------------------------------------------- */}
+          <Reveal className="contact-side" delay={0.09}>
+            <div className="side-block">
+              <span className="label">Direct</span>
+              <a className="side-big" href={`mailto:${profile.email}`}>
+                {profile.email}
               </a>
-              <a href="mailto:dllim@umich.edu" className="contact-info-value">
-                dllim@umich.edu
+              <a className="side-link" href={`mailto:${profile.schoolEmail}`}>
+                {profile.schoolEmail}
               </a>
             </div>
 
-            <div className="contact-info-group">
-              <h3 className="contact-info-label">Phone</h3>
-              <a href="tel:+12482209668" className="contact-info-value">
-                +1 (248) 220-9668
+            <div className="side-block">
+              <span className="label">Elsewhere</span>
+              <a className="side-link" href={profile.socials.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a className="side-link" href={profile.socials.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a className="side-link" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+                Resume PDF
               </a>
             </div>
 
-            <div className="contact-info-group">
-              <h3 className="contact-info-label">Socials</h3>
-              <div className="contact-socials">
-                <a
-                  href="https://www.linkedin.com/in/daniel-lim0306/"
-                  className="contact-social-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LinkedIn
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-                <a
-                  href="https://github.com/daniel3606"
-                  className="contact-social-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-                <a
-                  href="https://instagram.com/daniel.lim.06"
-                  className="contact-social-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Instagram
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </a>
-              </div>
+            <div className="side-block">
+              <span className="label">Based in</span>
+              <p className="side-text">{profile.location}</p>
+              <p className="side-note">Open to remote and relocation. Usually replies within a day or two.</p>
             </div>
-          </div>
-
-          <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="from_name" className="form-label">Name</label>
-                <input
-                  type="text"
-                  id="from_name"
-                  name="from_name"
-                  required
-                  className="form-input"
-                  placeholder="Your name"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="from_email" className="form-label">Email</label>
-                <input
-                  type="email"
-                  id="from_email"
-                  name="from_email"
-                  required
-                  className="form-input"
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="subject" className="form-label">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                required
-                className="form-input"
-                placeholder="What's this about?"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message" className="form-label">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                className="form-textarea"
-                rows="6"
-                placeholder="Tell me about your project..."
-              />
-            </div>
-
-            {status.message && (
-              <div className={`form-status ${status.type}`}>
-                {status.message}
-              </div>
-            )}
-
-            <button type="submit" className="btn-primary submit-btn" disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
+          </Reveal>
         </div>
       </div>
-    </div>
+    </main>
   );
-};
-
-export default Contact;
+}
