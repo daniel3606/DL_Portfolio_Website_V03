@@ -22,7 +22,7 @@ export const disciplines = [
   {
     key: 'engineering',
     title: 'Engineering',
-    line: 'Mobile and full-stack',
+    line: 'Full-Stack',
     body:
       'React Native and TypeScript across iOS and Android, with Node, Django, Firebase, and PostgreSQL behind them. Most of my recent work has been production mobile: state sync, native build systems, and the defects that only show up on a real device.',
     tags: ['TypeScript', 'React Native', 'React', 'Next.js', 'Node.js', 'Django', 'PostgreSQL'],

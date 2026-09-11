@@ -27,7 +27,7 @@ export default function About() {
           <Reveal className="about-head-grid">
             <div>
               <span className="eyebrow">About</span>
-              <h1 className="h1 about-title">Engineer who can read a Figma file.</h1>
+              <h1 className="h1 about-title">I Design, Build, and Ship.</h1>
               <p className="lede about-lede">{profile.intro}</p>
             </div>
 
