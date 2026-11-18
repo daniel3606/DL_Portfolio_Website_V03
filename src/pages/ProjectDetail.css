@@ -1,262 +1,249 @@
 /* ==========================================================================
-   Project detail — one editorial template, driven by data
+   Case study — one template, three depths.
    ========================================================================== */
 
-.pd {
+.cs {
   padding-bottom: 40px;
 }
 
-/* Masthead ---------------------------------------------------------------- */
-
-.pd-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--ink-2);
-  transition: color 0.3s var(--ease);
+.cs [id] {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
 }
 
-.pd-back:hover {
-  color: var(--ink);
-}
+/* Head -------------------------------------------------------------------- */
 
-.pd-back svg {
-  transition: transform 0.35s var(--ease-out);
-}
-
-.pd-back:hover svg {
-  transform: translateX(-4px);
-}
-
-.pd-disciplines {
+.cs-crumbs {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  margin-top: 40px;
+  justify-content: space-between;
+  gap: 16px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--line);
 }
 
-.pd-disciplines .label {
+.cs-back {
   display: inline-flex;
   align-items: center;
-}
-
-.pd-year {
-  display: inline-flex;
-  align-items: center;
-  margin-left: auto;
-}
-
-.pd-title {
-  margin-top: 34px;
-}
-
-.pd-head-foot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 40px;
-  margin-top: 44px;
-  padding-bottom: 60px;
-}
-
-.pd-tagline {
-  font-size: clamp(1.2rem, 2.1vw, 1.6rem);
-  font-weight: 500;
-  line-height: 1.32;
-  letter-spacing: -0.024em;
+  gap: 8px;
+  min-height: 44px;
   color: var(--ink-2);
-  max-width: 34ch;
+  transition: color 0.3s var(--ease);
 }
 
-.pd-links {
+.cs-back:hover {
+  color: var(--ink);
+}
+
+.cs-back svg {
+  transition: transform 0.35s var(--ease-out);
+}
+
+.cs-back:hover svg {
+  transform: translateX(-3px);
+}
+
+.cs-kind {
+  display: inline-flex;
+  align-items: center;
+  text-align: right;
+}
+
+.cs-title {
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+.cs-head-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(28px, 5vw, 72px);
+  margin-top: clamp(24px, 3.4vw, 40px);
+  padding-bottom: clamp(36px, 5vw, 56px);
+}
+
+.cs-summary {
+  max-width: 30ch;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.024em;
+}
+
+.cs-head-side {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.cs-head-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  align-items: center;
+  gap: 10px 20px;
 }
 
 /* Hero -------------------------------------------------------------------- */
 
-.pd-hero {
-  margin-bottom: 76px;
-}
-
-.pd-hero-frame {
-  border-radius: var(--r-lg);
-  display: grid;
-  place-items: center;
-  background: var(--tint, var(--paper-sunken));
-  overflow: hidden;
-}
-
-[data-theme='dark'] .pd-hero-frame {
-  background: var(--tint-dark, var(--paper-sunken));
-}
-
-/* Full-bleed for wide product shots. */
-.pd-hero-wide .pd-hero-frame img {
-  width: 100%;
-  object-fit: cover;
-  max-height: 72vh;
-}
-
-.pd-hero-contain .pd-hero-frame {
-  padding: clamp(40px, 7vw, 100px);
-}
-
-.pd-hero-contain .pd-hero-frame img {
-  max-height: 52vh;
-  width: auto;
-}
-
-.pd-hero-device .pd-hero-frame {
-  padding: clamp(48px, 7vw, 96px) 24px 0;
-}
-
-.pd-hero-device .pd-hero-frame img {
-  width: auto;
-  max-height: 62vh;
-}
-
-.pd-hero-text .pd-hero-frame {
-  aspect-ratio: 21 / 8;
-}
-
-.pd-hero-word {
-  font-size: clamp(2.4rem, 8vw, 6rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  text-align: center;
-  padding: 0 24px;
-  /* Same reason as .windex-thumb-word: the frame behind it is the project
-     tint, which already flips with the appearance. */
-  color: var(--ink);
+.cs-hero {
+  margin-bottom: clamp(40px, 6vw, 72px);
 }
 
 /* Facts ------------------------------------------------------------------- */
 
-.pd-facts {
+.cs-facts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--line);
 }
 
-.pd-fact {
-  padding: 24px 28px 26px 24px;
+.cs-fact {
+  padding: 20px 24px 22px;
   border-left: 1px solid var(--line);
 }
 
-.pd-fact:first-child {
+.cs-fact:first-child {
   border-left: none;
   padding-left: 0;
 }
 
-.pd-fact-value {
-  margin-top: 10px;
-  font-size: 1rem;
+.cs-fact dd {
+  margin-top: 8px;
+  font-size: 0.9875rem;
   line-height: 1.45;
+}
+
+/* On this page ------------------------------------------------------------ */
+
+.cs-toc {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 10;
+  display: flex;
+  gap: 4px 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0;
+  margin-top: 0;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter: saturate(150%) blur(12px);
+  -webkit-backdrop-filter: saturate(150%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.cs-toc::-webkit-scrollbar {
+  display: none;
+}
+
+.cs-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+  transition: color 0.25s var(--ease);
+}
+
+.cs-toc a:hover {
   color: var(--ink);
 }
 
 /* Overview ---------------------------------------------------------------- */
 
-/* Set to the right of the measure — the page breathes asymmetrically. */
-.pd-overview {
-  padding: 84px 0 0;
-  max-width: 46ch;
-  margin-left: auto;
-}
-
-.pd-overview p {
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-  font-weight: 500;
-  line-height: 1.34;
-  letter-spacing: -0.028em;
-}
-
-/* Metrics ----------------------------------------------------------------- */
-
-.pd-metrics {
+.cs-overview {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 90px;
-  border-top: 1px solid var(--ink);
+  gap: clamp(24px, 4vw, 56px);
+  padding: clamp(56px, 7vw, 96px) 0 0;
 }
 
-.pd-metric {
-  padding: 34px 24px 36px 26px;
-  border-left: 1px solid var(--line);
-}
-
-.pd-metric:first-child {
-  border-left: none;
-  padding-left: 0;
-}
-
-.pd-metric strong {
-  display: block;
-  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.pd-metric .label {
-  display: block;
-  margin-top: 16px;
-  max-width: 22ch;
-  line-height: 1.7;
-}
-
-/* Body -------------------------------------------------------------------- */
-
-.pd-body {
-  padding-top: 40px;
-}
-
-.pd-section {
-  display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 48px;
-  padding: 58px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.pd-section-mark {
-  position: sticky;
-  top: calc(var(--nav-h) + 34px);
-  align-self: start;
-}
-
-.pd-section-title {
-  margin-top: 12px;
-  max-width: 12ch;
-}
-
-.pd-prose {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  max-width: 66ch;
-}
-
-.pd-prose p {
+.cs-ov-item p {
+  margin-top: 14px;
   font-size: 1.0625rem;
-  line-height: 1.72;
+  line-height: 1.62;
   color: var(--ink-2);
 }
 
-.pd-list {
-  max-width: 70ch;
+.cs-ov-item:first-child p {
+  color: var(--ink);
 }
 
-.pd-columns {
+/* Numbers ----------------------------------------------------------------- */
+
+.cs-numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: clamp(56px, 7vw, 88px);
+  border-top: 1px solid var(--ink);
+}
+
+.cs-number {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 24px 28px 0;
+}
+
+.cs-number + .cs-number {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.cs-number strong {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.cs-number span {
+  max-width: 24ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* Blocks ------------------------------------------------------------------ */
+
+.cs-block {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 48px;
+  padding: clamp(56px, 6vw, 80px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cs-block-mark {
+  position: sticky;
+  top: calc(var(--nav-h) + 72px);
+  align-self: start;
+}
+
+.cs-block-title {
+  margin-top: 10px;
+  max-width: 14ch;
+}
+
+.cs-prose {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 66ch;
+}
+
+.cs-prose p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* Features ---------------------------------------------------------------- */
+
+.cs-features {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
@@ -264,218 +251,359 @@
   border: 1px solid var(--line);
 }
 
-.pd-column {
-  padding: 28px 26px 30px;
+/* An odd last feature takes the full row instead of leaving an empty cell. */
+.cs-feature:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.cs-feature {
+  padding: 24px 24px 26px;
   background: var(--paper);
 }
 
-.pd-column-head {
-  font-size: 1.125rem;
+.cs-feature h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.25;
+}
+
+.cs-feature p {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* Screens ----------------------------------------------------------------- */
+
+.cs-screens {
+  padding-top: clamp(56px, 7vw, 88px);
+}
+
+/* Engineering divider ------------------------------------------------------ */
+
+.cs-divider {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  margin-top: clamp(88px, 11vw, 144px);
+  padding: 22px 0 18px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.cs-divider p {
+  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Challenges -------------------------------------------------------------- */
+
+.cs-challenges {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-challenge {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 8px;
+  padding: 28px 0 30px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.cs-challenge:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.cs-challenge-num {
+  padding-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+.cs-challenge h3 {
+  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
   font-weight: 600;
   letter-spacing: -0.022em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
-.pd-column p {
-  margin-top: 12px;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--ink-2);
-}
-
-/* Galleries ---------------------------------------------------------------- */
-
-.pd-gallery-wide {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  padding-top: 86px;
-}
-
-.pd-wide-frame {
-  background: var(--tint, var(--paper-sunken));
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-
-[data-theme='dark'] .pd-wide-frame {
-  background: var(--tint-dark, var(--paper-sunken));
-}
-
-.pd-wide-frame img {
-  width: 100%;
-}
-
-.pd-caption {
-  display: block;
+.cs-challenge dl {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 12px 20px;
   margin-top: 16px;
-  padding: 0 var(--gutter);
+  max-width: 72ch;
 }
 
-.pd-gallery-device {
-  padding-top: 86px;
+.cs-challenge dt {
+  padding-top: 4px;
 }
 
-.pd-device-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.pd-device-frame {
-  background: var(--tint, var(--paper-sunken));
-  border-radius: var(--r-md);
-  overflow: hidden;
-  transition: transform 0.7s var(--ease-out);
-}
-
-[data-theme='dark'] .pd-device-frame {
-  background: var(--tint-dark, var(--paper-sunken));
-}
-
-.pd-device:hover .pd-device-frame {
-  transform: translateY(-8px);
-}
-
-.pd-device-frame img {
-  width: 100%;
-}
-
-.pd-gallery-device .pd-caption {
-  padding: 0;
-  max-width: 30ch;
-  line-height: 1.7;
-}
-
-/* Pager -------------------------------------------------------------------- */
-
-.pd-pager {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  margin-top: 110px;
-  border-top: 1px solid var(--ink);
-}
-
-.pd-pager-link {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-height: 44px;
-  padding: 34px 28px 38px 0;
+.cs-challenge dd {
+  font-size: 1rem;
+  line-height: 1.66;
   color: var(--ink-2);
-  transition: color 0.4s var(--ease);
 }
 
-.pd-pager-next {
-  align-items: flex-end;
-  text-align: right;
-  padding: 34px 0 38px 28px;
-  border-left: 1px solid var(--line);
-}
-
-.pd-pager-link:hover {
+.cs-challenge dd:last-of-type {
   color: var(--ink);
 }
 
-.pd-pager-label {
+.cs-where {
+  margin-top: 16px;
+  margin-left: 116px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+  word-break: break-word;
+}
+
+/* Stack ------------------------------------------------------------------- */
+
+.cs-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-stack > div {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.cs-stack > div:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.cs-stack dt {
+  padding-top: 3px;
+}
+
+.cs-stack-list {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  row-gap: 6px;
+}
+
+/* Outcome ----------------------------------------------------------------- */
+
+.cs-outcome {
+  border-bottom: none;
+}
+
+.cs-now {
+  max-width: 44ch;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.32;
+  letter-spacing: -0.024em;
+}
+
+.cs-outcome-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.cs-outcome-cols .list-dash {
+  margin-top: 14px;
+}
+
+/* Pager ------------------------------------------------------------------- */
+
+.cs-pager {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 0;
+  margin-top: clamp(64px, 8vw, 112px);
+  border-top: 1px solid var(--ink);
+}
+
+.cs-pager a {
+  color: inherit;
+}
+
+.cs-pager-prev {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px 28px 32px 0;
+  border-right: 1px solid var(--line);
+}
+
+.cs-pager-prev .label,
+.cs-pager-next .label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.pd-pager-name {
+.cs-pager-name {
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   transition: transform 0.5s var(--ease-out);
 }
 
-.pd-pager-link:hover .pd-pager-name {
-  transform: translateX(8px);
+.cs-pager-prev:hover .cs-pager-name {
+  transform: translateX(-6px);
 }
 
-.pd-pager-next:hover .pd-pager-name {
-  transform: translateX(-8px);
+.cs-pager-next {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  padding: 32px 0 32px 28px;
 }
 
-/* Responsive --------------------------------------------------------------- */
+.cs-pager-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cs-pager-summary {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Responsive -------------------------------------------------------------- */
 
 @media (max-width: 1040px) {
-  .pd-facts {
+  .cs-facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .pd-fact:nth-child(3) {
+  .cs-fact:nth-child(3) {
     border-left: none;
     padding-left: 0;
   }
-  .pd-fact:nth-child(n + 3) {
+  .cs-fact:nth-child(n + 3) {
     border-top: 1px solid var(--line);
   }
-  .pd-overview {
-    margin-left: 0;
-    max-width: 44ch;
-  }
-  .pd-section {
-    grid-template-columns: 1fr;
+  .cs-block {
+    /* minmax(0, …) so a long code line scrolls inside its block instead of
+       widening the page, which makes phones zoom the whole layout out. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
-    padding: 44px 0;
   }
-  .pd-section-mark {
+  .cs-block-mark {
     position: static;
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
   }
-  .pd-section-title {
-    margin-top: 0;
+  .cs-block-title {
     max-width: none;
   }
-  .pd-device-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .cs-overview {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .cs-ov-item {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 20px;
+  }
+  .cs-ov-item p {
+    margin-top: 0;
+    max-width: 62ch;
+  }
+  .cs-pager {
+    grid-template-columns: 1fr;
+  }
+  .cs-pager-prev {
+    order: 2;
+    border-right: none;
+    border-top: 1px solid var(--line);
+  }
+  .cs-pager-next {
+    padding-left: 0;
   }
 }
 
-@media (max-width: 720px) {
-  .pd-head-foot {
+@media (max-width: 760px) {
+  /* The bar scrolls sideways here; fade its right edge so that reads. */
+  .cs-toc {
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+    padding-right: 32px;
+  }
+  .cs-head-foot {
     grid-template-columns: 1fr;
     align-items: start;
-    gap: 28px;
   }
-  .pd-metrics,
-  .pd-columns {
+  .cs-features,
+  .cs-outcome-cols {
     grid-template-columns: 1fr;
   }
-  .pd-metric {
-    border-left: none;
+  .cs-ov-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .cs-challenge {
+    grid-template-columns: 1fr;
+  }
+  .cs-challenge-num {
+    padding-top: 0;
+  }
+  .cs-challenge dl {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .cs-challenge dd + dt {
+    margin-top: 12px;
+  }
+  .cs-where {
+    margin-left: 0;
+  }
+  .cs-stack > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .cs-number + .cs-number {
     padding-left: 0;
-    border-top: 1px solid var(--line);
-  }
-  .pd-metric:first-child {
-    border-top: none;
-  }
-  .pd-pager {
-    grid-template-columns: 1fr;
-  }
-  .pd-pager-next {
-    align-items: flex-start;
-    text-align: left;
-    padding: 34px 0 38px;
     border-left: none;
     border-top: 1px solid var(--line);
+  }
+  .cs-pager-next {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
 @media (max-width: 520px) {
-  .pd-facts {
+  .cs-facts {
     grid-template-columns: 1fr;
   }
-  .pd-fact {
+  .cs-fact {
     border-left: none;
     padding-left: 0;
     border-top: 1px solid var(--line);
   }
-  .pd-fact:first-child {
+  .cs-fact:first-child {
     border-top: none;
   }
-  .pd-device-row {
-    grid-template-columns: 1fr;
+  .cs-crumbs {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-pager-name,
+  .cs-back svg {
+    transition: none;
   }
 }

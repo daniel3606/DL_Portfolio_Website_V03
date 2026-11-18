@@ -1,8 +1,8 @@
 # Daniel Lim — Portfolio v04
 
-An editorial portfolio built with React and Vite. Serif display type, mono for
-the record, warm paper instead of screen grey, and a project index that reveals
-its covers as you move through it.
+A portfolio built with React and Vite: a playable lake on the home page, then
+the work — every project presented on one art-directed preview system and
+opened into a case study that goes from the product down to the code.
 
 ## Run it
 
@@ -15,81 +15,80 @@ npm run preview  # serve the built bundle
 
 ## The design system
 
-Everything lives in `src/styles/base.css` as custom properties.
+Everything lives in `src/styles/base.css` as custom properties: warm paper
+(`#f7f5f2`) and near-black ink (`#22201c`), redefined under
+`[data-theme='dark']`. Type is Archivo for everything you read and IBM Plex Mono
+for the record layer — labels, dates, counts, file paths. The shell has no
+accent colour: each project brings its own tint, and that tint only appears
+behind the project's own imagery.
 
-**Type** — three faces, each with one job:
-
-| Role | Face | Used for |
-| --- | --- | --- |
-| Display | Instrument Serif | Headlines, project names, metrics, form fields. Its italic is the emphasis of the whole system. |
-| Body | Inter Tight | Running prose and UI copy. |
-| Record | JetBrains Mono | Labels, dates, numbers, categories, buttons. |
-
-**Palette** — warm paper (`#f2f0ea`) and near-black ink (`#16150f`), with a
-single saturated voice: vermilion `#c33f1c`, which brightens to `#ff6a3d` in
-dark mode. Dark theme redefines only the token values under `[data-theme='dark']`.
-
-**No dots.** Separators are hairlines (`.sep`), list markers are em rules or
-mono numerals (`.list-dash`, `.list-num`), and the active nav marker is an
-underline. Nothing in the system is a filled circle.
-
-**Structure** — sections are numbered `(01)`, divided by 1px rules, and set on
-an asymmetric grid: the hero's second line indents 12vw, the case-study overview
-sets right of the measure, and the statement column drops below its portrait.
+**No dots.** Separators are hairlines, list markers are rules or numerals, and
+status marks are squares.
 
 ## Structure
 
 ```
 src/
-├── main.jsx              # entry — base.css loads before any component CSS
-├── App.jsx               # routes
-├── styles/base.css       # tokens, reset, type scale, shared primitives
 ├── data/
-│   ├── profile.js        # bio, disciplines, experience, education, skills, resume entries
-│   └── projects.js       # every case study, as data
+│   ├── profile.js           # bio, disciplines, experience, skills
+│   ├── resume.js            # the /resume page
+│   └── projects/            # one file per project + index.js (tiers, order)
+├── assets/work/<slug>/      # every project image, WebP, one width per role
 ├── components/
-│   ├── Nav.jsx           # numbered nav, theme toggle, mobile sheet
-│   ├── Footer.jsx
-│   ├── WorkIndex.jsx     # the numbered project index + cursor-following cover
-│   ├── Marquee.jsx       # infinite ticker
-│   ├── Reveal.jsx        # scroll-in wrapper
-│   └── ScrollToTop.jsx
-└── pages/
-    ├── Home.jsx          # hero, ticker, statement, practice, work, experience, closing
-    ├── Work.jsx          # filterable index + "also built"
-    ├── ProjectDetail.jsx # one template renders every case study
-    ├── About.jsx         # story, process, point of view, capabilities
-    ├── Resume.jsx        # typeset resume with a real print stylesheet
-    └── Contact.jsx       # EmailJS form with underline fields
+│   ├── media/ProjectMedia   # the preview plate (see below)
+│   ├── work/                # ProjectCard, LabList, status/tech/link metadata
+│   ├── case/                # Gallery, Architecture, CodeExcerpt
+│   ├── Fishing.jsx          # the playable lake on the home page
+│   └── Nav, Footer, Reveal, ScrollToTop
+└── pages/                   # Home, Work, ProjectDetail, About, Resume, Contact
 ```
 
-## The work index
+## Projects
 
-`WorkIndex.jsx` is the signature interaction. On a pointer device it floats the
-hovered project's cover near the cursor — trailed by a lerp, so it lags rather
-than pins — and dims every other row. On touch, or under 861px, it drops the
-float entirely and renders inline thumbnails instead; the media query gates the
-listener so no pointer work happens where it cannot be seen.
+`src/data/projects/index.js` documents the record shape and orders the
+projects into three tiers:
 
-## Adding a project
+| Tier | Where it shows | Page |
+| --- | --- | --- |
+| `featured` | Home grid, wide rows on /work | Full case study |
+| `more` | Card grid on /work | Shorter case study |
+| `lab` | Rows on /work | None |
 
-Project pages are generated from data — there is no per-project component. Add a
-record to the `projects` array in `src/data/projects.js` and the index row, the
-`/work/:slug` page, the filters, and the prev/next pager all pick it up.
+A case study renders whatever the record carries, top to bottom: head and hero
+(the five-second read), facts, overview, numbers, features and screens (the
+one-minute read), then the engineering section — architecture, challenges, a
+code excerpt, stack, process — and the outcome. Sections without data are
+skipped, so a design project and a Rust codebase use the same template without
+empty headings.
 
-| Field | Purpose |
+Rules the content follows: every number must be backed by the repository or a
+public listing; private repositories get no code excerpts; work in progress says
+so in its status.
+
+### Adding a project
+
+1. Put its images in `src/assets/work/<slug>/` — phone screens at 720px wide,
+   desktop and browser captures at 1800px, WebP.
+2. Add `src/data/projects/<slug>.js` (copy the closest existing one).
+3. Import it in `src/data/projects/index.js` and place it in the list.
+
+## The preview plate
+
+`ProjectMedia` draws every project preview on the site — cards, case-study
+heroes, the pager — from authentic screens plus a layout name:
+
+| Layout | For |
 | --- | --- |
-| `slug`, `name`, `tagline`, `summary` | Identity and index copy |
-| `year`, `status`, `discipline` | `discipline` is an array; the index sets its own separators |
-| `categories` | Filter keys: `engineering`, `product`, `design`, `xr` |
-| `featured` | Shows in the home index |
-| `cover`, `coverMode` | `wide`, `device`, `contain`, or `text` for a typographic plate |
-| `tint`, `tintDark` | Backdrop behind the cover, per theme |
-| `tags`, `meta`, `metrics` | Tag list, the facts strip, the stat row |
-| `overview` | The large serif opening statement |
-| `sections` | Body blocks: `kind` of `prose`, `bullets`, or `columns` |
-| `gallery` | `kind` of `wide`, `device`, or `mixed` |
-| `links` | Buttons; one may set `primary: true` |
+| `phones` | 1–3 phone screens; the centre one leads |
+| `browser` | a website, in a browser frame with an address bar |
+| `window` | a desktop app or game capture (`zoom` crops in closer) |
+| `duo` | a website with its phone version in front |
+
+The rules that make them read as one set: one aspect ratio (16:10 for covers,
+16:9 for heroes, 4:3 on phones), the project tint lit from the top, devices
+sized in container units so the composition scales as a unit, one shadow
+recipe, and every device running off the bottom edge. Device frames are CSS,
+not baked into images, so a screen looks identical everywhere it appears.
 
 ## Resume
 

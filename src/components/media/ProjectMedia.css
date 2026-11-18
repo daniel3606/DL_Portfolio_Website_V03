@@ -1,0 +1,347 @@
+/* ==========================================================================
+   Project plate — the preview system.
+
+   Geometry is in container units (cqw = 1% of the plate's width), so a plate
+   at 320px on a phone and at 1200px in a case-study hero is the same picture,
+   scaled. Nothing in here is sized in px except hairlines.
+   ========================================================================== */
+
+.pm {
+  --plate: var(--paper-sunken);
+  --plate-dark: var(--paper-sunken);
+  --plate-now: var(--plate);
+
+  /* One shadow recipe for every device: a contact shadow, a body shadow and
+     a long ambient falloff, all from a single light above the plate. */
+  --device-shadow: 0 0.08cqw 0.2cqw rgba(20, 18, 14, 0.12), 0 1.4cqw 3cqw -0.8cqw rgba(20, 18, 14, 0.22),
+    0 4cqw 8cqw -2.4cqw rgba(20, 18, 14, 0.28);
+
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background-color: var(--plate-now);
+  /* The light: a soft lift at the top, nothing more. */
+  background-image: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+  isolation: isolate;
+}
+
+/* A hairline inside the edge, so a pale plate still has a boundary on paper. */
+.pm::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(20, 18, 14, 0.06);
+  pointer-events: none;
+  z-index: 3;
+}
+
+[data-theme='dark'] .pm {
+  --plate-now: var(--plate-dark);
+  --device-shadow: 0 0.08cqw 0.2cqw rgba(0, 0, 0, 0.4), 0 1.4cqw 3cqw -0.8cqw rgba(0, 0, 0, 0.5),
+    0 4cqw 8cqw -2.4cqw rgba(0, 0, 0, 0.55);
+  background-image: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 70%);
+}
+
+[data-theme='dark'] .pm::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.pm-cover {
+  aspect-ratio: 16 / 10;
+}
+
+.pm-hero {
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 720px) {
+  .pm-hero {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.pm-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.pm img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* --------------------------------------------------------------------------
+   Phone — drawn, not photographed. Bezel, island and radius are proportions
+   of the phone's own width, so every phone on the site is the same object.
+   -------------------------------------------------------------------------- */
+
+.pm-phone {
+  --pw: 22cqw; /* phone width; layouts override */
+  position: absolute;
+  width: var(--pw);
+  aspect-ratio: 9 / 19.2;
+  padding: calc(var(--pw) * 0.034);
+  border-radius: calc(var(--pw) * 0.17);
+  background: #121212;
+  box-shadow: var(--device-shadow), inset 0 0 0 calc(var(--pw) * 0.006) rgba(255, 255, 255, 0.14);
+}
+
+.pm-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--pw) * 0.137);
+  background: #000;
+}
+
+/* --------------------------------------------------------------------------
+   Browser — a bar and an address, no traffic lights: this system has no dots.
+   -------------------------------------------------------------------------- */
+
+.pm-browser,
+.pm-window {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 1.1cqw;
+  background: #fff;
+  box-shadow: var(--device-shadow), 0 0 0 1px rgba(20, 18, 14, 0.08);
+}
+
+.pm-browser-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.4cqw;
+  background: #f4f3f0;
+  border-bottom: 1px solid rgba(20, 18, 14, 0.08);
+}
+
+.pm-browser-url {
+  padding: 0.35cqw 2.4cqw;
+  border-radius: 0.6cqw;
+  background: rgba(20, 18, 14, 0.05);
+  font-family: var(--font-mono);
+  font-size: 1.15cqw;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #6b675f;
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .pm-browser,
+[data-theme='dark'] .pm-window {
+  background: #1a1918;
+  box-shadow: var(--device-shadow), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .pm-browser-bar {
+  background: #242320;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='dark'] .pm-browser-url {
+  background: rgba(255, 255, 255, 0.06);
+  color: #a8a298;
+}
+
+.pm-browser-screen {
+  aspect-ratio: 16 / 10;
+}
+
+/* --------------------------------------------------------------------------
+   Layouts. Every device sits on the same baseline: it starts a fixed margin
+   below the top edge and runs off the bottom.
+   -------------------------------------------------------------------------- */
+
+/* Geometry, in cqw of the plate's width (a 16:10 plate is 62.5cqw tall).
+   A phone is 2.13x as tall as it is wide, so every phone below is sized to
+   run 3–6cqw past the bottom edge. */
+
+/* Phones: 1 */
+.pm-phones-1 .pm-phone-0 {
+  --pw: 28cqw;
+  left: 50%;
+  top: 7cqw;
+  transform: translateX(-50%);
+}
+
+/* Phones: 2 — overlapping pair, front one leads. */
+.pm-phones-2 .pm-phone-0 {
+  --pw: 27cqw;
+  left: 50%;
+  top: 6cqw;
+  transform: translateX(-92%);
+  z-index: 2;
+}
+
+.pm-phones-2 .pm-phone-1 {
+  --pw: 27cqw;
+  left: 50%;
+  top: 12cqw;
+  transform: translateX(-2%);
+  z-index: 1;
+}
+
+/* Phones: 3 — centre leads, flanks step down. */
+.pm-phones-3 .pm-phone-0,
+.pm-phones-3 .pm-phone-2 {
+  --pw: 24cqw;
+  top: 15cqw;
+}
+
+.pm-phones-3 .pm-phone-0 {
+  left: calc(50% - 41cqw);
+}
+
+.pm-phones-3 .pm-phone-2 {
+  left: calc(50% + 17cqw);
+}
+
+.pm-phones-3 .pm-phone-1 {
+  --pw: 28cqw;
+  left: 50%;
+  top: 6cqw;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Browser / window, alone: anchored top-left, running off the right and the
+   bottom, so the plate frames the part of the product that matters. */
+.pm-solo {
+  left: 8cqw;
+  top: 8cqw;
+  width: var(--solo-w, 100cqw);
+}
+
+.pm-window.pm-solo img,
+.pm-duo .pm-window.pm-duo-back img {
+  height: auto;
+}
+
+/* Duo — the wide surface behind, the phone in front on the right. */
+.pm-duo .pm-duo-back {
+  left: 7cqw;
+  top: 8cqw;
+  width: 84cqw;
+}
+
+.pm-duo .pm-duo-front {
+  --pw: 22cqw;
+  right: 6cqw;
+  top: 19cqw;
+  z-index: 2;
+}
+
+/* Hero (16:9, 56.25cqw tall): the same pictures, a little smaller. */
+.pm-hero .pm-phones-3 .pm-phone-0,
+.pm-hero .pm-phones-3 .pm-phone-2 {
+  --pw: 20cqw;
+  top: 13cqw;
+}
+
+.pm-hero .pm-phones-3 .pm-phone-0 {
+  left: calc(50% - 35cqw);
+}
+
+.pm-hero .pm-phones-3 .pm-phone-2 {
+  left: calc(50% + 15cqw);
+}
+
+.pm-hero .pm-phones-3 .pm-phone-1 {
+  --pw: 24cqw;
+  top: 5.5cqw;
+}
+
+.pm-hero .pm-phones-2 .pm-phone-0,
+.pm-hero .pm-phones-2 .pm-phone-1 {
+  --pw: 23cqw;
+}
+
+.pm-hero .pm-phones-1 .pm-phone-0 {
+  --pw: 24cqw;
+  top: 6cqw;
+}
+
+.pm-hero .pm-solo {
+  left: 10cqw;
+  top: 6.5cqw;
+  width: calc(var(--solo-w, 100cqw) * 0.9);
+}
+
+.pm-hero .pm-duo .pm-duo-back {
+  left: 9cqw;
+  top: 6.5cqw;
+  width: 74cqw;
+}
+
+.pm-hero .pm-duo .pm-duo-front {
+  --pw: 19cqw;
+  right: 9cqw;
+  top: 15cqw;
+}
+
+@media (max-width: 720px) {
+  /* The hero becomes 4:3 (75cqw tall) on phones; scale up to fill it. */
+  .pm-hero .pm-phones-3 .pm-phone-0,
+  .pm-hero .pm-phones-3 .pm-phone-2 {
+    --pw: 27cqw;
+    top: 20cqw;
+  }
+  .pm-hero .pm-phones-3 .pm-phone-0 {
+    left: calc(50% - 46cqw);
+  }
+  .pm-hero .pm-phones-3 .pm-phone-2 {
+    left: calc(50% + 19cqw);
+  }
+  .pm-hero .pm-phones-3 .pm-phone-1 {
+    --pw: 33cqw;
+    top: 7cqw;
+  }
+  .pm-hero .pm-solo {
+    left: 7cqw;
+    top: 9cqw;
+    width: calc(var(--solo-w, 100cqw) * 1.2);
+  }
+  .pm-hero .pm-duo .pm-duo-back {
+    left: 6cqw;
+    top: 9cqw;
+    width: 100cqw;
+  }
+  .pm-hero .pm-duo .pm-duo-front {
+    --pw: 28cqw;
+    right: 6cqw;
+    top: 22cqw;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Motion — a plate inside a link lifts its lead device a few pixels on hover.
+   Small enough to read as response, not as animation.
+   -------------------------------------------------------------------------- */
+
+.pm-phone,
+.pm-browser,
+.pm-window {
+  transition: translate 0.7s var(--ease-out);
+}
+
+a:hover .pm .pm-phone-1,
+a:hover .pm .pm-phones-1 .pm-phone-0,
+a:hover .pm .pm-phones-2 .pm-phone-0,
+a:hover .pm .pm-solo,
+a:hover .pm .pm-duo-front {
+  translate: 0 -0.8cqw;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a:hover .pm * {
+    translate: none !important;
+  }
+}

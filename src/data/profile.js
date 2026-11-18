@@ -24,15 +24,15 @@ export const disciplines = [
     title: 'Engineering',
     line: 'Full-Stack',
     body:
-      'React Native and TypeScript across iOS and Android, with Node, Django, Firebase, and PostgreSQL behind them. Most of my recent work has been production mobile: state sync, native build systems, and the defects that only show up on a real device.',
-    tags: ['TypeScript', 'React Native', 'React', 'Next.js', 'Node.js', 'Django', 'PostgreSQL'],
+      'React Native and TypeScript across iOS and Android, Swift for the parts of iOS that React Native cannot reach, and Rust where speed matters — with Node, Django, Supabase and PostgreSQL behind them. Most of my recent work has been production mobile: state sync, native build systems, and the defects that only show up on a real device.',
+    tags: ['TypeScript', 'React Native', 'Swift', 'Rust', 'Next.js', 'Supabase', 'PostgreSQL'],
   },
   {
     key: 'product',
     title: 'Product',
     line: 'Scope, spec, and the metric',
     body:
-      'I write the requirements before the code — problem, user, scope, success metric, and what is deliberately out of scope. On Quadly and Spectacle Face Recognizer I carried the product decisions as well as the build, and at SPAN I shipped internal tooling that paid for itself.',
+      'I write the requirements before the code — problem, user, scope, success metric, and what is deliberately out of scope. On Quadly and Marshmallow I carried the product decisions as well as the build, and at SPAN I shipped internal tooling that paid for itself.',
     tags: ['Requirements', 'Scoping', 'Metrics', 'Trust & safety', 'Roadmapping', 'Jira'],
   },
   {

@@ -1,0 +1,328 @@
+/* ==========================================================================
+   Case-study parts: gallery bands, architecture, code.
+   ========================================================================== */
+
+/* Gallery ----------------------------------------------------------------- */
+
+.gal {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+/* A band is a plate without a fixed ratio: same ground, same light, same
+   hairline as ProjectMedia, sized by what it holds. */
+.gal-band {
+  --plate-now: var(--plate, var(--paper-sunken));
+  --device-shadow: 0 1px 2px rgba(20, 18, 14, 0.12), 0 14px 30px -10px rgba(20, 18, 14, 0.22),
+    0 40px 80px -30px rgba(20, 18, 14, 0.28);
+  position: relative;
+  border-radius: var(--r-lg);
+  background-color: var(--plate-now);
+  background-image: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+  box-shadow: inset 0 0 0 1px rgba(20, 18, 14, 0.06);
+}
+
+[data-theme='dark'] .gal-band {
+  --plate-now: var(--plate-dark, var(--paper-sunken));
+  --device-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -10px rgba(0, 0, 0, 0.5),
+    0 40px 80px -30px rgba(0, 0, 0, 0.55);
+  background-image: radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 70%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Phones — a centred grid on wide screens; on narrow ones a row that
+   scrolls sideways rather than shrinking screens past legibility. */
+.gal-phones {
+  padding: clamp(36px, 5vw, 64px) clamp(24px, 4vw, 56px) clamp(28px, 4vw, 44px);
+  overflow: hidden;
+}
+
+.gal-phones-row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 248px));
+  justify-content: center;
+  gap: clamp(36px, 4vw, 56px) clamp(20px, 2.6vw, 40px);
+}
+
+.gal-phone-fig {
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.gal-band .gal-phone {
+  --pw: 100cqw;
+  position: relative;
+  width: 100%;
+}
+
+.gal-phone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.gal-caption {
+  display: block;
+  margin-top: 18px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* Wide shots */
+.gal-wide {
+  padding: clamp(24px, 5vw, 64px) clamp(16px, 6vw, 88px) 0;
+  overflow: hidden;
+}
+
+.gal-band .gal-device {
+  position: relative;
+  margin: 0 auto -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  max-width: 1080px;
+}
+
+.gal-device img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gal-wide .pm-browser-bar {
+  height: clamp(26px, 2.6vw, 36px);
+}
+
+.gal-wide .pm-browser-url {
+  padding: 3px 18px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.gal-caption-wide {
+  max-width: 64ch;
+}
+
+@media (max-width: 760px) {
+  .gal-phones {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .gal-phones-row {
+    display: flex;
+    gap: 20px;
+    padding: 0 24px 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 24px;
+  }
+  .gal-phone-fig {
+    flex: 0 0 62vw;
+    max-width: 260px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Architecture ------------------------------------------------------------ */
+
+.arch-intro {
+  max-width: 64ch;
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: var(--ink-2);
+}
+
+.arch-lanes {
+  display: grid;
+  grid-template-columns: repeat(var(--lanes), minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 32px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper-raised);
+}
+
+[data-theme='dark'] .arch-lanes {
+  background: var(--paper-sunken);
+}
+
+.arch-lane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Connector between lanes: a hairline with a chevron head. */
+.arch-lane + .arch-lane::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 52px;
+  width: 16px;
+  height: 1px;
+  background: var(--ink-3);
+}
+
+.arch-lane + .arch-lane::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 49px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid var(--ink-3);
+  border-right: 1px solid var(--ink-3);
+  transform: rotate(45deg);
+}
+
+.arch-label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.arch-num {
+  color: var(--ink-3);
+}
+
+.arch-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.arch-node {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+}
+
+.arch-lane:first-child .arch-node:first-child {
+  border-color: var(--ink);
+}
+
+.arch-node strong {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+}
+
+.arch-node span {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.arch-notes {
+  margin-top: 28px;
+  max-width: 72ch;
+}
+
+@media (max-width: 860px) {
+  .arch-lanes {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 22px;
+  }
+  .arch-lane + .arch-lane::before {
+    left: 18px;
+    top: -26px;
+    width: 1px;
+    height: 16px;
+  }
+  .arch-lane + .arch-lane::after {
+    left: 15px;
+    top: -14px;
+    transform: rotate(135deg);
+  }
+}
+
+/* Code -------------------------------------------------------------------- */
+
+.code {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #1b1a18;
+  color: #e9e5dd;
+}
+
+.code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  min-height: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-file {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #a8a298;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.code-src {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #efebe4;
+}
+
+.code-src:focus-visible {
+  outline-color: #efebe4;
+}
+
+.code-body {
+  margin: 0;
+  padding: 20px 20px 24px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.code-body:focus-visible {
+  outline: 2px solid #efebe4;
+  outline-offset: -4px;
+}
+
+.code-line {
+  display: inline;
+}
+
+.code-comment {
+  color: #9a948a;
+}
+
+.code-note {
+  padding: 14px 20px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #c9c3b8;
+}

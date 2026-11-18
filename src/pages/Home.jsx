@@ -1,23 +1,18 @@
 import { Link } from 'react-router-dom';
 import Fishing from '../components/Fishing';
 import Reveal from '../components/Reveal';
-import WorkIndex from '../components/WorkIndex';
-import { projects } from '../data/projects';
+import ProjectCard from '../components/work/ProjectCard';
+import { Arrow } from '../components/work/meta';
+import { featured, caseStudies, labProjects } from '../data/projects';
 import './Home.css';
 
-const Arrow = () => (
-  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M4 12 12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="square" />
-  </svg>
-);
-
 /**
- * The home page is an index, not an introduction. The lake carries the name
- * and the first impression; everything a visitor would read about a project —
- * or about me — lives on the page that can actually carry it.
+ * The home page is the lake, then the work. One sentence sits between them so
+ * a visitor who skims knows what kind of engineer this is before the first
+ * card; everything else is on the project pages.
  */
 export default function Home() {
-  const featured = projects.filter((p) => p.featured);
+  const total = caseStudies.length + labProjects.length;
 
   return (
     <main className="home">
@@ -31,18 +26,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-work">
+      <section className="home-work" aria-labelledby="home-work-title">
         <div className="shell">
           <div className="index-head">
             <span className="eyebrow">Selected work</span>
             <Link to="/work" className="index-all">
-              All {projects.length} projects
+              All {total} projects
               <Arrow />
             </Link>
           </div>
 
           <Reveal>
-            <WorkIndex projects={featured} />
+            <h2 className="home-statement" id="home-work-title">
+              I build and ship software end to end, from native apps to the backends behind them.
+            </h2>
+          </Reveal>
+
+          <div className="home-grid">
+            {featured.map((project, i) => (
+              <Reveal key={project.slug} delay={(i % 2) * 0.08}>
+                <ProjectCard project={project} index={i + 1} />
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="home-more">
+            <Link to="/work" className="btn btn-secondary">
+              See every project, including the experiments
+              <Arrow dir="right" />
+            </Link>
           </Reveal>
         </div>
       </section>
