@@ -139,7 +139,7 @@ export default function Nav() {
         </button>
       </header>
 
-      <div id="sheet" className={`sheet ${open ? 'is-open' : ''}`} hidden={!open}>
+      <div id="sheet" className={`nav-sheet ${open ? 'is-open' : ''}`} hidden={!open}>
         <Links className="sheet-links" onPick={() => setOpen(false)} />
         <div className="sheet-says">
           <p className="md-say md-say--right">{profile.availability}.</p>
