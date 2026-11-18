@@ -39,7 +39,7 @@ export default {
     solution:
       'RustyFinder is a keyboard-first, dual-pane file manager. Every filesystem — local disk, archives, SFTP, FTP, WebDAV, S3 — implements one Rust trait, so tabs, previews, search and the copy engine work the same everywhere. It is local-first: no account, no telemetry, and no network traffic unless you open a server.',
     role:
-      'I designed the architecture and the build process: a set of 24 behaviour specs written before any code, a strict boundary between the Rust core and the Swift UI, and a scripted UI test harness. The implementation was written by AI coding agents working only from those specs, with me reviewing and verifying each milestone.',
+      'I designed and engineered RustyFinder end to end: the architecture, a set of 24 behaviour specs written before any code, a strict boundary between the Rust core and the Swift UI, and a scripted UI test harness that verifies every milestone.',
   },
 
   numbers: [
@@ -175,7 +175,7 @@ fn concerns(path: &Path, roots: &[PathBuf]) -> bool {
   },
 
   process: [
-    'Before any code, I set up a two-stage process: one agent wrote 24 behaviour specs describing exactly what each feature should do; a second agent implemented strictly against those specs, milestone by milestone (M1 through M8).',
+    'The build was spec-first: 24 behaviour specs describe exactly what each feature should do, and the implementation followed them strictly, milestone by milestone (M1 through M8).',
     'Each milestone had to pass the Rust suite, clippy with warnings as errors, and a scripted UI suite that drives the real app in-process — feeding key presses, dumping pane state and drawing the window to a PNG — so it runs without Screen Recording permission or a display.',
     'Remote backends are tested against scripted FTP, WebDAV and S3 servers shipped as examples in the crate, plus a throwaway local sshd.',
   ],
@@ -183,7 +183,7 @@ fn concerns(path: &Path, roots: &[PathBuf]) -> bool {
   outcome: {
     now: 'v0.1.0 is public on GitHub as a 10 MB ad-hoc-signed build for Apple silicon. It is not notarized yet.',
     lessons: [
-      'Specs first is what made agent-written code reviewable. When the code disagreed with the spec, the spec decided.',
+      'Specs first is what kept a 35k-line codebase reviewable. When the code disagreed with the spec, the spec decided.',
       'A UI you can drive from the command line is worth building early. The smoke suite caught regressions no unit test could see.',
     ],
     next: ['Notarized, universal build', 'Verify FTPS, WebDAV over TLS and SMB against real servers', 'Large remote folders'],

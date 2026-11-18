@@ -182,7 +182,7 @@ export default {
   process: [
     'Every Zero App starts as a written native spec: measurements taken from iPhone screenshots of the real app, with anything I could not confirm marked UNVERIFIED rather than guessed.',
     'Each service is built on its own branch and worktree, then merged into a QA branch that runs the full suite together. On that branch the latest run is 444 unit tests with no failures; the release report still says “not yet releasable”, and I have kept it that way rather than ship around it.',
-    'I use AI coding agents heavily and review everything they produce; 298 of the 344 commits on main are mine, and the specs, audits and test matrices are how I keep generated code honest.',
+    'Specs, audits and test matrices are how I keep a fast-moving codebase honest.',
   ],
 
   outcome: {

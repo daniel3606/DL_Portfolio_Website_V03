@@ -38,7 +38,7 @@ export default {
     problem: 'Most Roblox fishing games are grind loops. I wanted a place where fishing is what your hands do while you talk to people.',
     solution:
       'Cast, then play a short timing game — the Tide Ring — to reel in. 108 creatures across six baits and seven rarities, a codex, shops, a day-night cycle, leaderboards and saved progress.',
-    role: 'I built the game, the island generator and the fish pipeline, with an AI coding agent as a pair.',
+    role: 'I built the game, the island generator and the fish pipeline.',
   },
 
   numbers: [
