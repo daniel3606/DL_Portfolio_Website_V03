@@ -8,7 +8,7 @@ export const resumeExperience = [
     place: 'San Francisco, CA',
     points: [
       'Shipped production React Native features for SPAN’s energy app, fixing 50+ QA-flagged rendering and state-sync defects',
-      'Built an in-app Jira bug-reporting tool that auto-attaches diagnostic context, saving an estimated $20K/year',
+      'Built an in-app Jira bug-reporting tool that auto-attaches diagnostic context, saving an estimated $27K+/year',
       'Fixed iOS/Android build failures in a multi-app React Native monorepo by tracing dependency and native-module conflicts',
     ],
   },

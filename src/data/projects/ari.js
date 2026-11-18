@@ -34,7 +34,7 @@ export default {
 
   facts: [
     { label: 'Role', value: 'Website lead — design and build' },
-    { label: 'Organization', value: 'Augmented Reality Initiative, UMich' },
+    { label: 'Organization', value: 'Alternate Reality Initiative, UMich' },
     { label: 'Stack', value: 'React 19, Vite, three.js, Supabase' },
     { label: 'Status', value: 'On a branch; the live site is the previous version' },
   ],
