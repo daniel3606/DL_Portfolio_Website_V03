@@ -1,0 +1,428 @@
+/* ==========================================================================
+   The lake — the playable scene that opens the home page.
+
+   Every colour here resolves to a shell token, so the scene follows the
+   warm-neutral palette and the theme toggle without a second set of values.
+   The one exception is the rarity ramp, which has to be hue to work at all;
+   both sets clear 4.5:1 on the surface they sit on.
+   ========================================================================== */
+
+.lake {
+  /* Darker than they look like they need to be: on warm paper the waves are
+     thin 1px strokes at 11px type, and anything lighter reads as noise
+     rather than water. */
+  --sky: #79838a;
+  --deep: #49525a;
+  --fish: #626b72;
+  --claude: #c2603a;
+  --name: var(--ink);
+  --faded: rgba(34, 32, 28, 0.1);
+
+  /* Not a shell token and not theme-flipped: the character has dark eyes in
+     both appearances. Tying them to the paper made them white cut-outs on
+     light, which is a different character. */
+  --eye: #1c1a17;
+}
+
+[data-theme='dark'] .lake {
+  --sky: #4a545c;
+  --deep: #7d8b94;
+  --fish: #9aa3aa;
+  --claude: #e08a6a;
+  --faded: rgba(239, 235, 228, 0.09);
+}
+
+/* Rarity reads as escalating log severity: notice, info, warn, then his own
+   shipped work. Hue is never the only signal — the tag word and the pip
+   count say the same thing. */
+.lake-pop {
+  --r-common: #5f666c;
+  --r-uncommon: #22734a;
+  --r-rare: #1f5fd0;
+  --r-legendary: #a8532b;
+}
+
+[data-theme='dark'] .lake-pop {
+  --r-common: #9aa0a6;
+  --r-uncommon: #5fc287;
+  --r-rare: #6ba6f7;
+  --r-legendary: #e89070;
+}
+
+/* --------------------------------------------------------------------------
+   Scene
+   -------------------------------------------------------------------------- */
+
+.lake-stage {
+  position: relative;
+}
+
+.lake-scene {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.lake-scene:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: var(--r-sm);
+}
+
+.lake-grid {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: pre;
+  color: var(--faded);
+  user-select: none;
+  transition: opacity 0.18s var(--ease);
+}
+
+.lake-stage.is-dim .lake-grid {
+  opacity: 0.12;
+}
+
+.lake-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Colour planes the engine addresses by class name. */
+.lake .c-sky {
+  color: var(--sky);
+}
+.lake .c-deep {
+  color: var(--deep);
+}
+.lake .c-fish {
+  color: var(--fish);
+}
+.lake .c-claude {
+  color: var(--claude);
+}
+.lake .c-eye {
+  color: var(--eye);
+}
+.lake .c-name {
+  color: var(--name);
+}
+.lake .c-faint {
+  color: var(--ink-3);
+}
+.lake .c-accent {
+  color: var(--claude);
+}
+
+/* --------------------------------------------------------------------------
+   Panels — a log line, then structured output
+   -------------------------------------------------------------------------- */
+
+.lake-pop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  pointer-events: none;
+  --rar: var(--ink-2);
+}
+
+.lake-pop[hidden] {
+  display: none;
+}
+
+/* The halo is the rarity tell you read before any text: it spills the tier's
+   colour onto the dimmed scene behind the panel. */
+.lake-halo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(42% 46% at 50% 50%, var(--rar), transparent 70%);
+  opacity: 0.3;
+}
+
+.lake-popbox {
+  position: relative;
+  width: min(392px, 100%);
+  padding: 0 0 15px;
+  border: 1px solid var(--rar);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+  text-align: center;
+  box-shadow:
+    0 18px 54px rgba(0, 0, 0, 0.28),
+    0 0 46px -14px var(--rar);
+}
+
+/* Title strip, read as a log line: severity tag, what happened, how to quit. */
+.lake-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: left;
+}
+
+.lake-tag {
+  font-weight: 700;
+  color: var(--rar);
+}
+
+.lake-what {
+  color: var(--ink-2);
+}
+
+.lake-esc {
+  margin-left: auto;
+}
+
+.lake-body {
+  padding: 0 20px;
+}
+
+.lake-icon {
+  display: grid;
+  place-items: center;
+  min-height: 68px;
+  margin: 18px 0 11px;
+  color: var(--ink);
+}
+
+.lake-icon img {
+  display: block;
+  border-radius: 12px;
+}
+
+.lake-name {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Key/value output rather than a centred caption: structured, like something
+   a tool printed. */
+.lake-kv {
+  margin: 16px 0 0;
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.lake-kv div {
+  display: flex;
+  gap: 12px;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+}
+
+.lake-kv dt {
+  flex: none;
+  width: 56px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+.lake-kv dd {
+  margin: 0;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+
+.lake-pips {
+  letter-spacing: 0.12em;
+  color: var(--rar);
+}
+
+.lake-say {
+  margin: 14px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-align: left;
+}
+
+.lake-say--hint {
+  margin-top: 16px;
+}
+
+.lake-say b {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.lake-close {
+  margin-top: 16px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  text-align: left;
+}
+
+.lake-close b {
+  font-weight: 400;
+  color: var(--rar);
+}
+
+/* --------------------------------------------------------------------------
+   Hook-timing track
+   -------------------------------------------------------------------------- */
+
+.lake-track {
+  position: relative;
+  height: 26px;
+  margin: 22px 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--paper-sunken);
+}
+
+.lake-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--rar);
+  opacity: 0.3;
+}
+
+.lake-mark {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 2px;
+  background: var(--ink);
+  transform: translateX(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   HUD and logbook
+   -------------------------------------------------------------------------- */
+
+.lake-hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.lake-state b {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.lake-seen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 14px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lake-seen[hidden] {
+  display: none;
+}
+
+.lake-seen-h {
+  color: var(--ink-3);
+}
+
+.lake-seen-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lake-seen-row span {
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ink-3);
+  opacity: 0.55;
+}
+
+.lake-seen-row span.is-got {
+  color: var(--ink);
+  opacity: 1;
+}
+
+/* The panel is centred inside the stage, and on a phone the stage is only as
+   tall as 38 rows of 6px type. Everything here buys the panel back enough
+   height to sit inside it instead of spilling over the HUD below. */
+@media (max-width: 640px) {
+  .lake-pop {
+    padding: 10px;
+  }
+
+  .lake-popbox {
+    width: 100%;
+    padding-bottom: 12px;
+  }
+
+  .lake-icon {
+    min-height: 48px;
+    margin: 12px 0 8px;
+  }
+
+  .lake-icon svg,
+  .lake-icon img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .lake-name {
+    font-size: 1.25rem;
+  }
+
+  .lake-kv {
+    margin-top: 12px;
+  }
+
+  .lake-kv div {
+    padding: 3px 0;
+  }
+
+  .lake-say,
+  .lake-close {
+    margin-top: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lake-grid {
+    transition: none;
+  }
+}

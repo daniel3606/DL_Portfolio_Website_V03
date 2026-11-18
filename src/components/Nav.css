@@ -38,15 +38,10 @@
 }
 
 .nav-name {
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.028em;
-}
-
-.nav-role {
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.02em;
 }
 
 /* Links ------------------------------------------------------------------- */
@@ -231,11 +226,5 @@
   }
   .nav-burger {
     display: block;
-  }
-}
-
-@media (max-width: 460px) {
-  .nav-role {
-    display: none;
   }
 }

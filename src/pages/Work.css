@@ -3,16 +3,11 @@
 }
 
 .work-head {
-  padding-bottom: 52px;
+  padding-bottom: 44px;
 }
 
 .work-title {
-  margin-top: 20px;
-}
-
-.work-lede {
-  margin-top: 26px;
-  max-width: 52ch;
+  margin-top: 0;
 }
 
 /* Filters ----------------------------------------------------------------- */
@@ -86,7 +81,7 @@
 }
 
 /* The sticky filter bar already draws the rule above the first row. */
-.work-page .windex-list {
+.work-page .windex {
   border-top: none;
 }
 

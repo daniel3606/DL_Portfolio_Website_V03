@@ -14,12 +14,10 @@ export default function Work() {
   return (
     <main className="work-page page-top">
       <div className="shell">
+        {/* No standfirst. The filters below say what the range is, and the
+            rows say it better than a sentence about them would. */}
         <header className="work-head">
-          <span className="eyebrow">Index</span>
-          <h1 className="h1 work-title">Things I&rsquo;ve shipped.</h1>
-          <p className="lede work-lede">
-            Mobile, web, and XR — each one written up as a full case study rather than a screenshot with a caption.
-          </p>
+          <h1 className="h1 work-title">Work</h1>
         </header>
 
         <div className="work-filters" role="tablist" aria-label="Filter projects">
