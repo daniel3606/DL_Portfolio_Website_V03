@@ -1,4 +1,4 @@
-/* Facts here mirror dl_resume_03.pdf (Sept 2026). Keep them in step. */
+/* Facts here mirror public/Daniel_Lim_Resume.pdf (refreshed Nov 18, 2026). Keep them in step. */
 
 export const profile = {
   name: 'Daniel Lim',
@@ -45,41 +45,6 @@ export const disciplines = [
   },
 ];
 
-export const experience = [
-  {
-    org: 'SPAN',
-    role: 'Mobile Engineering Intern',
-    period: 'Jun 2026 — Sep 2026',
-    place: 'San Francisco, CA',
-    points: [
-      'Shipped production React Native features to SPAN’s homeowner energy application, resolving 50+ rendering and state-sync defects flagged in QA and improving reliability across iOS and Android.',
-      'Engineered an in-app Jira bug-reporting tool that automatically captured diagnostic context, cutting ticket-creation time and saving an estimated $20K/year in engineering productivity and software costs.',
-      'Resolved cross-package iOS and Android build failures in a multi-application React Native monorepo by tracing dependency, native-module, and generated-project conflicts, restoring reliable development builds.',
-    ],
-  },
-  {
-    org: 'Nalara Corporation',
-    role: 'Web Engineering Intern',
-    period: 'Jun 2025 — Aug 2025',
-    place: 'Livonia, MI',
-    points: [
-      'Shipped a 100+ page full-stack Vue.js platform for logistics tracking and workforce management, used by internal operations across multiple departments.',
-      'Developed real-time analytics dashboards in Vue.js with live inventory tracking and advanced filtering, improving operational visibility for logistics teams.',
-      'Automated HR workflows using Django ORM and PostgreSQL, including candidate tracking and interview scheduling, reducing manual processing time by 35%.',
-    ],
-  },
-  {
-    org: 'Augmented Reality Initiative',
-    role: 'Hackathon & Website Lead',
-    period: 'Mar 2026 — Present',
-    place: 'Ann Arbor, MI',
-    points: [
-      'Organize the XR track for hackathons including MHacks, coordinating mentorship, judging criteria, and technical direction.',
-      'Maintain the ARI website with Three.js components and Unity WebGL builds, and lead XR workshops supporting members building AR and VR projects.',
-    ],
-  },
-];
-
 export const education = {
   school: 'University of Michigan — Ann Arbor',
   detail: 'B.S.E. in Computer Science, Minor in User Experience Design',
@@ -90,7 +55,7 @@ export const education = {
 export const skills = [
   {
     group: 'Languages',
-    items: ['TypeScript', 'JavaScript', 'Python', 'Java', 'Swift', 'C/C++', 'C#', 'SQL (PostgreSQL)', 'HTML', 'CSS'],
+    items: ['TypeScript', 'JavaScript', 'Python', 'Swift', 'Rust', 'Java', 'C/C++', 'C#', 'SQL (PostgreSQL)', 'HTML', 'CSS'],
   },
   {
     group: 'Frameworks',
@@ -98,42 +63,6 @@ export const skills = [
   },
   {
     group: 'Tools',
-    items: ['Git', 'Firebase', 'Figma', 'Jira', 'REST APIs', 'Three.js', 'Unity', 'Lens Studio'],
-  },
-];
-
-/* Mirrors the Projects section of the resume PDF. */
-export const resumeProjects = [
-  {
-    name: 'Quadly',
-    role: 'Mobile & Product Engineer',
-    stack: 'React Native, Firebase, PostgreSQL',
-    period: 'Jan 2026 — Jun 2026',
-    points: [
-      'Launched a cross-platform social application serving 100+ users with authentication, real-time messaging, and marketplace features using React Native and Firebase.',
-      'Architected a multi-tenant PostgreSQL schema with migrations and Row Level Security policies to isolate university data and enforce access controls.',
-    ],
-  },
-  {
-    name: 'Spectacle Face Recognizer',
-    role: 'AI & Product Engineer',
-    stack: 'Lens Studio, React, PostgreSQL',
-    period: 'Nov 2025 — Jan 2026',
-    points: [
-      'Published an AI-powered facial recognition system for Snapchat Spectacles using Lens Studio and React.',
-      'Designed a PostgreSQL-based facial embedding pipeline for vector similarity search, identity matching, and user profile retrieval.',
-      'Achieved 95.2% recognition accuracy on a labeled test dataset by evaluating similarity thresholds and implementing an unknown-face classification and profile-creation workflow.',
-    ],
-  },
-  {
-    name: 'Scribble A.I.',
-    role: 'AI Engineer',
-    stack: 'PyTorch, Flask, Python',
-    period: 'Nov 2025 — Jan 2026',
-    points: [
-      'Trained a convolutional neural network using PyTorch, achieving 89% accuracy on a 50-class hand-drawn sketch dataset.',
-      'Built a Flask real-time prediction API supporting both image uploads and interactive canvas-drawing inputs.',
-      'Reduced model inference time by 40% through batch processing and implemented a reproducible data-preprocessing pipeline.',
-    ],
+    items: ['Git', 'Supabase', 'PostgreSQL', 'Figma', 'Jira', 'REST APIs', 'Three.js', 'Unity', 'Lens Studio'],
   },
 ];

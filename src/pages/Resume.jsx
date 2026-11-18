@@ -133,7 +133,7 @@ export default function Resume() {
 
           {/* Leadership ---------------------------------------------- */}
           <section className="sheet-section sheet-section-last">
-            <h3 className="label sheet-heading">Leadership</h3>
+            <h3 className="label sheet-heading">Awards &amp; Leadership</h3>
             <div className="sheet-body">
               {resumeLeadership.map((role) => (
                 <div className="entry" key={role.org}>
