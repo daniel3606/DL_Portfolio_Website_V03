@@ -8,6 +8,7 @@ const win = (src, alt) => shot(src, 1800, 1129, alt);
 export default {
   slug: 'rustyfinder',
   name: 'RustyFinder',
+  mascot: 'glasses',
   tier: 'featured',
   kind: 'macOS app',
   year: '2026',

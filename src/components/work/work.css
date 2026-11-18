@@ -10,29 +10,16 @@
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--ink-2);
   white-space: nowrap;
 }
 
-/* A square, not a dot: filled when it is out in the world. */
-.status i {
-  width: 7px;
-  height: 7px;
-  flex: none;
-  border: 1px solid currentColor;
-}
-
-.status-live i,
-.status-award i,
-.status-release i {
-  background: currentColor;
-}
-
 .status-live,
-.status-award {
-  color: var(--ink);
+.status-award,
+.status-release {
+  color: var(--accent);
 }
 
 /* Tech -------------------------------------------------------------------- */
@@ -101,7 +88,7 @@
   gap: 14px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -115,11 +102,14 @@
 }
 
 .pcard-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-top: 12px;
   font-size: clamp(1.4rem, 2.2vw, 1.75rem);
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.028em;
+  letter-spacing: 0;
 }
 
 .pcard-summary {
@@ -185,7 +175,7 @@
   margin-top: 18px;
   font-size: clamp(1.9rem, 3.4vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
 }
 
 .pcard-feature .pcard-summary {
@@ -235,7 +225,7 @@
 .lab-name {
   font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: -0.022em;
+  letter-spacing: 0;
   line-height: 1.2;
 }
 
@@ -244,7 +234,7 @@
   align-items: center;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--ink-3);
   white-space: nowrap;
@@ -291,7 +281,7 @@
 .lab-private {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--ink-3);
   min-height: 44px;

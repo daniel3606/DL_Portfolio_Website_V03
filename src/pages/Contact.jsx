@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import MiniDan from '../components/minidan/MiniDan';
 import Reveal from '../components/Reveal';
 import { profile } from '../data/profile';
 import { sendEmail } from '../utils/email';
@@ -44,7 +45,10 @@ export default function Contact() {
         <header className="contact-head">
           <Reveal>
             <span className="eyebrow">Contact</span>
-            <h1 className="display contact-title">Let&rsquo;s talk.</h1>
+            <div className="contact-title-row">
+              <h1 className="display contact-title">Let&rsquo;s talk.</h1>
+              <MiniDan pose="wave" px={8} animate className="contact-md" />
+            </div>
             <p className="lede contact-lede">
               Engineering and product roles, a project, or just a coffee chat about shipping mobile — all worth a
               message.

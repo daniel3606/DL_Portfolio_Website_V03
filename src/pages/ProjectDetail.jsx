@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
+import MiniDan from '../components/minidan/MiniDan';
 import Reveal from '../components/Reveal';
 import ProjectMedia from '../components/media/ProjectMedia';
 import Gallery from '../components/case/Gallery';
@@ -83,7 +84,10 @@ export default function ProjectDetail() {
           </span>
         </div>
 
-        <h1 className="display cs-title">{project.name}</h1>
+        <div className="cs-title-row">
+          <h1 className="display cs-title">{project.name}</h1>
+          {project.mascot ? <MiniDan pose={project.mascot} px={8} animate className="cs-mascot" /> : null}
+        </div>
 
         <div className="cs-head-foot">
           <p className="cs-summary">{project.summary}</p>
@@ -132,18 +136,19 @@ export default function ProjectDetail() {
 
         {/* Level 2 — Overview -------------------------------------------- */}
         <Reveal as="section" className="cs-overview" id="overview" aria-label="Overview">
-          <div className="cs-ov-item">
-            <span className="label">Problem</span>
-            <p>{project.overview.problem}</p>
-          </div>
-          <div className="cs-ov-item">
-            <span className="label">What I built</span>
-            <p>{project.overview.solution}</p>
-          </div>
-          <div className="cs-ov-item">
-            <span className="label">My role</span>
-            <p>{project.overview.role}</p>
-          </div>
+          {[
+            ['Problem', 'confused', project.overview.problem],
+            ['What I built', 'idea', project.overview.solution],
+            ['My role', 'determined', project.overview.role],
+          ].map(([label, pose, text], i) => (
+            <div className="cs-ov-item" key={label}>
+              <span className="cs-ov-head">
+                <MiniDan pose={pose} px={4} animate style={{ '--md-delay': `${-i * 0.9}s` }} />
+                <span className="label">{label}</span>
+              </span>
+              <p className="md-say md-say--up">{text}</p>
+            </div>
+          ))}
         </Reveal>
 
         {project.numbers?.length ? (
@@ -200,9 +205,15 @@ export default function ProjectDetail() {
                     <div>
                       <h3>{c.title}</h3>
                       <dl>
-                        <dt className="label">Problem</dt>
+                        <dt className="label cs-ch-label">
+                          <MiniDan pose="surprised" px={2.5} />
+                          Problem
+                        </dt>
                         <dd>{c.problem}</dd>
-                        <dt className="label">Approach</dt>
+                        <dt className="label cs-ch-label">
+                          <MiniDan pose="passed" px={2.5} />
+                          Approach
+                        </dt>
                         <dd>{c.solution}</dd>
                       </dl>
                       {c.where ? <p className="cs-where">{c.where}</p> : null}

@@ -11,6 +11,7 @@ const f = (src, alt) => shot(src, 393, 852, alt);
 export default {
   slug: 'sidequest',
   name: 'SideQuest',
+  mascot: 'walk',
   tier: 'more',
   kind: 'Product design',
   year: '2024',

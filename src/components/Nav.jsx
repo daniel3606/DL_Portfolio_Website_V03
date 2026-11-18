@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { profile } from '../data/profile';
+import { caseStudies, labProjects } from '../data/projects';
+import MiniDan from './minidan/MiniDan';
 import './Nav.css';
 
 const LINKS = [
-  { to: '/work', label: 'Work' },
+  { to: '/work', label: 'Work', count: caseStudies.length + labProjects.length },
+  { to: '/work#lab', label: 'Lab' },
   { to: '/about', label: 'About' },
   { to: '/resume', label: 'Resume' },
   { to: '/contact', label: 'Contact' },
@@ -27,23 +30,68 @@ function useTheme() {
     }
   }, [theme]);
 
-  return [theme, () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))];
+  return [theme, setTheme];
 }
 
+/* "Lab" is a section of the Work page, so it is only current when the URL
+   says so; Work is current everywhere else under /work. */
+function useCurrent() {
+  const { pathname, hash } = useLocation();
+  return (to) => {
+    const [path, h] = to.split('#');
+    if (h) return pathname === path && hash === `#${h}`;
+    if (path === '/work') return pathname.startsWith('/work') && hash !== '#lab';
+    return pathname === path;
+  };
+}
+
+function Links({ className, onPick }) {
+  const isCurrent = useCurrent();
+  return (
+    <nav className={className} aria-label="Primary">
+      {LINKS.map((link) => {
+        const on = isCurrent(link.to);
+        return (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            onClick={onPick}
+            className={`nav-link ${on ? 'is-active' : ''}`}
+            aria-current={on ? 'page' : undefined}
+          >
+            <i aria-hidden="true" />
+            <span>{link.label}</span>
+            {link.count ? <em>{link.count}</em> : null}
+          </NavLink>
+        );
+      })}
+    </nav>
+  );
+}
+
+function ThemeSwitch({ theme, setTheme }) {
+  return (
+    <div className="nav-theme" role="group" aria-label="Appearance">
+      {['light', 'dark'].map((t) => (
+        <button key={t} type="button" aria-pressed={theme === t} onClick={() => setTheme(t)}>
+          {t}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * The rail. On a wide screen it is a fixed left column: MiniDan as the mark,
+ * the pages, and the contact line that used to be the footer. Below 1024px it
+ * folds into a top bar and a full-screen sheet.
+ */
 export default function Nav() {
   const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [theme, toggleTheme] = useTheme();
+  const [theme, setTheme] = useTheme();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => setOpen(false), [location.pathname]);
+  useEffect(() => setOpen(false), [location.pathname, location.hash]);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -53,67 +101,65 @@ export default function Nav() {
   }, [open]);
 
   return (
-    <header className={`nav ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
-      <div className="nav-inner shell">
-        {/* The role used to sit under the name here. The hero says it once,
-            which is enough — a wordmark does not need a subtitle. */}
-        <Link to="/" className="nav-brand" aria-label={`${profile.name}, home`}>
-          <span className="nav-name">{profile.name}</span>
+    <>
+      <aside className="rail">
+        <Link to="/" className="rail-brand" aria-label={`${profile.name}, home`}>
+          <MiniDan pose="idle" px={5} animate />
+          <span>minidan</span>
         </Link>
 
-        <nav className="nav-links" aria-label="Primary">
-          {LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
+        <Links className="rail-links" />
 
-        <div className="nav-actions">
-          <button
-            className="nav-theme label"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} appearance`}
-          >
-            {theme === 'dark' ? 'Light' : 'Dark'}
-          </button>
-
-          <button
-            className={`nav-burger ${open ? 'is-open' : ''}`}
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            <span />
-            <span />
-          </button>
+        <div className="rail-foot">
+          <span>{profile.location}</span>
+          <span>{profile.availability}</span>
+          <a href={profile.socials.linkedin} target="_blank" rel="noreferrer">
+            LinkedIn →
+          </a>
+          <a href={profile.socials.github} target="_blank" rel="noreferrer">
+            GitHub →
+          </a>
+          <ThemeSwitch theme={theme} setTheme={setTheme} />
         </div>
-      </div>
+      </aside>
 
-      <div className={`nav-sheet ${open ? 'is-open' : ''}`}>
-        <div className="nav-sheet-inner shell">
-          {LINKS.map((link, i) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) => `nav-sheet-link ${isActive ? 'is-active' : ''}`}
-              style={{ transitionDelay: open ? `${0.06 + i * 0.05}s` : '0s' }}
-            >
-              {link.label}
-            </NavLink>
-          ))}
+      <header className={`topbar ${open ? 'is-open' : ''}`}>
+        <Link to="/" className="topbar-brand" aria-label={`${profile.name}, home`}>
+          <MiniDan pose="idle" px={2.5} />
+          <span>minidan</span>
+        </Link>
+        <button
+          type="button"
+          className="topbar-menu"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-controls="sheet"
+        >
+          {open ? 'Close' : 'Menu'}
+        </button>
+      </header>
 
-          <div className="nav-sheet-foot">
-            <a className="link" href={`mailto:${profile.email}`}>
-              {profile.email}
+      <div id="sheet" className={`sheet ${open ? 'is-open' : ''}`} hidden={!open}>
+        <Links className="sheet-links" onPick={() => setOpen(false)} />
+        <div className="sheet-says">
+          <p className="md-say md-say--right">{profile.availability}.</p>
+          <MiniDan pose="wave" px={7} animate />
+        </div>
+        <div className="sheet-foot">
+          <a className="sheet-mail" href={`mailto:${profile.email}`}>
+            {profile.email}
+          </a>
+          <span>
+            <a href={profile.socials.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn →
             </a>
-          </div>
+            <a href={profile.socials.github} target="_blank" rel="noreferrer">
+              GitHub →
+            </a>
+          </span>
+          <ThemeSwitch theme={theme} setTheme={setTheme} />
         </div>
       </div>
-    </header>
+    </>
   );
 }

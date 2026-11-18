@@ -15,6 +15,7 @@ const o = (src, alt) => shot(src, 720, 1561, alt);
 export default {
   slug: 'orbit',
   name: 'Orbit',
+  mascot: 'shades',
   tier: 'more',
   kind: 'Hackathon · iOS app',
   year: '2026',

@@ -1,0 +1,99 @@
+/* MiniDan sprites. The idle loop is deliberately tiny — one pixel of breath
+   and a blink every few seconds — so a page full of them reads as alive, not
+   busy. Stepped timing keeps the motion on the pixel grid. */
+
+.md {
+  display: block;
+  flex: none;
+  overflow: visible;
+  image-rendering: pixelated;
+}
+
+.md-anim .md-body {
+  animation: md-breathe 2.6s steps(1, end) infinite;
+  animation-delay: var(--md-delay, 0s);
+}
+
+.md-anim .md-eyes {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: md-blink 5.2s steps(1, end) infinite;
+  animation-delay: var(--md-delay, 0s);
+}
+
+@keyframes md-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes md-blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  92%,
+  95% {
+    transform: scaleY(0.5);
+  }
+}
+
+/* A comic speech bubble on the pixel grid: square corners, a 2px ink border
+   and a stepped tail. */
+.md-say {
+  position: relative;
+  padding: 14px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper-raised);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+/* The tail points at the speaker. Default: MiniDan stands to the left of the
+   bubble, so the tail leaves the left edge near the bottom. */
+.md-say::after {
+  content: '';
+  position: absolute;
+  left: -14px;
+  bottom: 10px;
+  width: 12px;
+  height: 12px;
+  background: var(--ink);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 66%, 33% 66%, 33% 33%, 66% 33%, 66% 0);
+}
+
+/* Speaker on the right. */
+.md-say--right::after {
+  left: auto;
+  right: -14px;
+  transform: scaleX(-1);
+}
+
+/* Speaker above the bubble, to the left. */
+.md-say--up::after {
+  left: 16px;
+  bottom: auto;
+  top: -14px;
+  transform: rotate(90deg);
+}
+
+/* Speaker below the bubble (stacked layouts on phones). */
+.md-say--down::after {
+  left: 18px;
+  bottom: -14px;
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-anim .md-body,
+  .md-anim .md-eyes {
+    animation: none;
+  }
+}

@@ -10,6 +10,7 @@ import { phone, wide } from './shot.js';
 export default {
   slug: 'dopamine-zero',
   name: 'Dopamine Zero',
+  mascot: 'peaceful',
   tier: 'featured',
   kind: 'iOS app',
   year: '2026',

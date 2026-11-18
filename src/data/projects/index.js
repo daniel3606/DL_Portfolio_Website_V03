@@ -13,6 +13,7 @@
  *   year*, period              '2026', 'Oct — Nov 2026'
  *   status*                    { label, tone }  tone: live | beta | release | prototype | award
  *   summary*                   the one line a visitor reads in five seconds
+ *   mascot                     MiniDan pose that explains it (see minidan/poses.js)
  *   hook                       the single most distinguishing fact, for the card
  *   tech*                      3–4 headline technologies (cards show these)
  *   theme                      { tint, tintDark } — the plate behind its imagery

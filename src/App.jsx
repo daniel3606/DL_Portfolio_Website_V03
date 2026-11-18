@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
-import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Home from './pages/Home.jsx';
 import Work from './pages/Work.jsx';
@@ -24,7 +23,6 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </div>
   );
 }
