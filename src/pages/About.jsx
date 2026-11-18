@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import MiniDan from '../components/minidan/MiniDan';
 import Reveal from '../components/Reveal';
 import { profile, disciplines, education, skills } from '../data/profile';
 import headshot from '../assets/brand/headshot.jpeg';
@@ -6,10 +7,10 @@ import './About.css';
 
 /* A real sequence, so it earns its numbering. */
 const PROCESS = [
-  { step: 'Define', body: 'Problem, user, scope, success metric, and what this deliberately will not do.' },
-  { step: 'Design', body: 'Figma at real fidelity, including the states that break things — empty, loading, error.' },
-  { step: 'Build', body: 'TypeScript across web and native, schema-first, access control at the database.' },
-  { step: 'Refine', body: 'Watch real usage, cut what nobody touches, fix what only breaks on device.' },
+  { step: 'Define', pose: 'thinking', body: 'Problem, user, scope, success metric, and what this deliberately will not do.' },
+  { step: 'Design', pose: 'glasses', body: 'Figma at real fidelity, including the states that break things — empty, loading, error.' },
+  { step: 'Build', pose: 'typing', body: 'TypeScript across web and native, schema-first, access control at the database.' },
+  { step: 'Refine', pose: 'passed', body: 'Watch real usage, cut what nobody touches, fix what only breaks on device.' },
 ];
 
 const FACTS = [
@@ -26,7 +27,10 @@ export default function About() {
         <header className="about-head">
           <Reveal className="about-head-grid">
             <div>
-              <span className="eyebrow">About</span>
+              <span className="about-hi">
+                <MiniDan pose="coffee" px={4} animate />
+                <span className="eyebrow">About</span>
+              </span>
               <h1 className="h1 about-title">I Design, Build, and Ship.</h1>
               <p className="lede about-lede">{profile.intro}</p>
             </div>
@@ -57,7 +61,10 @@ export default function About() {
           <div className="process-grid">
             {PROCESS.map((p, i) => (
               <Reveal className="process-step" key={p.step} delay={i * 0.06}>
-                <span className="label process-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="process-top">
+                  <MiniDan pose={p.pose} px={3} animate style={{ '--md-delay': `${-i * 0.8}s` }} />
+                  <span className="label process-num">{String(i + 1).padStart(2, '0')}</span>
+                </span>
                 <h3 className="h3 process-name">{p.step}</h3>
                 <p className="process-body">{p.body}</p>
               </Reveal>

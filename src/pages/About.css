@@ -63,7 +63,7 @@
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: -0.014em;
+  letter-spacing: 0;
 }
 
 /* Blocks ------------------------------------------------------------------- */
@@ -171,7 +171,7 @@
 .skills-group-name {
   font-size: 1.0625rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .skills-items {
@@ -265,4 +265,19 @@
   .fact:first-child {
     border-top: none;
   }
+}
+
+/* MiniDan ---------------------------------------------------------------- */
+
+.about-hi {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.process-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-height: 64px;
 }

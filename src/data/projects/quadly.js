@@ -9,6 +9,7 @@ const q = (src, alt) => shot(src, 720, 1565, alt);
 export default {
   slug: 'quadly',
   name: 'Quadly',
+  mascot: 'starstruck',
   tier: 'featured',
   kind: 'iOS app + web',
   year: '2026',

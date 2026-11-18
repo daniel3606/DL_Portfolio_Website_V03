@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import MiniDan from '../minidan/MiniDan';
 import ProjectMedia from '../media/ProjectMedia';
 import { Arrow, StatusTag, TechList } from './meta';
 import './work.css';
@@ -32,7 +33,10 @@ export default function ProjectCard({ project, variant = 'card', index, eager = 
             <span className="pcard-year">{project.year}</span>
           </div>
 
-          <h3 className="pcard-name">{project.name}</h3>
+          <h3 className="pcard-name">
+            {project.mascot ? <MiniDan pose={project.mascot} px={2.5} /> : null}
+            {project.name}
+          </h3>
           <p className="pcard-summary">{project.summary}</p>
           {variant === 'feature' && project.hook ? <p className="pcard-hook">{project.hook}</p> : null}
 

@@ -4,3 +4,6 @@ dist
 *.local
 .agents
 .claude
+
+# Personal Claude Code settings
+.claude/settings.local.json

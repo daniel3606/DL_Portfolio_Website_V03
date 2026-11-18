@@ -10,6 +10,7 @@ const g = (src, alt) => shot(src, 1684, 1080, alt);
 export default {
   slug: 'fish-and-talk',
   name: 'Fish & Talk',
+  mascot: 'showfish',
   tier: 'more',
   kind: 'Roblox game',
   year: '2026',

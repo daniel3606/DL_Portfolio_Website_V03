@@ -41,14 +41,14 @@
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.038em;
+  letter-spacing: 0;
 }
 
 .sheet-role {
   margin-top: 10px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
@@ -109,7 +109,7 @@
   font-size: 1.1875rem;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.024em;
+  letter-spacing: 0;
 }
 
 .entry-role {

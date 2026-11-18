@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { catchRoster } from '../data/catch';
+import MiniDan from './minidan/MiniDan';
 import './Fishing.css';
 
 /* ==========================================================================
@@ -61,22 +62,20 @@ const BITE_WINDOW = 2.6;
 const FIGHT_TIMEOUT = 7;
 const CAST_TIME = 0.75;
 
-/* The Claude Code character, built to the proportions of the sticker: 1.25
-   wide to tall, side nubs at 12% of the body width, four equal legs with a
-   wide centre notch. 'E' becomes a dark block for the eyes. */
-const ANGLER = [
-  '  ████████████████  ',
-  '  ████████████████  ',
-  '████EE████████EE████',
-  '████████████████████',
-  '  ████████████████  ',
-  '  ████████████████  ',
-  '  ██  ██    ██  ██  ',
-  '  ██  ██    ██  ██  ',
-];
-const ANGLER_CLS = 'c-claude';
-const ANGLER_OVER = { E: { c: 'c-eye', g: '█' } };
-const HAND = { x: 0, y: 2 };
+/* The angler is MiniDan, with Claude (the previous angler) at half size
+   beside him on the pier. Both are drawn as square-pixel sprites laid over
+   the grid rather than as characters in it: a text cell is twice as tall as
+   it is wide, so a character grid cannot hold MiniDan's face. The engine
+   still reserves their cells, so waves and clouds never show through.
+
+   Footprints in grid cells. MiniDan's fishing pose is 18 x 14 pixels at one
+   cell-width per pixel, so 14 pixels make 7 rows; Claude is 20 x 16 pixels
+   at half that size. */
+const MD = { w: 18, h: 7 };
+const CL = { w: 10, h: 4, gap: 2 };
+/* The rod leaves MiniDan's left nub, which sits on pixel rows 6-7. */
+const HAND = { x: 0, y: 3 };
+const ROD_CLS = 'c-rod';
 
 /* Shadows under the surface. The ambient ones just make the lake look
    occupied; a separate one swims in to meet the float while you wait, so the
@@ -153,7 +152,7 @@ function iconHTML(ic, size) {
    The engine. Takes the mounted nodes, returns a teardown.
    -------------------------------------------------------------------------- */
 function startLake(els) {
-  const { grid, scene, state, tally, seen: seenEl, seenWrap, pop, popBox, stage } = els;
+  const { grid, scene, state, tally, seen: seenEl, seenWrap, pop, popBox, stage, md, claude } = els;
   const CATCH = catchRoster;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -213,6 +212,22 @@ function startLake(els) {
         }
       }
     }
+  }
+
+  /* Sprites sit on top of the <pre>, positioned in grid cells. */
+  let cellW = 6;
+  let cellH = 12;
+  function placeActors(ax, top, cx, deck) {
+    const ox = grid.offsetLeft;
+    const oy = grid.offsetTop;
+    md.style.transform = `translate(${ox + ax * cellW}px, ${oy + top * cellH}px)`;
+    md.style.width = `${MD.w * cellW}px`;
+    md.style.height = `${MD.h * cellH}px`;
+    md.classList.toggle('is-bite', mode === 'bite' || mode === 'fight');
+    claude.hidden = !withClaude();
+    claude.style.transform = `translate(${ox + cx * cellW}px, ${oy + (deck - CL.h) * cellH}px)`;
+    claude.style.width = `${CL.w * cellW}px`;
+    claude.style.height = `${CL.h * cellH}px`;
   }
 
   function render() {
@@ -322,8 +337,11 @@ function startLake(els) {
     }
   }
 
-  // Constant right margin whatever the figure's width.
-  const anglerX = () => W - 6 - ANGLER[0].length;
+  // Claude only stands on the pier when there is room for both without the
+  // pair crowding the name on a phone.
+  const withClaude = () => W >= 96;
+  // Constant right margin whatever the figures' widths.
+  const anglerX = () => W - 6 - MD.w - (withClaude() ? CL.w + CL.gap : 0);
   const lerp = (a, b, p) => a + (b - a) * Math.max(0, Math.min(1, p));
 
   /* Elevation of the rod above horizontal, in degrees. The cast is a windup
@@ -339,7 +357,7 @@ function startLake(els) {
   }
   function handPos() {
     const deck = HORIZON - 1;
-    const top = deck - ANGLER.length;
+    const top = deck - MD.h;
     // The body leans forward through the forward half of the swing.
     let lean = 0;
     if (mode === 'cast') lean = (t - modeAt) / CAST_TIME < 0.34 ? 1 : -1;
@@ -441,11 +459,18 @@ function startLake(els) {
       for (let q = 1; q <= 4; q++) put(anglerX() - 5 + p * 13, deck + q, '|', 'c-faint');
     }
 
-    // Clear the figure's box first, so nothing shows through the silhouette.
-    for (let by = 0; by < ANGLER.length; by++) {
-      for (let bx = -1; bx <= ANGLER[0].length; bx++) put(ax + bx, top + by, ' ', '');
+    // Reserve the figures' cells so nothing in the grid shows through the
+    // gaps in the sprites (between the feet, around the hood).
+    for (let by = 0; by < MD.h; by++) {
+      for (let bx = -1; bx <= MD.w; bx++) put(ax + bx, top + by, ' ', '');
     }
-    sprite(ax, top, ANGLER, ANGLER_CLS, ANGLER_OVER);
+    const cx = anglerX() + MD.w + CL.gap;
+    if (withClaude()) {
+      for (let by = deck - CL.h; by < deck; by++) {
+        for (let bx = 0; bx < CL.w; bx++) put(cx + bx, by, ' ', '');
+      }
+    }
+    placeActors(ax, top, cx, deck);
 
     // Rod: a straight line from the hand, at whatever angle the swing is at.
     const tip = rodTip();
@@ -453,7 +478,7 @@ function startLake(els) {
     const hy = hand.y;
     const steps = Math.max(Math.abs(tip.x - hx), Math.abs(tip.y - hy));
     for (let i = 0; i <= steps; i++) {
-      put(hx + ((tip.x - hx) * i) / steps, hy + ((tip.y - hy) * i) / steps, '/', ANGLER_CLS);
+      put(hx + ((tip.x - hx) * i) / steps, hy + ((tip.y - hy) * i) / steps, '/', ROD_CLS);
     }
 
     // Line and float, once something is in the water. Nothing is in the air
@@ -661,6 +686,8 @@ function startLake(els) {
     probe.textContent = REF;
     const adv = probe.getBoundingClientRect().width / 100 || want * 0.6;
     probe.textContent = '';
+    cellW = adv;
+    cellH = parseFloat(getComputedStyle(grid).lineHeight) || want * 1.2;
     const cols = Math.max(52, Math.min(170, Math.floor(box / adv)));
     if (cols !== W) {
       W = cols;
@@ -728,6 +755,8 @@ export default function Fishing() {
     pop: useRef(null),
     popBox: useRef(null),
     stage: useRef(null),
+    md: useRef(null),
+    claude: useRef(null),
   };
 
   useEffect(() => {
@@ -752,6 +781,13 @@ export default function Fishing() {
           {/* The grid is decoration; the live region below is what a screen
               reader follows, so the art itself stays out of the tree. */}
           <pre className="lake-grid" ref={refs.grid} aria-hidden="true" />
+          <span className="lake-actor lake-md" ref={refs.md} aria-hidden="true">
+            <MiniDan pose="fishing" px={1} animate className="lake-md-calm" />
+            <MiniDan pose="fishing_bite" px={1} className="lake-md-bite" />
+          </span>
+          <span className="lake-actor lake-claude" ref={refs.claude} aria-hidden="true">
+            <MiniDan pose="claude" px={1} animate style={{ '--md-delay': '-1.3s' }} />
+          </span>
           <span className="lake-sr">
             Cast a line into the lake. Click, or press Enter, to play.
           </span>

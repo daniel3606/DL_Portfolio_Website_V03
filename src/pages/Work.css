@@ -10,12 +10,24 @@
   padding-bottom: clamp(56px, 7vw, 96px);
 }
 
+.work-say {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
 .work-lede {
   max-width: 46ch;
-  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  margin-bottom: 40px;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
   line-height: 1.5;
-  letter-spacing: -0.012em;
-  color: var(--ink-2);
+}
+
+.work-tier-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* Tiers -------------------------------------------------------------------- */
@@ -26,18 +38,17 @@
 
 .work-tier-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding-top: 18px;
-  border-top: 1px solid var(--ink);
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--line-soft);
   margin-bottom: clamp(36px, 5vw, 64px);
 }
 
 /* The lab list draws its own top rule. */
 .work-tier-head-plain {
-  border-top: none;
-  padding-top: 0;
+  border-bottom: none;
   margin-bottom: 18px;
 }
 
@@ -63,6 +74,13 @@
   .work-head {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+  .work-say {
+    justify-content: flex-start;
+  }
+  .work-say .md {
+    width: 64px;
+    height: auto;
   }
   .work-grid {
     grid-template-columns: 1fr;

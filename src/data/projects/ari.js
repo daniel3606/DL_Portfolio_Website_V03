@@ -11,6 +11,7 @@ const m = (src, alt) => shot(src, 720, 1561, alt);
 export default {
   slug: 'ari-website',
   name: 'ARI Website',
+  mascot: 'determined',
   tier: 'more',
   kind: 'Website + CMS',
   year: '2026',

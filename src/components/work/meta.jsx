@@ -14,17 +14,12 @@ export const Arrow = ({ dir = 'ne', size = 14 }) => {
 };
 
 /**
- * Status reads through words and a square mark — filled when the thing is out
- * in the world, outlined when it is not yet. Never colour alone.
+ * Status is just the words. A dot or square in front of it read as
+ * generated UI, and the label already says everything the mark did.
  */
 export function StatusTag({ status }) {
   if (!status) return null;
-  return (
-    <span className={`status status-${status.tone}`}>
-      <i aria-hidden="true" />
-      {status.label}
-    </span>
-  );
+  return <span className={`status status-${status.tone}`}>{status.label}</span>;
 }
 
 export function TechList({ items, className = '' }) {

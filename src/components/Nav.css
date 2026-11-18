@@ -1,230 +1,229 @@
-.nav {
+/* ==========================================================================
+   The rail (desktop) and the top bar + sheet (below 1024px).
+   ========================================================================== */
+
+:root {
+  --rail-w: 248px;
+}
+
+/* ---------- rail ---------- */
+
+.rail {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  height: var(--nav-h);
-  border-bottom: 1px solid transparent;
-  transition: background-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease),
-    border-color 0.4s var(--ease);
-}
-
-.nav.is-scrolled,
-.nav.is-open {
-  background: var(--chrome);
-  backdrop-filter: saturate(150%) blur(16px);
-  -webkit-backdrop-filter: saturate(150%) blur(16px);
-  border-bottom-color: var(--line);
-}
-
-.nav-inner {
-  height: var(--nav-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-}
-
-/* Brand ------------------------------------------------------------------- */
-
-.nav-brand {
+  inset: 0 auto 0 0;
+  z-index: 40;
+  width: var(--rail-w);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-  min-height: 44px;
-  flex-shrink: 0;
+  padding: 40px 24px 32px;
+  background: var(--paper-sunken);
+  border-right: 1px solid var(--line-soft);
+  overflow-y: auto;
 }
 
-.nav-name {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+.rail-brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 0 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--ink);
 }
 
-/* Links ------------------------------------------------------------------- */
-
-.nav-links {
+.rail-links {
   display: flex;
-  align-items: baseline;
-  gap: 34px;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 44px;
 }
 
 .nav-link {
-  position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  gap: 12px;
   min-height: 44px;
-  font-size: 0.9375rem;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 1.1875rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
   color: var(--ink-2);
-  transition: color 0.32s var(--ease);
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.nav-link i {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  background: var(--ink-3);
+  opacity: 0.6;
+}
+
+.nav-link span {
+  flex: 1;
+}
+
+.nav-link em {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-style: normal;
+  color: var(--ink-3);
 }
 
 .nav-link:hover {
   color: var(--ink);
 }
 
-/* The active marker is a rule, not a dot. */
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 12px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.45s var(--ease-out);
-}
-
-.nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* Active state carries weight and a rule, never colour alone. */
 .nav-link.is-active {
+  background: var(--paper-raised);
   color: var(--ink);
-  font-weight: 600;
 }
 
-.nav-link.is-active::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.nav-link.is-active i {
+  background: var(--accent);
+  opacity: 1;
 }
 
-/* Actions ----------------------------------------------------------------- */
-
-.nav-actions {
+.rail-foot {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding: 32px 8px 0;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+.rail-foot a {
+  color: var(--ink);
+}
+
+.rail-foot a:hover {
+  color: var(--accent);
 }
 
 .nav-theme {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 64px;
-  min-height: 44px;
-  padding: 0 12px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--line);
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  text-transform: none;
-  color: var(--ink-2);
-  transition: color 0.32s var(--ease), border-color 0.32s var(--ease),
-    background-color 0.32s var(--ease);
+  gap: 12px;
+  margin-top: 6px;
 }
 
-.nav-theme:hover {
-  color: var(--ink);
-  border-color: var(--ink);
-  background: var(--paper-sunken);
+.nav-theme button {
+  min-height: 32px;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
 }
 
-.nav-burger {
-  display: none;
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--r-sm);
-}
-
-.nav-burger span {
-  position: absolute;
-  left: 10px;
-  width: 24px;
-  height: 1px;
-  background: var(--ink);
-  transition: transform 0.4s var(--ease-out);
-}
-
-.nav-burger span:first-child {
-  top: 19px;
-}
-
-.nav-burger span:last-child {
-  top: 25px;
-}
-
-.nav-burger.is-open span:first-child {
-  transform: translateY(3px) rotate(45deg);
-}
-
-.nav-burger.is-open span:last-child {
-  transform: translateY(-3px) rotate(-45deg);
-}
-
-/* Mobile sheet ------------------------------------------------------------ */
-
-.nav-sheet {
-  position: fixed;
-  inset: var(--nav-h) 0 0 0;
-  background: var(--paper);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
-}
-
-.nav-sheet.is-open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nav-sheet-inner {
-  display: flex;
-  flex-direction: column;
-  padding-top: 30px;
-}
-
-.nav-sheet-link {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  min-height: 44px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.034em;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out),
-    color 0.3s var(--ease);
-}
-
-.nav-sheet.is-open .nav-sheet-link {
-  opacity: 1;
-  transform: none;
-}
-
-.nav-sheet-link.is-active {
+.nav-theme button[aria-pressed='true'] {
   color: var(--ink);
   text-decoration: underline;
-  text-underline-offset: 6px;
-  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
-.nav-sheet-foot {
-  margin-top: 40px;
+/* ---------- top bar + sheet (narrow) ---------- */
+
+.topbar,
+.sheet {
+  display: none;
 }
 
-@media (max-width: 900px) {
-  .nav-links {
+@media (max-width: 1023px) {
+  .rail {
     display: none;
   }
-  .nav-burger {
-    display: block;
+
+  .topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-h);
+    padding: 0 var(--gutter);
+    background: var(--chrome);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .topbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--ink);
+  }
+
+  .topbar-menu {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 2px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--nav-h) + 32px) var(--gutter) 28px;
+    background: var(--paper);
+    overflow-y: auto;
+  }
+
+  .sheet[hidden] {
+    display: none;
+  }
+
+  .sheet-links .nav-link {
+    min-height: 64px;
+    font-size: clamp(2.2rem, 10vw, 3rem);
+    font-weight: 700;
+  }
+
+  .sheet-links .nav-link i {
+    width: 10px;
+    height: 10px;
+  }
+
+  .sheet-says {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 28px;
+  }
+
+  .sheet-says .md-say {
+    margin-bottom: 40px;
+  }
+
+  .sheet-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 24px;
+    font-size: 1rem;
+  }
+
+  .sheet-foot span {
+    display: flex;
+    gap: 18px;
+  }
+
+  .sheet-mail {
+    color: var(--accent);
   }
 }

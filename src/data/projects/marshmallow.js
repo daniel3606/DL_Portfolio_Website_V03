@@ -10,6 +10,7 @@ const mm = (src, alt) => shot(src, 720, 1565, alt);
 export default {
   slug: 'marshmallow',
   name: 'Marshmallow',
+  mascot: 'inlove',
   tier: 'featured',
   kind: 'iOS app',
   year: '2026',
