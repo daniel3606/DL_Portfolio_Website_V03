@@ -38,8 +38,7 @@ export default function Home() {
 
           <Reveal>
             <h2 className="home-statement" id="home-work-title">
-              I build software end to end — native iOS, React Native, Rust and the backends behind them — and I ship
-              it.
+              I build and ship software end to end, from native apps to the backends behind them.
             </h2>
           </Reveal>
 
