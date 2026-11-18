@@ -497,7 +497,9 @@
     border-top: 1px solid var(--line);
   }
   .cs-block {
-    grid-template-columns: 1fr;
+    /* minmax(0, …) so a long code line scrolls inside its block instead of
+       widening the page, which makes phones zoom the whole layout out. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
   .cs-block-mark {

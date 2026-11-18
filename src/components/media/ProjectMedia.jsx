@@ -120,29 +120,6 @@ export default function ProjectMedia({ media, theme, ratio = 'cover', eager = fa
         </div>
       );
       break;
-    case 'system':
-      // For work with no honest screenshot: the system itself, drawn as a
-      // row of lanes on the same plate every other project sits on.
-      body = (
-        <div className="pm-system" aria-hidden="true">
-          <span className="pm-system-title">{media.system.title}</span>
-          <div className="pm-system-lanes">
-            {media.system.lanes.map((lane, i) => (
-              <div className="pm-system-lane" key={lane.label}>
-                <span className="pm-system-label">
-                  {String(i + 1).padStart(2, '0')} {lane.label}
-                </span>
-                {lane.items.map((item) => (
-                  <span className="pm-system-node" key={item}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-      break;
     default:
       body = null;
   }

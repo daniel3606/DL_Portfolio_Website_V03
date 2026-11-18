@@ -83,7 +83,6 @@ heroes, the pager — from authentic screens plus a layout name:
 | `browser` | a website, in a browser frame with an address bar |
 | `window` | a desktop app or game capture (`zoom` crops in closer) |
 | `duo` | a website with its phone version in front |
-| `system` | an architecture drawn as lanes, for work with no honest screenshot |
 
 The rules that make them read as one set: one aspect ratio (16:10 for covers,
 16:9 for heroes, 4:3 on phones), the project tint lit from the top, devices
