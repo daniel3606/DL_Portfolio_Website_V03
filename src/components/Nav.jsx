@@ -55,9 +55,10 @@ export default function Nav() {
   return (
     <header className={`nav ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
       <div className="nav-inner shell">
+        {/* The role used to sit under the name here. The hero says it once,
+            which is enough — a wordmark does not need a subtitle. */}
         <Link to="/" className="nav-brand" aria-label={`${profile.name}, home`}>
           <span className="nav-name">{profile.name}</span>
-          <span className="nav-role label">{profile.role}</span>
         </Link>
 
         <nav className="nav-links" aria-label="Primary">

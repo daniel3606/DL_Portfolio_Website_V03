@@ -130,7 +130,9 @@
   line-height: 1;
   text-align: center;
   padding: 0 24px;
-  color: #111112;
+  /* Same reason as .windex-thumb-word: the frame behind it is the project
+     tint, which already flips with the appearance. */
+  color: var(--ink);
 }
 
 /* Facts ------------------------------------------------------------------- */
