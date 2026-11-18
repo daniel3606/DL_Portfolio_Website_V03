@@ -1,0 +1,313 @@
+/* ==========================================================================
+   Work components — cards, metadata, lab rows.
+   ========================================================================== */
+
+/* Status ------------------------------------------------------------------ */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* A square, not a dot: filled when it is out in the world. */
+.status i {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border: 1px solid currentColor;
+}
+
+.status-live i,
+.status-award i,
+.status-release i {
+  background: currentColor;
+}
+
+.status-live,
+.status-award {
+  color: var(--ink);
+}
+
+/* Tech -------------------------------------------------------------------- */
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+.tech li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tech li + li::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 0.8em;
+  margin: 0 0.7em;
+  background: var(--line);
+}
+
+/* Links ------------------------------------------------------------------- */
+
+.plinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.plinks-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+  max-width: 34ch;
+}
+
+/* Card -------------------------------------------------------------------- */
+
+.pcard-link {
+  display: block;
+  color: inherit;
+  border-radius: var(--r-lg);
+}
+
+.pcard-link:focus-visible {
+  outline-offset: 6px;
+}
+
+.pcard-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.pcard-top {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.pcard-index {
+  color: var(--ink);
+}
+
+.pcard-year {
+  margin-left: auto;
+}
+
+.pcard-name {
+  margin-top: 12px;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+}
+
+.pcard-summary {
+  margin-top: 10px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+
+.pcard-hook {
+  margin-top: 18px;
+  padding-left: 16px;
+  border-left: 1px solid var(--ink);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 46ch;
+}
+
+.pcard-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 20px;
+  margin-top: 20px;
+}
+
+.pcard-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  margin-top: 30px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.pcard-cta svg {
+  transition: transform 0.35s var(--ease-out);
+}
+
+.pcard-link:hover .pcard-cta svg {
+  transform: translateX(4px);
+}
+
+/* Grid variant: plate above, text below. */
+.pcard-card .pcard-body {
+  padding-top: 22px;
+}
+
+/* Feature variant: plate and text side by side. */
+.pcard-feature .pcard-link {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.pcard-feature .pcard-name {
+  margin-top: 18px;
+  font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.pcard-feature .pcard-summary {
+  margin-top: 16px;
+  font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+@media (max-width: 900px) {
+  .pcard-feature .pcard-link {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .pcard-feature .pcard-name {
+    margin-top: 12px;
+  }
+  .pcard-cta {
+    margin-top: 22px;
+  }
+}
+
+/* Lab --------------------------------------------------------------------- */
+
+.lab {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 48px;
+  border-top: 1px solid var(--ink);
+}
+
+.lab-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.lab-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lab-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+}
+
+.lab-kind {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.lab-kind .sep {
+  margin: 0 0.6em;
+}
+
+.lab-summary {
+  font-size: 0.9875rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+
+.lab-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.lab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.lab-link svg {
+  transition: transform 0.35s var(--ease-out);
+}
+
+.lab-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.lab-private {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  .lab {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard-cta svg,
+  .lab-link svg {
+    transition: none;
+  }
+}

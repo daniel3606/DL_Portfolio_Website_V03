@@ -1,234 +1,301 @@
 import { useEffect } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import Reveal from '../components/Reveal';
-import { projects, getProject } from '../data/projects';
+import ProjectMedia from '../components/media/ProjectMedia';
+import Gallery from '../components/case/Gallery';
+import Architecture from '../components/case/Architecture';
+import CodeExcerpt from '../components/case/CodeExcerpt';
+import { Arrow, StatusTag, TechList, ProjectLinks } from '../components/work/meta';
+import { caseStudies, getProject } from '../data/projects';
 import './ProjectDetail.css';
 
-const Arrow = ({ dir = 'ne' }) => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    {dir === 'ne' ? (
-      <path d="M4 12 12 4M12 4H6M12 4v6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="square" />
-    ) : (
-      <path
-        d={dir === 'left' ? 'M10 3 5 8l5 5' : 'M6 3l5 5-5 5'}
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="square"
-      />
-    )}
-  </svg>
-);
+/**
+ * One template, three depths. The head and hero are the five-second read; the
+ * overview, features and screens are the minute-long one; everything under
+ * "Engineering" is for the reader who wants to know how it works.
+ */
 
-function Section({ section }) {
+function Block({ id, label, title, children, className = '' }) {
   return (
-    <Reveal className="pd-section" as="section">
-      <div className="pd-section-mark">
-        <h2 className="h3 pd-section-title">{section.title}</h2>
+    <Reveal as="section" className={`cs-block ${className}`} id={id} aria-labelledby={`${id}-title`}>
+      <div className="cs-block-mark">
+        {label ? <span className="label">{label}</span> : null}
+        <h2 className="h3 cs-block-title" id={`${id}-title`}>
+          {title}
+        </h2>
       </div>
-
-      <div className="pd-section-body">
-        {section.kind === 'prose' ? (
-          <div className="pd-prose">
-            {section.body.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-            ))}
-          </div>
-        ) : null}
-
-        {section.kind === 'bullets' ? (
-          <ul className="list-num pd-list">
-            {section.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        ) : null}
-
-        {section.kind === 'columns' ? (
-          <div className="pd-columns">
-            {section.items.map((item) => (
-              <div className="pd-column" key={item.head}>
-                <h3 className="pd-column-head">{item.head}</h3>
-                <p>{item.body}</p>
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
+      <div className="cs-block-body">{children}</div>
     </Reveal>
   );
+}
+
+function useDocumentMeta(project) {
+  useEffect(() => {
+    if (!project) return undefined;
+    const prevTitle = document.title;
+    const meta = document.querySelector('meta[name="description"]');
+    const prevDesc = meta?.getAttribute('content');
+    document.title = `${project.name} — Daniel Lim`;
+    meta?.setAttribute('content', `${project.name}: ${project.summary}`);
+    return () => {
+      document.title = prevTitle;
+      if (meta && prevDesc) meta.setAttribute('content', prevDesc);
+    };
+  }, [project]);
 }
 
 export default function ProjectDetail() {
   const { slug } = useParams();
   const project = getProject(slug);
-
-  // The project's own colour washes the page for as long as you're on it.
-  useEffect(() => {
-    if (!project) return undefined;
-    const root = document.documentElement;
-    const paint = () => {
-      const dark = root.getAttribute('data-theme') === 'dark';
-      root.style.setProperty('--wash', dark ? project.tintDark : project.tint);
-    };
-    paint();
-    const observer = new MutationObserver(paint);
-    observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => {
-      observer.disconnect();
-      root.style.setProperty('--wash', 'transparent');
-    };
-  }, [project]);
+  useDocumentMeta(project);
 
   if (!project) return <Navigate to="/work" replace />;
 
-  const index = projects.findIndex((p) => p.slug === slug);
-  const next = projects[(index + 1) % projects.length];
-  const prev = projects[(index - 1 + projects.length) % projects.length];
+  const index = caseStudies.findIndex((p) => p.slug === slug);
+  const next = caseStudies[(index + 1) % caseStudies.length];
+  const prev = caseStudies[(index - 1 + caseStudies.length) % caseStudies.length];
 
-  const style = { '--tint': project.tint, '--tint-dark': project.tintDark };
-  const deviceShots =
-    project.gallery?.items?.length && project.gallery.kind !== 'wide' ? project.gallery.items : null;
-  const wideShots = project.gallery?.kind === 'wide' ? project.gallery.items : project.gallery?.wide || null;
+  const hasEngineering = Boolean(
+    project.stack || project.architecture || project.challenges?.length || project.code || project.process
+  );
+
+  const toc = [
+    { id: 'overview', label: 'Overview' },
+    project.features?.length && { id: 'product', label: 'Product' },
+    project.gallery?.length && { id: 'screens', label: 'Screens' },
+    hasEngineering && { id: 'engineering', label: 'Engineering' },
+    project.outcome && { id: 'outcome', label: 'Outcome' },
+  ].filter(Boolean);
 
   return (
-    <main className="pd page-top" style={style}>
-      {/* Masthead ------------------------------------------------------ */}
-      <header className="shell pd-head">
-        <Link to="/work" className="pd-back label">
-          <Arrow dir="left" />
-          Index
-        </Link>
-
-        <div className="pd-disciplines">
-          {project.discipline.map((d, i) => (
-            <span className="label label-ink" key={d}>
-              {i > 0 ? <i className="sep" aria-hidden="true" /> : null}
-              {d}
-            </span>
-          ))}
-          <span className="label pd-year">
-            {project.status}
+    <main className="cs page-top">
+      {/* Head ------------------------------------------------------------ */}
+      <header className="shell cs-head">
+        <div className="cs-crumbs">
+          <Link to="/work" className="cs-back label">
+            <Arrow dir="left" />
+            All work
+          </Link>
+          <span className="label cs-kind">
+            {project.kind}
             <i className="sep" aria-hidden="true" />
-            {project.year}
+            {project.period || project.year}
           </span>
         </div>
 
-        <h1 className="display pd-title">{project.name}</h1>
+        <h1 className="display cs-title">{project.name}</h1>
 
-        <div className="pd-head-foot">
-          <p className="pd-tagline">{project.tagline}</p>
-          {project.links.length ? (
-            <div className="pd-links">
-              {project.links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`btn ${link.primary ? 'btn-primary' : 'btn-secondary'}`}
-                >
-                  {link.label}
-                  <Arrow />
-                </a>
-              ))}
+        <div className="cs-head-foot">
+          <p className="cs-summary">{project.summary}</p>
+          <div className="cs-head-side">
+            <div className="cs-head-meta">
+              <StatusTag status={project.status} />
+              <TechList items={project.tech} />
             </div>
-          ) : null}
+            <ProjectLinks links={project.links} note={project.repoNote} />
+          </div>
         </div>
       </header>
 
-      {/* Hero ---------------------------------------------------------- */}
-      <Reveal className={`pd-hero pd-hero-${project.coverMode}`}>
-        <div className="pd-hero-frame">
-          {project.cover ? (
-            <img src={project.cover} alt={`${project.name} preview`} loading="eager" />
-          ) : (
-            <span className="pd-hero-word" aria-hidden="true">
-              {project.name}
-            </span>
-          )}
-        </div>
-      </Reveal>
+      {/* Hero ------------------------------------------------------------ */}
+      <div className="shell cs-hero">
+        <ProjectMedia
+          media={project.hero || project.cover}
+          theme={project.theme}
+          ratio="hero"
+          eager
+          label={`${project.name} — product preview`}
+        />
+      </div>
 
       <div className="shell">
-        {/* Facts ------------------------------------------------------- */}
-        <Reveal className="pd-facts">
-          {project.meta.map((m) => (
-            <div className="pd-fact" key={m.label}>
-              <span className="label">{m.label}</span>
-              <p className="pd-fact-value">{m.value}</p>
-            </div>
+        {/* Facts --------------------------------------------------------- */}
+        {project.facts?.length ? (
+          <dl className="cs-facts">
+            {project.facts.map((f) => (
+              <div className="cs-fact" key={f.label}>
+                <dt className="label">{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
+
+        {/* On this page -------------------------------------------------- */}
+        <nav className="cs-toc" aria-label="On this page">
+          {toc.map((t) => (
+            <a key={t.id} href={`#${t.id}`}>
+              {t.label}
+            </a>
           ))}
+        </nav>
+
+        {/* Level 2 — Overview -------------------------------------------- */}
+        <Reveal as="section" className="cs-overview" id="overview" aria-label="Overview">
+          <div className="cs-ov-item">
+            <span className="label">Problem</span>
+            <p>{project.overview.problem}</p>
+          </div>
+          <div className="cs-ov-item">
+            <span className="label">What I built</span>
+            <p>{project.overview.solution}</p>
+          </div>
+          <div className="cs-ov-item">
+            <span className="label">My role</span>
+            <p>{project.overview.role}</p>
+          </div>
         </Reveal>
 
-        {/* Overview ---------------------------------------------------- */}
-        <Reveal className="pd-overview">
-          <p>{project.overview}</p>
-        </Reveal>
-
-        {/* Metrics ----------------------------------------------------- */}
-        {project.metrics?.length ? (
-          <Reveal className="pd-metrics">
-            {project.metrics.map((m) => (
-              <div className="pd-metric" key={m.label}>
-                <strong>{m.value}</strong>
-                <span className="label">{m.label}</span>
+        {project.numbers?.length ? (
+          <Reveal className="cs-numbers">
+            {project.numbers.map((n) => (
+              <div className="cs-number" key={n.label}>
+                <strong>{n.value}</strong>
+                <span>{n.label}</span>
               </div>
             ))}
           </Reveal>
         ) : null}
 
-        {/* Body -------------------------------------------------------- */}
-        <div className="pd-body">
-          {project.sections.map((section) => (
-            <Section section={section} key={section.title} />
-          ))}
-        </div>
+        {project.features?.length ? (
+          <Block id="product" label="Product" title="What it does">
+            <div className="cs-features">
+              {project.features.map((f) => (
+                <div className="cs-feature" key={f.title}>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </div>
+              ))}
+            </div>
+          </Block>
+        ) : null}
       </div>
 
-      {/* Galleries ------------------------------------------------------ */}
-      {wideShots?.length ? (
-        <div className="pd-gallery-wide">
-          {wideShots.map((shot) => (
-            <Reveal className="pd-wide-shot" key={shot.src}>
-              <div className="pd-wide-frame">
-                <img src={shot.src} alt={shot.caption} loading="lazy" />
-              </div>
-              <p className="label pd-caption">{shot.caption}</p>
-            </Reveal>
-          ))}
-        </div>
+      {project.gallery?.length ? (
+        <section className="shell cs-screens" id="screens" aria-label="Screens">
+          <Gallery items={project.gallery} theme={project.theme} />
+        </section>
       ) : null}
 
-      {deviceShots?.length ? (
-        <div className="shell pd-gallery-device">
-          <Reveal className="pd-device-row">
-            {deviceShots.map((shot) => (
-              <figure className="pd-device" key={shot.src}>
-                <div className="pd-device-frame">
-                  <img src={shot.src} alt={shot.caption} loading="lazy" />
-                </div>
-                <figcaption className="label pd-caption">{shot.caption}</figcaption>
-              </figure>
-            ))}
+      {/* Level 3 — Engineering ------------------------------------------- */}
+      {hasEngineering ? (
+        <div className="shell" id="engineering">
+          <Reveal className="cs-divider">
+            <span className="eyebrow">Engineering</span>
+            <p>How it works, what was hard, and how it was built.</p>
           </Reveal>
+
+          {project.architecture ? (
+            <Block id="architecture" label="System" title="Architecture">
+              <Architecture architecture={project.architecture} />
+            </Block>
+          ) : null}
+
+          {project.challenges?.length ? (
+            <Block id="challenges" label="Problems worth solving" title="Engineering challenges">
+              <ol className="cs-challenges">
+                {project.challenges.map((c, i) => (
+                  <li className="cs-challenge" key={c.title}>
+                    <span className="cs-challenge-num">{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3>{c.title}</h3>
+                      <dl>
+                        <dt className="label">Problem</dt>
+                        <dd>{c.problem}</dd>
+                        <dt className="label">Approach</dt>
+                        <dd>{c.solution}</dd>
+                      </dl>
+                      {c.where ? <p className="cs-where">{c.where}</p> : null}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Block>
+          ) : null}
+
+          {project.code ? (
+            <Block id="code" label="From the source" title={project.code.title}>
+              <CodeExcerpt code={project.code} />
+            </Block>
+          ) : null}
+
+          {project.stack?.length ? (
+            <Block id="stack" label="Stack" title="Built with">
+              <dl className="cs-stack">
+                {project.stack.map((s) => (
+                  <div key={s.group}>
+                    <dt className="label">{s.group}</dt>
+                    <dd>
+                      <TechList items={s.items} className="cs-stack-list" />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Block>
+          ) : null}
+
+          {project.process?.length ? (
+            <Block id="process" label="Process" title="How it was built">
+              <div className="cs-prose">
+                {project.process.map((p) => (
+                  <p key={p.slice(0, 40)}>{p}</p>
+                ))}
+              </div>
+            </Block>
+          ) : null}
         </div>
       ) : null}
 
-      {/* Pager ---------------------------------------------------------- */}
-      <nav className="shell pd-pager" aria-label="More projects">
-        <Link to={`/work/${prev.slug}`} className="pd-pager-link">
-          <span className="label pd-pager-label">
-            <Arrow dir="left" />
-            Previous
+      {/* Outcome ---------------------------------------------------------- */}
+      {project.outcome ? (
+        <div className="shell">
+          <Block id="outcome" label="Where it stands" title="Outcome" className="cs-outcome">
+            <p className="cs-now">{project.outcome.now}</p>
+            <div className="cs-outcome-cols">
+              {project.outcome.lessons?.length ? (
+                <div>
+                  <span className="label">What I learned</span>
+                  <ul className="list-dash">
+                    {project.outcome.lessons.map((l) => (
+                      <li key={l}>{l}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {project.outcome.next?.length ? (
+                <div>
+                  <span className="label">Next</span>
+                  <ul className="list-dash">
+                    {project.outcome.next.map((l) => (
+                      <li key={l}>{l}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+          </Block>
+        </div>
+      ) : null}
+
+      {/* Pager ------------------------------------------------------------ */}
+      <nav className="shell cs-pager" aria-label="More projects">
+        <Link to={`/work/${prev.slug}`} className="cs-pager-prev">
+          <span className="label">
+            <Arrow dir="left" /> Previous
           </span>
-          <span className="h3 pd-pager-name">{prev.name}</span>
+          <span className="cs-pager-name">{prev.name}</span>
         </Link>
-        <Link to={`/work/${next.slug}`} className="pd-pager-link pd-pager-next">
-          <span className="label pd-pager-label">
-            Next
-            <Arrow dir="right" />
-          </span>
-          <span className="h3 pd-pager-name">{next.name}</span>
+        <Link to={`/work/${next.slug}`} className="cs-pager-next">
+          <div className="cs-pager-media">
+            <ProjectMedia media={next.cover} theme={next.theme} />
+          </div>
+          <div className="cs-pager-text">
+            <span className="label">
+              Next project <Arrow dir="right" />
+            </span>
+            <span className="cs-pager-name">{next.name}</span>
+            <span className="cs-pager-summary">{next.summary}</span>
+          </div>
         </Link>
       </nav>
     </main>
