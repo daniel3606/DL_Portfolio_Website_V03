@@ -68,13 +68,14 @@ const CAST_TIME = 0.75;
    it is wide, so a character grid cannot hold MiniDan's face. The engine
    still reserves their cells, so waves and clouds never show through.
 
-   Footprints in grid cells. MiniDan's fishing pose is 18 x 14 pixels at one
-   cell-width per pixel, so 14 pixels make 7 rows; Claude is 20 x 16 pixels
-   at half that size. */
-const MD = { w: 18, h: 7 };
+   Footprints in grid cells. A sprite pixel is half a cell wide and a
+   quarter of a cell tall, so it stays square: MiniDan's 26 x 36 lake pose
+   is 13 x 9 cells, and Claude's 20 x 16 is 10 x 4. */
+const MD = { w: 13, h: 9 };
 const CL = { w: 10, h: 4, gap: 2 };
-/* The rod leaves MiniDan's left nub, which sits on pixel rows 6-7. */
-const HAND = { x: 0, y: 3 };
+/* The rod leaves MiniDan's outstretched left hand, pixels 1-2 across and
+   25-26 down. */
+const HAND = { x: 0, y: 6 };
 const ROD_CLS = 'c-rod';
 
 /* Shadows under the surface. The ambient ones just make the lake look
@@ -782,8 +783,8 @@ export default function Fishing() {
               reader follows, so the art itself stays out of the tree. */}
           <pre className="lake-grid" ref={refs.grid} aria-hidden="true" />
           <span className="lake-actor lake-md" ref={refs.md} aria-hidden="true">
-            <MiniDan pose="fishing" px={1} animate className="lake-md-calm" />
-            <MiniDan pose="fishing_bite" px={1} className="lake-md-bite" />
+            <MiniDan pose="lake" px={1} animate className="lake-md-calm" />
+            <MiniDan pose="lake_bite" px={1} className="lake-md-bite" />
           </span>
           <span className="lake-actor lake-claude" ref={refs.claude} aria-hidden="true">
             <MiniDan pose="claude" px={1} animate style={{ '--md-delay': '-1.3s' }} />

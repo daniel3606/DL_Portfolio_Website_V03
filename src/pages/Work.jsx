@@ -31,14 +31,14 @@ export default function Work() {
               experiments in between. The larger ones open into case studies that go from the product down to the
               code.
             </p>
-            <MiniDan pose="reading" px={6} animate />
+            <MiniDan pose="reading" px={3} animate />
           </div>
         </header>
 
         <section className="work-tier" aria-labelledby="tier-featured">
           <div className="work-tier-head">
             <h2 className="eyebrow work-tier-title" id="tier-featured">
-              <MiniDan pose="typing" px={3} />
+              <MiniDan pose="typing" px={1.5} />
               Featured
             </h2>
             <span className="label">{featured.length} projects</span>
@@ -55,7 +55,7 @@ export default function Work() {
         <section className="work-tier" aria-labelledby="tier-more">
           <div className="work-tier-head">
             <h2 className="eyebrow work-tier-title" id="tier-more">
-              <MiniDan pose="sparkle" px={3} />
+              <MiniDan pose="sparkle" px={1.5} />
               More projects
             </h2>
             <span className="label">{more.length} projects</span>
@@ -72,7 +72,7 @@ export default function Work() {
         <section className="work-tier" id="lab" aria-labelledby="tier-lab">
           <div className="work-tier-head work-tier-head-plain">
             <h2 className="eyebrow work-tier-title" id="tier-lab">
-              <MiniDan pose="idea" px={3} />
+              <MiniDan pose="idea" px={1.5} />
               Experiments
             </h2>
             <span className="label">{labProjects.length} builds</span>

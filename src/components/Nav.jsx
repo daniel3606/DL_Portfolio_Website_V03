@@ -104,7 +104,7 @@ export default function Nav() {
     <>
       <aside className="rail">
         <Link to="/" className="rail-brand" aria-label={`${profile.name}, home`}>
-          <MiniDan pose="idle" px={5} animate />
+          <MiniDan pose="idle" px={2} animate />
           <span>minidan</span>
         </Link>
 
@@ -125,7 +125,7 @@ export default function Nav() {
 
       <header className={`topbar ${open ? 'is-open' : ''}`}>
         <Link to="/" className="topbar-brand" aria-label={`${profile.name}, home`}>
-          <MiniDan pose="idle" px={2.5} />
+          <MiniDan pose="idle" px={1} />
           <span>minidan</span>
         </Link>
         <button
@@ -143,7 +143,7 @@ export default function Nav() {
         <Links className="sheet-links" onPick={() => setOpen(false)} />
         <div className="sheet-says">
           <p className="md-say md-say--right">{profile.availability}.</p>
-          <MiniDan pose="wave" px={7} animate />
+          <MiniDan pose="wave" px={3} animate />
         </div>
         <div className="sheet-foot">
           <a className="sheet-mail" href={`mailto:${profile.email}`}>
