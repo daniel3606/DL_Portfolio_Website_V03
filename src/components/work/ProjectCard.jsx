@@ -34,7 +34,7 @@ export default function ProjectCard({ project, variant = 'card', index, eager = 
           </div>
 
           <h3 className="pcard-name">
-            {project.mascot ? <MiniDan pose={project.mascot} px={2.5} /> : null}
+            {project.mascot ? <MiniDan pose={project.mascot} px={1} /> : null}
             {project.name}
           </h3>
           <p className="pcard-summary">{project.summary}</p>

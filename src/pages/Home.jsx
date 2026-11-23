@@ -31,7 +31,7 @@ export default function Home() {
         <div className="shell">
           <div className="index-head">
             <span className="index-label">
-              <MiniDan pose="typing" px={3} />
+              <MiniDan pose="typing" px={1.5} />
               <span className="eyebrow">Selected work</span>
             </span>
             <Link to="/work" className="index-all">
@@ -56,7 +56,7 @@ export default function Home() {
 
           <Reveal className="home-more">
             <Link to="/work" className="home-more-link">
-              <MiniDan pose="walk" px={3} animate />
+              <MiniDan pose="walk" px={1.5} animate />
               See every project, including the experiments
               <Arrow dir="right" />
             </Link>
@@ -76,7 +76,7 @@ export default function Home() {
           </div>
           <div className="home-hi-md">
             <p className="md-say md-say--right">{profile.availability}.</p>
-            <MiniDan pose="laughing" px={7} animate />
+            <MiniDan pose="laughing" px={3} animate />
           </div>
         </div>
       </section>

@@ -28,7 +28,7 @@ export default function ProjectExplainer({ project, index, flip = false, eager =
         </p>
 
         <div className="px-say">
-          <MiniDan pose={project.mascot || 'idle'} px={5} animate style={{ '--md-delay': `${-index * 0.7}s` }} />
+          <MiniDan pose={project.mascot || 'idle'} px={2} animate style={{ '--md-delay': `${-index * 0.7}s` }} />
           <p className="md-say">{project.summary}</p>
         </div>
 

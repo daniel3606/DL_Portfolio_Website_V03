@@ -47,7 +47,7 @@ export default function Contact() {
             <span className="eyebrow">Contact</span>
             <div className="contact-title-row">
               <h1 className="display contact-title">Let&rsquo;s talk.</h1>
-              <MiniDan pose="wave" px={8} animate className="contact-md" />
+              <MiniDan pose="wave" px={3} animate className="contact-md" />
             </div>
             <p className="lede contact-lede">
               Engineering and product roles, a project, or just a coffee chat about shipping mobile — all worth a

@@ -28,7 +28,7 @@ export default function About() {
           <Reveal className="about-head-grid">
             <div>
               <span className="about-hi">
-                <MiniDan pose="coffee" px={4} animate />
+                <MiniDan pose="coffee" px={2} animate />
                 <span className="eyebrow">About</span>
               </span>
               <h1 className="h1 about-title">I Design, Build, and Ship.</h1>
@@ -62,7 +62,7 @@ export default function About() {
             {PROCESS.map((p, i) => (
               <Reveal className="process-step" key={p.step} delay={i * 0.06}>
                 <span className="process-top">
-                  <MiniDan pose={p.pose} px={3} animate style={{ '--md-delay': `${-i * 0.8}s` }} />
+                  <MiniDan pose={p.pose} px={1.5} animate style={{ '--md-delay': `${-i * 0.8}s` }} />
                   <span className="label process-num">{String(i + 1).padStart(2, '0')}</span>
                 </span>
                 <h3 className="h3 process-name">{p.step}</h3>

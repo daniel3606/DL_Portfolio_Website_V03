@@ -1,19 +1,23 @@
-import { POSES, PROP, CLAUDE } from './poses';
+import { POSES, PAL, CLAUDE } from './poses';
 import './MiniDan.css';
 
 /* The character's own colours are tokens (see base.css) so they can be tuned
-   in one place; prop colours are fixed because they only ever appear on
-   props. */
-const SELF = { b: 'var(--md-hood)', a: 'var(--md-face)', f: 'var(--md-face)', E: 'var(--md-eye)', e: 'var(--md-eye)' };
+   in one place; shading, outline and prop colours come from the kit. */
+const SELF = { B: 'var(--md-hood)', S: 'var(--md-face)', E: 'var(--md-eye)' };
 const CLAUDE_FILL = { C: 'var(--claude, #d97757)', E: 'var(--md-eye)' };
+const SKIN = new Set(['S', 's', 'p']);
 
-/* Runs of one colour on a row become one rect, so a 20x14 sprite is ~60
-   nodes instead of ~200. Eyes go in their own group (blink) and everything
-   but the feet in another (the idle bob), which is all the animation needs. */
+/* Runs of one colour on a row become one rect, so a 26x36 sprite is a few
+   hundred nodes instead of ~900. Eyes go in their own group (blink) and
+   everything above the shoes in another (the idle bob), which is all the
+   animation needs. An eye is an E pixel touching skin, so a prop's dark
+   pixel (a fish eye) does not blink. */
 function build(rows, fills) {
   const body = [];
   const eyes = [];
   const feet = [];
+  const at = (x, y) => (rows[y] ? rows[y][x] : undefined);
+  const shoes = rows.findIndex((r, y) => y >= rows.length - 6 && r.includes('K'));
   rows.forEach((row, y) => {
     let x = 0;
     while (x < row.length) {
@@ -21,8 +25,11 @@ function build(rows, fills) {
       let j = x;
       while (j < row.length && row[j] === c) j++;
       if (c !== '.') {
-        const rect = <rect key={`${x}-${y}`} x={x} y={y} width={j - x} height={1} fill={fills[c] || PROP[c]} />;
-        (c === 'E' ? eyes : c === 'f' ? feet : body).push(rect);
+        const rect = <rect key={`${x}-${y}`} x={x} y={y} width={j - x} height={1} fill={fills[c] || PAL[c]} />;
+        const eye =
+          c === 'E' &&
+          [at(x - 1, y), at(j, y), at(x, y - 1), at(x, y + 1)].some((n) => SKIN.has(n));
+        (eye ? eyes : shoes >= 0 && y >= shoes ? feet : body).push(rect);
       }
       x = j;
     }
@@ -43,7 +50,7 @@ function parts(name) {
  *
  * px       size of one pixel in CSS px
  * animate  a small idle loop: a one-pixel breath and a blink. Only worth it
- *          on the bigger sprites; at 2–3px a blink is just flicker.
+ *          on the bigger sprites; at 1–1.5px a blink is just flicker.
  * label    pass for a sprite that means something; omit for decoration.
  */
 export default function MiniDan({ pose = 'idle', px = 4, animate = false, label, className = '', style }) {

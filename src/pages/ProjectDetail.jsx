@@ -86,7 +86,7 @@ export default function ProjectDetail() {
 
         <div className="cs-title-row">
           <h1 className="display cs-title">{project.name}</h1>
-          {project.mascot ? <MiniDan pose={project.mascot} px={8} animate className="cs-mascot" /> : null}
+          {project.mascot ? <MiniDan pose={project.mascot} px={3} animate className="cs-mascot" /> : null}
         </div>
 
         <div className="cs-head-foot">
@@ -143,7 +143,7 @@ export default function ProjectDetail() {
           ].map(([label, pose, text], i) => (
             <div className="cs-ov-item" key={label}>
               <span className="cs-ov-head">
-                <MiniDan pose={pose} px={4} animate style={{ '--md-delay': `${-i * 0.9}s` }} />
+                <MiniDan pose={pose} px={2} animate style={{ '--md-delay': `${-i * 0.9}s` }} />
                 <span className="label">{label}</span>
               </span>
               <p className="md-say md-say--up">{text}</p>
@@ -206,12 +206,12 @@ export default function ProjectDetail() {
                       <h3>{c.title}</h3>
                       <dl>
                         <dt className="label cs-ch-label">
-                          <MiniDan pose="surprised" px={2.5} />
+                          <MiniDan pose="surprised" px={1} />
                           Problem
                         </dt>
                         <dd>{c.problem}</dd>
                         <dt className="label cs-ch-label">
-                          <MiniDan pose="passed" px={2.5} />
+                          <MiniDan pose="passed" px={1} />
                           Approach
                         </dt>
                         <dd>{c.solution}</dd>
